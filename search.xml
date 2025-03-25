@@ -23,25 +23,6 @@
     
     
     <entry>
-      <title>hexo g -d推送失败</title>
-      <link href="/posts/81fb1343.html"/>
-      <url>/posts/81fb1343.html</url>
-      
-        <content type="html"><![CDATA[<p><strong>报错信息如下</strong></p><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br><span class="line">FATAL Something&#x27;s wrong. Maybe you can find the solution here: https://hexo.io/docs/troubleshooting.html</span><br><span class="line"><span class="keyword">Error: </span>Spawn failed</span><br><span class="line">    at ChildProcess.&lt;anonymous&gt; </span><br><span class="line">    at ChildProcess.emit (node:events:517:28)</span><br><span class="line">    at cp.emit</span><br><span class="line">    at ChildProcess._handle.onexit (node:internal/child_process:292:12)</span><br></pre></td></tr></table></figure><p>这个一般来说是网络问题，可能是魔法没开，或者开了之后仍然推送失败，可以尝试<strong>电脑重启</strong>之后，先开<strong>魔法</strong>，再进行推送。</p><h3 id="1-如果还不行，看SSH密钥是否过期">1.如果还不行，看SSH密钥是否过期</h3><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ssh</span> -T git<span class="variable">@github</span>.com</span><br></pre></td></tr></table></figure><p>来查看SSH密钥是否成功配置到GitHub.</p><p>如果提示 <code>&quot;Permission denied (publickey)&quot;</code>，说明 SSH 密钥未配置或未添加到 GitHub，解决办法：</p><ul><li>运行 <code>ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</code> 生成 SSH 密钥。</li><li>将 <code>~/.ssh/id_rsa.pub</code> 添加到 GitHub 的 SSH Key。</li></ul><h3 id="2-检查-Hexo-部署配置">2. <strong>检查 Hexo 部署配置</strong></h3><p>打开 <code>_config.yml</code>，找到 <code>deploy</code> 配置，确保格式正确。例如：</p><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在根站点下的_config.yml</span></span><br><span class="line"><span class="params">deploy:</span></span><br><span class="line">  <span class="params">type:</span> git</span><br><span class="line">  <span class="params">repo:</span> git@github.com:your-username<span class="symbol">/your-repo.git</span></span><br><span class="line">  <span class="params">branch:</span> main</span><br></pre></td></tr></table></figure><p>如果你的远程仓库默认分支是 <code>master</code> 而不是 <code>main</code>，或者用的是 HTTPS 地址，需要修改对应的 <code>branch</code> 或 <code>repo</code>。</p><p><strong>作者：</strong> Yangzy<br><strong>博客链接：</strong> <a href="https://yingzya.github.io/">个人博客</a></p>]]></content>
-      
-      
-      <categories>
-          
-          <category> Bug </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>苍穹外卖一口气完结笔记</title>
       <link href="/posts/44e4c2a4.html"/>
       <url>/posts/44e4c2a4.html</url>
@@ -52,6 +33,25 @@
       <categories>
           
           <category> Java实战项目 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>hexo g -d推送失败</title>
+      <link href="/posts/81fb1343.html"/>
+      <url>/posts/81fb1343.html</url>
+      
+        <content type="html"><![CDATA[<p><strong>报错信息如下</strong></p><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br><span class="line">FATAL Something&#x27;s wrong. Maybe you can find the solution here: https://hexo.io/docs/troubleshooting.html</span><br><span class="line"><span class="keyword">Error: </span>Spawn failed</span><br><span class="line">    at ChildProcess.&lt;anonymous&gt; </span><br><span class="line">    at ChildProcess.emit (node:events:517:28)</span><br><span class="line">    at cp.emit</span><br><span class="line">    at ChildProcess._handle.onexit (node:internal/child_process:292:12)</span><br></pre></td></tr></table></figure><p>这个一般来说是网络问题，可能是魔法没开，或者开了之后仍然推送失败，可以尝试<strong>电脑重启</strong>之后，先开<strong>魔法</strong>，再进行推送。</p><h3 id="1-如果还不行，看SSH密钥是否过期">1.如果还不行，看SSH密钥是否过期</h3><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ssh</span> -T git<span class="variable">@github</span>.com</span><br></pre></td></tr></table></figure><p>来查看SSH密钥是否成功配置到GitHub.</p><p>如果提示 <code>&quot;Permission denied (publickey)&quot;</code>，说明 SSH 密钥未配置或未添加到 GitHub，解决办法：</p><ul><li>运行 <code>ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</code> 生成 SSH 密钥。</li><li>将 <code>~/.ssh/id_rsa.pub</code> 添加到 GitHub 的 SSH Key。</li></ul><h3 id="2-检查-Hexo-部署配置">2. <strong>检查 Hexo 部署配置</strong></h3><p>打开 <code>_config.yml</code>，找到 <code>deploy</code> 配置，确保格式正确。例如：</p><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在根站点下的_config.yml</span></span><br><span class="line"><span class="params">deploy:</span></span><br><span class="line">  <span class="params">type:</span> git</span><br><span class="line">  <span class="params">repo:</span> git@github.com:your-username<span class="symbol">/your-repo.git</span></span><br><span class="line">  <span class="params">branch:</span> main</span><br></pre></td></tr></table></figure><p>如果你的远程仓库默认分支是 <code>master</code> 而不是 <code>main</code>，或者用的是 HTTPS 地址，需要修改对应的 <code>branch</code> 或 <code>repo</code>。</p><p><strong>作者：</strong> Yangzy<br><strong>博客链接：</strong> <a href="https://yingzya.github.io/">个人博客</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Bug </category>
           
       </categories>
       
