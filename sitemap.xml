@@ -47,6 +47,15 @@
   </url>
   
   <url>
+    <loc>https://yingzya.top/tags/index.html</loc>
+    
+    <lastmod>2023-03-22</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://yingzya.top/categories/index.html</loc>
     
     <lastmod>2023-03-22</lastmod>
@@ -56,7 +65,7 @@
   </url>
   
   <url>
-    <loc>https://yingzya.top/tags/index.html</loc>
+    <loc>https://yingzya.top/box/animation/index.html</loc>
     
     <lastmod>2023-03-22</lastmod>
     
@@ -74,7 +83,25 @@
   </url>
   
   <url>
-    <loc>https://yingzya.top/box/animation/index.html</loc>
+    <loc>https://yingzya.top/life/games/index.html</loc>
+    
+    <lastmod>2023-03-22</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yingzya.top/social/fcircle/index.html</loc>
+    
+    <lastmod>2023-03-22</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yingzya.top/life/movies/index.html</loc>
     
     <lastmod>2023-03-22</lastmod>
     
@@ -101,52 +128,7 @@
   </url>
   
   <url>
-    <loc>https://yingzya.top/life/games/index.html</loc>
-    
-    <lastmod>2023-03-22</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yingzya.top/life/movies/index.html</loc>
-    
-    <lastmod>2023-03-22</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yingzya.top/social/fcircle/index.html</loc>
-    
-    <lastmod>2023-03-22</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yingzya.top/site/time/index.html</loc>
-    
-    <lastmod>2023-03-22</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://yingzya.top/life/music/index.html</loc>
-    
-    <lastmod>2023-03-22</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://yingzya.top/personal/about/index.html</loc>
     
     <lastmod>2023-03-22</lastmod>
     
@@ -164,7 +146,7 @@
   </url>
   
   <url>
-    <loc>https://yingzya.top/personal/love/index.html</loc>
+    <loc>https://yingzya.top/personal/about/index.html</loc>
     
     <lastmod>2023-03-22</lastmod>
     
@@ -174,6 +156,24 @@
   
   <url>
     <loc>https://yingzya.top/personal/bb/index.html</loc>
+    
+    <lastmod>2023-03-22</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yingzya.top/site/time/index.html</loc>
+    
+    <lastmod>2023-03-22</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://yingzya.top/personal/love/index.html</loc>
     
     <lastmod>2023-03-22</lastmod>
     
@@ -216,7 +216,7 @@
 
   
   <url>
-    <loc>https://yingzya.top/categories/%E6%BC%94%E7%A4%BA/</loc>
+    <loc>https://yingzya.top/categories/Bug/</loc>
     <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -230,7 +230,14 @@
   </url>
   
   <url>
-    <loc>https://yingzya.top/categories/Bug/</loc>
+    <loc>https://yingzya.top/categories/Java%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE/</loc>
+    <lastmod>2025-05-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://yingzya.top/categories/%E6%BC%94%E7%A4%BA/</loc>
     <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -238,13 +245,6 @@
   
   <url>
     <loc>https://yingzya.top/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/</loc>
-    <lastmod>2025-05-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://yingzya.top/categories/Java%E5%AE%9E%E6%88%98%E9%A1%B9%E7%9B%AE/</loc>
     <lastmod>2025-05-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
