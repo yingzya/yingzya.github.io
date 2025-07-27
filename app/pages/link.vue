@@ -34,7 +34,7 @@ const copyFields = {
 			闲聊或技术交流。
 		</p>
 		<p>
-			我制作了本站的
+			本站的
 			<!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
 			<ProseA href="/zhilu.opml">友链源 OPML 聚合</ProseA>，可导入阅读器或
 			<!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
