@@ -26,6 +26,3 @@ logs
 # Custom
 .vercel
 content/posts/test.md
-
-# 配置
-*.ts
