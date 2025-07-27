@@ -1,5 +1,5 @@
 ---
-title: lanqiaobei_2025
+title: 2025蓝桥杯
 description: lanqiaobei_2025
 date: 2025-03-27 23:45:35
 updated: 2025-03-27 23:45:35
