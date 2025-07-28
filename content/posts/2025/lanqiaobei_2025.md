@@ -63,7 +63,6 @@ struct tm {
   int tm_mday;  // 天
   int tm_mon;   // 月（0~11）❗️注意不是 1~12
   int tm_year;  // 年（从 1900 开始）❗️
-  ...
 };
 ```
 
@@ -78,10 +77,6 @@ struct tm {
 第三步：日期 +1 天
 
 ```
-cpp
-
-
-复制编辑
 t.tm_mday += 1;
 ```
 
