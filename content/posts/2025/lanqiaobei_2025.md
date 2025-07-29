@@ -76,7 +76,7 @@ struct tm {
 
 第三步：日期 +1 天
 
-```
+```C++
 t.tm_mday += 1;
 ```
 
@@ -1079,7 +1079,7 @@ priority_queue<int, vector<int>, greater<int>> q;
 priority_queue<类型, vector<类型>, greater<类型>> 变量名;
 ```
 
-## 📝 总结一下
+**📝 总结一下**
 
 | 操作      | 意义                   | 举例                |
 | --------- | ---------------------- | ------------------- |
