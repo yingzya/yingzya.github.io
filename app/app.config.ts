@@ -68,12 +68,13 @@ export default defineAppConfig({
 				items: [
 					{ icon: 'simple-icons:nuxtdotjs', text: 'Nuxt开源博客主题', url: 'https://github.com/L33Z22L11/blog-v3' },
 					{ icon: 'ph:swatches-bold', text: '主题和组件文档', url: 'https://blog.zhilu.site/theme' },
-					//{ icon: 'ph:certificate-bold', text: '萌备20246888号', url: 'https://icp.gov.moe/?keyword=20246888' },
+					{ icon: 'ph:certificate-bold', text: '晋ICP备2025064396号-1', url: 'https://beian.miit.gov.cn/' },
+
 				],
 			},
 		] satisfies Nav,
 		/** 页脚版权信息底部的其他信息 */
-		//message: '<a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener nofollow" data-v-e2b95aa8="">陕ICP备2025072742号-3</a>',
+		//message: '<a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener nofollow" data-v-e2b95aa8="">晋ICP备2025064396号-1</a>',
 	},
 
 	/** 左侧栏顶部 Logo */
