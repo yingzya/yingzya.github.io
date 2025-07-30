@@ -46,13 +46,13 @@ onMounted(() => {
 </div>
 
 <!-- TODO 谨慎升级 预计2025-10-25下线 -->
-<Alert v-if="displayWarning" type="warning" style="margin: 1em;">
-	<template #title>
+<!-- <Alert v-if="displayWarning" type="warning" style="margin: 1em;"> -->
+	<!-- <template #title>
 		<span style="flex-grow: 1;">主题用户谨慎合并上游</span>
 		<Icon name="ph:x-bold" style="cursor: pointer;" @click="hideWarning" />
-	</template>
+	</template> -->
 
-</Alert>
+<!-- </Alert> -->
 
 <PostSlide v-if="listRecommended.length && page === 1 && !category" :list="listRecommended" />
 
