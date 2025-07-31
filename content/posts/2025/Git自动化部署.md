@@ -99,7 +99,7 @@ server.listen(PORT, () => {
 nano deploy.sh
 ```
 
-内容如下(根据自己的项目路径调整)
+内容如下(根据自己的**项目路径**调整)
 
 ```bash
 #!/bin/bash
@@ -135,10 +135,9 @@ pm2 startup  # 设置开机自启
 ### 打开 GitHub 仓库 → `Settings` → `Webhooks`
 
 - **Payload URL**：
-
-  ```ur
+```ur
   http://你的服务器公网IP:6688/webhook
-  ```
+```
 
 - **Content type**：`application/json`
 
@@ -148,3 +147,11 @@ pm2 startup  # 设置开机自启
 
   -  只勾选 `Just the push event` 即可
 
+## 错误
+
+你可能碰到Github上Webhook返回200，但是没更新，请查看你设置的目录 `/home/qinyu/nuxt-blog` 并不是一个 Git 仓库。
+
+可能你：
+
+- 没有执行 `git clone 仓库地址`
+- 或者部署脚本中的工作目录设置错了

@@ -57,12 +57,12 @@ tm t = {0, 0, 0, d, m - 1, y - 1900};
 
 ```C++
 struct tm {
-  int tm_sec;   // 秒
-  int tm_min;   // 分
-  int tm_hour;  // 时
-  int tm_mday;  // 天
-  int tm_mon;   // 月（0~11）❗️注意不是 1~12
-  int tm_year;  // 年（从 1900 开始）❗️
+int tm_sec;   // 秒
+int tm_min;   // 分
+int tm_hour;  // 时
+int tm_mday;  // 天
+int tm_mon;   // 月（0~11）❗️注意不是 1~12
+int tm_year;  // 年（从 1900 开始）❗️
 };
 ```
 
