@@ -154,11 +154,12 @@ pm2 startup  # 设置开机自启
 
 ##  第 3 步：GitHub 设置 Webhook
 
-### 打开 GitHub 仓库 → `Settings` → `Webhooks`
+ 打开 GitHub 仓库 → `Settings` → `Webhooks`
 
 - **Payload URL**：
-```ur
-  http://你的服务器公网IP:6688/webhook
+
+```bash
+http://你的服务器公网IP:6688/webhook
 ```
 
 - **Content type**：`application/json`
@@ -179,6 +180,105 @@ pm2 startup  # 设置开机自启
 - 或者部署脚本中的工作目录设置错了
 
 ## Nuxt静态部署
+
+如果你的博客和我一样是Nuxt的话，完全可以本地构建 + 只同步静态文件到服务器。
+
+我之前用上面的方式，服务器上构建，太慢了，于是我想到了这种方法。
+
+在Github创建一个分支，用来专门存储静态文件，然后服务器只拉取这个分支。这里取分支为`gh-pages`
+
+- **每次 push 代码到 `main` 分支**
+
+- **自动构建 Nuxt 静态站点**
+
+- **自动把 `.output/public` 推送到 `gh-pages` 分支**
+
+**服务器只需要：**
+
+- 拉取最新的静态文件（比如 `git pull` 或通过 rsync）
+- 直接部署到网站目录 `/www/wwwroot/xxxxx`
+- 不用 `pnpm install` 或 `pnpm build`
+
+**服务器初始化**:
+
+假设你服务器网站目录为空或没初始化过：
+
+下面是以我自己的为例:
+
+```bash
+cd /www/wwwroot
+git clone https://github.com/yingzya/yingzya.github.io.git yingzya.top
+cd yingzya.top
+git checkout -b gh-pages origin/gh-pages
+```
+
+然后创建文件`.github/workflows/deploy.yml`
+
+```yaml
+name: Deploy Nuxt Static Site
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'  # 或你本地用的版本
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build Nuxt project
+        run: pnpm build
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .output/public
+          publish_branch: gh-pages
+```
+
+### 可能的错误
+
+`The requested URL returned error: 403`
+
+`github-actions[bot]` 没有权限推送到你的仓库，导致 403 拒绝访问。
+
+打开你Github的项目，然后settings，然后左侧点击Actions，点击Gereral，确保下面的两个勾选上了
+
+![10370](https://7.isyangs.cn/20250731/723b20ec409cf0976ee3459cf32c2809.png)
+
+记得配置下面的**Token**，如果访问权限不够的话。
+
+![10371](https://7.isyangs.cn/20250731/b67f9cf6ba2490e5d050a288d0ecca0f.png)
+
+**解决方法一：给 Actions 用一个 PAT 代替默认 token**
+
+- 你可以在 GitHub 生成一个 **Personal Access Token (PAT)**，权限至少要包含 **repo (所有)** 权限
+- 然后在你的仓库 Settings → Secrets → New repository secret 新建一个变量，比如叫 `PERSONAL_TOKEN`
+- 修改 workflow 用这个 token：
+
+**简单步骤生成 PAT：**
+
+1. 访问 https://github.com/settings/tokens
+2. 点击“Generate new token (classic)”
+3. 选中 `repo` 权限（全部权限）
+4. 生成后复制令牌
+5. 仓库→Settings→Secrets→Actions，新建 `PERSONAL_TOKEN`，粘贴保存
 
 ### NodeJS服务
 
@@ -247,7 +347,7 @@ server.listen(PORT, () => {
 
 ```
 
-### 服务器自动部署脚本示例（deploy.sh）
+### 自动部署脚本示例（deploy.sh）
 
 ```bash
 #!/bin/bash
@@ -267,5 +367,23 @@ git checkout gh-pages
 git pull origin gh-pages
 
 echo "✅ 静态文件已更新：$(date '+%Y-%m-%d %H:%M:%S')"
+```
+**1. 先创建部署脚本文件**
+
+文件在上面，按 `Ctrl + O` 保存，`Enter` 确认，然后 `Ctrl + X` 退出编辑器。
+
+**2. 赋予可执行权限**
+
+```bash
+chmod +x /home/qinyu/deploy.sh
+```
+
+### 使用 PM2 守护运行(可选)
+
+```bash
+npm install -g pm2
+pm2 start /home/qinyu/webhook.js
+pm2 save
+pm2 startup
 ```
 
