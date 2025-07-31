@@ -103,22 +103,44 @@ nano deploy.sh
 
 ```bash
 #!/bin/bash
+
+echo "🔄 开始部署..."
+
 cd /home/qinyu/nuxt-blog || exit
 
-echo "🔄 Pulling latest code..."
-git pull
+# 拉取最新代码
+git reset --hard origin/main
+git clean -fd
+git pull origin main
 
-echo "Installing dependencies..."
-pnpm install
+# 判断 package.json 是否有变化（缓存上一次的哈希）
+PACKAGE_HASH_FILE=".package.hash"
+CURRENT_HASH=$(md5sum package.json | awk '{print $1}')
 
-echo "Building project..."
+if [ -f "$PACKAGE_HASH_FILE" ]; then
+    LAST_HASH=$(cat "$PACKAGE_HASH_FILE")
+else
+    LAST_HASH=""
+fi
+
+if [ "$CURRENT_HASH" != "$LAST_HASH" ]; then
+    echo "📦 package.json 发生变化，执行 pnpm install..."
+    pnpm install
+    echo "$CURRENT_HASH" > "$PACKAGE_HASH_FILE"
+else
+    echo "✅ package.json 未变化，跳过 pnpm install"
+fi
+
+# 构建项目
+echo "⚙️ 开始构建项目..."
 pnpm build
 
-echo "Copying files to /www/wwwroot/yingzya.top ..."
+# 拷贝生成的文件到目标目录
+echo "🚚 拷贝到网站根目录..."
+rm -rf /www/wwwroot/yingzya.top/*
 cp -r .output/public/* /www/wwwroot/yingzya.top/
 
-echo "Deployment complete."
-
+echo "✅ 部署完成"
 ```
 
 ### 4、启动服务(pm2防挂)
