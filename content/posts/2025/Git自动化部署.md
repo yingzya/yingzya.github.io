@@ -169,7 +169,7 @@ pm2 startup  # 设置开机自启
 
   -  只勾选 `Just the push event` 即可
 
-## 错误
+## 可能的错误
 
 你可能碰到Github上Webhook返回200，但是没更新，请查看你设置的目录 `/home/qinyu/nuxt-blog` 并不是一个 Git 仓库。
 
@@ -177,3 +177,95 @@ pm2 startup  # 设置开机自启
 
 - 没有执行 `git clone 仓库地址`
 - 或者部署脚本中的工作目录设置错了
+
+## Nuxt静态部署
+
+### NodeJS服务
+
+```js
+const http = require('http');
+const { exec } = require('child_process');
+
+const PORT = 6688;  // 监听端口
+const SECRET = 'your_webhook_secret'; // 你在 GitHub webhook 里设置的 secret，和这里对应
+
+// 简单验证签名（可选，生产建议实现）
+function verifySignature(req, body) {
+  // 这里为了示例，暂时不验证，直接返回 true
+  return true;
+}
+
+const server = http.createServer((req, res) => {
+  if (req.method === 'POST' && req.url === '/webhook') {
+    let body = '';
+    req.on('data', chunk => body += chunk);
+    req.on('end', () => {
+      if (!verifySignature(req, body)) {
+        res.writeHead(403);
+        res.end('Invalid signature');
+        return;
+      }
+
+      let payload;
+      try {
+        payload = JSON.parse(body);
+      } catch {
+        res.writeHead(400);
+        res.end('Invalid JSON');
+        return;
+      }
+
+      // 只处理 gh-pages 分支的 push 事件
+      if (payload.ref === 'refs/heads/gh-pages') {
+        console.log('🚀 gh-pages 分支更新，开始部署脚本...');
+        exec('sh /home/qinyu/deploy.sh', (err, stdout, stderr) => {
+          if (err) {
+            console.error(`❌ 部署脚本执行失败: ${err.message}`);
+            return;
+          }
+          console.log(`✅ 部署脚本输出:\n${stdout}`);
+          if (stderr) {
+            console.error(`⚠️ 部署脚本错误输出:\n${stderr}`);
+          }
+        });
+      } else {
+        console.log(`忽略非 gh-pages 分支更新: ${payload.ref}`);
+      }
+
+      res.writeHead(200);
+      res.end('Webhook received');
+    });
+  } else {
+    res.writeHead(404);
+    res.end();
+  }
+});
+
+server.listen(PORT, () => {
+  console.log(`Webhook 监听服务已启动，端口 ${PORT}`);
+});
+
+```
+
+### 服务器自动部署脚本示例（deploy.sh）
+
+```bash
+#!/bin/bash
+
+set -e
+
+# 1. 网站目录（请改成你的路径）
+WEB_ROOT="/www/wwwroot/yingzya.top"
+
+# 2. 进入网站目录
+cd "$WEB_ROOT" || { echo "目录不存在，退出"; exit 1; }
+
+# 3. 确保当前在 gh-pages 分支
+git checkout gh-pages
+
+# 4. 拉取最新代码
+git pull origin gh-pages
+
+echo "✅ 静态文件已更新：$(date '+%Y-%m-%d %H:%M:%S')"
+```
+
