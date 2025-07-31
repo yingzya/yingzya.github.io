@@ -1,0 +1,1 @@
+function a(s="",e={size:92}){if(!s)return"";e.preset==="icon"&&(e={...e,size:32,mask:"circle"});const r=new URLSearchParams;return r.set("url",`github.com/${s}.png`),e.size&&r.set("url",`${r.get("url")}?size=${e.size}`),e.mask&&r.set("mask",e.mask),`https://wsrv.nl/?${r.toString()}`}export{a as g};

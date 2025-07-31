@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="2.0">
+  <head>
+    <title>字节追风者的友链订阅</title>
+    <dateCreated>2025-03-19T00:00:00.000Z</dateCreated>
+    <dateModified>2025-07-31T12:51:47.717Z</dateModified>
+    <ownerName>字节追风者</ownerName>
+    <ownerEmail>zy89969@163.com</ownerEmail>
+    <ownerId>https://yingzya.top/</ownerId>
+    <docs>https://opml.org/spec2.opml</docs>
+  </head>
+  <body>
+    <outline text="字节追风者" type="rss" xmlUrl="https://yingzya.top/atom.xml" created="2025-03-19T00:00:00.000Z" description="博客爱好者" htmlUrl="https://yingzya.top/"></outline>
+  </body>
+</opml>

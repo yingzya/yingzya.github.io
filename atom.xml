@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/assets/atom.xsl"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>https://yingzya.top/</id>
+  <title>字节追风者</title>
+  <updated>2025-07-31T12:51:47.717Z</updated>
+  <description>个人博客，分享技术与生活。“折腾不止，摸鱼生活——摸门🙏🏻”。纸鹿是一名开源爱好者，结识了许多志同道合的朋友。这个博客记录了他在生活和技术学习中的点滴经历，充满启发与思考。网站界面简洁美观，内容丰富实用，人气互动活跃，涵盖了编程、生活、学习等多个领域，为读者提供了卓越的阅读体验。</description>
+  <author>
+    <name>字节追风者</name>
+    <email>zy89969@163.com</email>
+    <uri>https://yingzya.top/</uri>
+  </author>
+  <link href="https://yingzya.top/atom.xml" rel="self"></link>
+  <link href="https://yingzya.top/" rel="alternate"></link>
+  <language>zh-CN</language>
+  <generator uri="https://github.com/L33Z22L11/blog-v3" version="3.3.0">Zhilu Blog</generator>
+  <icon>https://7.isyangs.cn/20250730/ad55d1177bff3a5566f072b44d5f9696.png</icon>
+  <logo>https://7.isyangs.cn/20250730/c65a56b5206f765b8a30203c71be985e.jpg</logo>
+  <rights>© 2025 字节追风者</rights>
+  <subtitle>博客爱好者</subtitle>
+  <entry>
+    <id>https://yingzya.top/2025/git</id>
+    <title>Git自动化部署</title>
+    <updated>2025-07-31T19:42:40.000Z</updated>
+    <author>
+      <name>字节追风者</name>
+    </author>
+    <content type="html">
+      <![CDATA[ <p>Git自动化部署</p> <a href="https://yingzya.top/2025/git">点击查看全文</a>]]>
+    </content>
+    <link href="https://yingzya.top/2025/git"></link>
+    <summary>Git自动化部署</summary>
+    <category term="Linux"></category>
+    <published>2025-07-31T19:42:40.000Z</published>
+  </entry>
+  <entry>
+    <id>https://yingzya.top/2025/lanqiaobei_2025</id>
+    <title>2025蓝桥杯</title>
+    <updated>2025-03-27T23:45:35.000Z</updated>
+    <author>
+      <name>字节追风者</name>
+    </author>
+    <content type="html">
+      <![CDATA[ <p>lanqiaobei_2025</p> <a href="https://yingzya.top/2025/lanqiaobei_2025">点击查看全文</a>]]>
+    </content>
+    <link href="https://yingzya.top/2025/lanqiaobei_2025"></link>
+    <summary>lanqiaobei_2025</summary>
+    <category term="算法"></category>
+    <published>2025-03-27T23:45:35.000Z</published>
+  </entry>
+</feed>
