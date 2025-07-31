@@ -3,7 +3,7 @@ title: Git自动化部署
 description: Git自动化部署
 date: 2025-07-31 19:42:40
 updated: 2025-07-31 19:42:40
-# image: https://7.isyangs.cn/20250731/2a767389db86969893e17922d767fb6a.jpg
+image: https://7.isyangs.cn/20250731/2a767389db86969893e17922d767fb6a.jpg
 # type: story
 categories: [Linux]
 tags: [Git]
