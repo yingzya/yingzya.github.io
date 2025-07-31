@@ -8,7 +8,7 @@
 - 所有文件均由 GitHub Actions 自动生成于 `.output/public`
 - 不建议手动修改本分支内容
 
-## #🔄 自动更新方式
+### 🔄 自动更新方式
 
 每次 `main` 分支代码更新并推送后，GitHub Actions 会：
 
