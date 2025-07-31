@@ -79,7 +79,7 @@ export default defineAppConfig({
 
 	/** 左侧栏顶部 Logo */
 	header: {
-		logo: 'https://img.picgo.net/2025/03/20/_2025032020393379905b18899238a7.jpg',
+		logo: 'https://7.isyangs.cn/20250730/c65a56b5206f765b8a30203c71be985e.jpg',
 		/** 展示标题文本，否则展示纯 Logo */
 		showTitle: true,
 		subtitle: blogConfig.subtitle,
