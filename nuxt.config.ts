@@ -1,17 +1,9 @@
 import process from 'node:process'
 import blogConfig, { routeRules } from './blog.config'
 import packageJson from './package.json'
+
 // 此处配置无需修改
 export default defineNuxtConfig({
-	// 静态部署配置
-	ssr: false,
-	nitro: {
-		prerender: {
-			routes: ['/'],
-			crawlLinks: true
-		}
-	},
-	
 	app: {
 		head: {
 			htmlAttrs: {
@@ -21,7 +13,7 @@ export default defineNuxtConfig({
 			meta: [
 				{ name: 'author', content: [blogConfig.author.name, blogConfig.author.email].filter(Boolean).join(', ') },
 				// 此处为元数据的生成器标识，不建议修改
-				{ 'name': 'generator', 'content': 'packageJson.name', 'data-github-repo': packageJson.homepage, 'data-version': packageJson.version },
+				{ 'name': 'generator', 'content': packageJson.name, 'data-github-repo': packageJson.homepage, 'data-version': packageJson.version },
 				{ name: 'mobile-web-app-capable', content: 'yes' },
 				{ name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
 			],
@@ -59,7 +51,6 @@ export default defineNuxtConfig({
 		'@/assets/css/main.scss',
 		'@/assets/css/reusable.scss',
 	],
-
 
 	features: {
 		inlineStyles: false,
