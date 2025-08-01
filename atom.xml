@@ -3,7 +3,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://yingzya.top/</id>
   <title>字节追风者</title>
-  <updated>2025-08-01T02:50:16.239Z</updated>
+  <updated>2025-08-01T09:28:52.304Z</updated>
   <description>个人博客，分享技术与生活。“折腾不止，摸鱼生活——摸门🙏🏻”。</description>
   <author>
     <name>字节追风者</name>
@@ -18,6 +18,21 @@
   <logo>https://7.isyangs.cn/20250730/c65a56b5206f765b8a30203c71be985e.jpg</logo>
   <rights>© 2025 字节追风者</rights>
   <subtitle>博客爱好者</subtitle>
+  <entry>
+    <id>https://yingzya.top/2025/gicpo</id>
+    <title>GicPo配置去图图床</title>
+    <updated>2025-08-01T17:15:43.000Z</updated>
+    <author>
+      <name>字节追风者</name>
+    </author>
+    <content type="html">
+      <![CDATA[<img src="https://7.isyangs.cn/20250801/cc418048d677e4b6a6d512f75603b372.png" /> <p>GicPo实现去图图床</p> <a href="https://yingzya.top/2025/gicpo">点击查看全文</a>]]>
+    </content>
+    <link href="https://yingzya.top/2025/gicpo"></link>
+    <summary>GicPo实现去图图床</summary>
+    <category term="配置"></category>
+    <published>2025-08-01T17:15:43.000Z</published>
+  </entry>
   <entry>
     <id>https://yingzya.top/2025/git</id>
     <title>Git自动化部署</title>
