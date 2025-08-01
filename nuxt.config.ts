@@ -3,6 +3,15 @@ import blogConfig, { routeRules } from './blog.config'
 import packageJson from './package.json'
 // 此处配置无需修改
 export default defineNuxtConfig({
+	// 静态部署配置
+	ssr: false,
+	nitro: {
+		prerender: {
+			routes: ['/'],
+			crawlLinks: true
+		}
+	},
+	
 	app: {
 		head: {
 			htmlAttrs: {

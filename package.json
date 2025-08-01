@@ -8,7 +8,7 @@
   "scripts": {
     "prepare": "nuxt prepare",
     "dev": "nuxt dev --no-qr",
-    "build": "cross-env NODE_OPTIONS='--no-deprecation' nuxt build",
+    "build": "cross-env NODE_OPTIONS='--no-deprecation' nuxt generate",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "lint": "stylelint '**/*.{vue,scss}'",
