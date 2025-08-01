@@ -37,13 +37,7 @@ onMounted(async () => {
 	<ul>
 		<li v-for="(item, index) in blogStats" :key="index" :title="item.tip">
 			<small>{{ item.label }}</small><br>
-			<ClientOnly v-if="item.label === '总字数'">
-				<span data-allow-mismatch>{{ item.content }}</span>
-				<template #fallback>
-					<span data-allow-mismatch>{{ appConfig.stats.wordCount }}</span>
-				</template>
-			</ClientOnly>
-			<span v-else data-allow-mismatch>{{ item.content }}</span>
+			<span data-allow-mismatch>{{ item.content }}</span>
 		</li>
 	</ul>
 </ZWidget>
