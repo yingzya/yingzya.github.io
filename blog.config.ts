@@ -10,11 +10,11 @@ const blogConfig = {
 	title: '字节追风者',
 	subtitle: '博客爱好者',
 	// 长 description 利好于 SEO
-	description: '个人博客，分享技术与生活。“折腾不止，摸鱼生活——摸门🙏🏻”。纸鹿是一名开源爱好者，结识了许多志同道合的朋友。这个博客记录了他在生活和技术学习中的点滴经历，充满启发与思考。网站界面简洁美观，内容丰富实用，人气互动活跃，涵盖了编程、生活、学习等多个领域，为读者提供了卓越的阅读体验。',
+	description: '个人博客，分享技术与生活。“折腾不止，摸鱼生活——摸门🙏🏻”。',
 	author: {
 		name: '字节追风者',
 		avatar: 'https://7.isyangs.cn/20250730/c65a56b5206f765b8a30203c71be985e.jpg',
-		email: 'zy89969@163.com',
+		email: 'yzy11235@qq.com',
 		homepage: 'https://yingzya.top/',
 	},
 	copyright: {
