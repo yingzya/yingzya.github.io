@@ -387,3 +387,121 @@ pm2 save
 pm2 startup
 ```
 
+### 动态部署
+
+```sh
+#!/bin/bash
+
+echo "🔄 开始动态部署..."
+
+PROJECT_DIR="/home/qinyu/nuxt-blog"  # 你项目目录
+APP_NAME="nuxt-blog"                 # pm2启动的进程名
+
+cd $PROJECT_DIR || { echo "❌ 项目目录不存在，退出"; exit 1; }
+
+# 拉取最新代码，确保干净
+git fetch origin main
+git reset --hard origin/main
+git clean -fd
+
+# 判断 package.json 是否有变化（缓存上一次的哈希）
+PACKAGE_HASH_FILE=".package.hash"
+CURRENT_HASH=$(md5sum package.json | awk '{print $1}')
+
+if [ -f "$PACKAGE_HASH_FILE" ]; then
+    LAST_HASH=$(cat "$PACKAGE_HASH_FILE")
+else
+    LAST_HASH=""
+fi
+
+if [ "$CURRENT_HASH" != "$LAST_HASH" ]; then
+    echo "📦 package.json 变化，执行 pnpm install..."
+    pnpm install
+    echo "$CURRENT_HASH" > "$PACKAGE_HASH_FILE"
+else
+    echo "✅ package.json 未变化，跳过 pnpm install"
+fi
+
+# 构建项目
+echo "⚙️ 开始构建项目..."
+pnpm build
+
+# 重启pm2进程，如果没有则启动
+if pm2 describe $APP_NAME > /dev/null; then
+    echo "🔄 重启 $APP_NAME"
+    pm2 restart $APP_NAME
+else
+    echo "🚀 启动 $APP_NAME"
+    pm2 start npm --name "$APP_NAME" -- run start
+fi
+
+echo "✅ 动态部署完成"
+```
+
+
+
+```js
+const http = require('http');
+const { exec } = require('child_process');
+
+const PORT = 6688;  // 监听端口
+const SECRET = 'your_webhook_secret'; // 你在 GitHub webhook 里设置的 secret，和这里对应
+
+// 简单验证签名（可选，生产建议实现）
+function verifySignature(req, body) {
+  // 这里为了示例，暂时不验证，直接返回 true
+  return true;
+}
+
+const server = http.createServer((req, res) => {
+  if (req.method === 'POST' && req.url === '/webhook') {
+    let body = '';
+    req.on('data', chunk => body += chunk);
+    req.on('end', () => {
+      if (!verifySignature(req, body)) {
+        res.writeHead(403);
+        res.end('Invalid signature');
+        return;
+      }
+
+      let payload;
+      try {
+        payload = JSON.parse(body);
+      } catch {
+        res.writeHead(400);
+        res.end('Invalid JSON');
+        return;
+      }
+
+      // 只处理 gh-pages 分支的 push 事件
+      if (payload.ref === 'refs/heads/main') {
+        console.log('main 分支更新，开始部署脚本...');
+        exec('sh /home/qinyu/deploy.sh', (err, stdout, stderr) => {
+          if (err) {
+            console.error(`❌ 部署脚本执行失败: ${err.message}`);
+            return;
+          }
+          console.log(`✅ 部署脚本输出:\n${stdout}`);
+          if (stderr) {
+            console.error(`⚠️ 部署脚本错误输出:\n${stderr}`);
+          }
+        });
+      } else {
+        console.log(`忽略非 gh-pages 分支更新: ${payload.ref}`);
+      }
+
+      res.writeHead(200);
+      res.end('Webhook received');
+    });
+  } else {
+    res.writeHead(404);
+    res.end();
+  }
+});
+
+server.listen(PORT, () => {
+  console.log(`Webhook 监听服务已启动，端口 ${PORT}`);
+});
+
+```
+
