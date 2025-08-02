@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '22'  # 或你本地用的版本
+          node-version: '22'  # 你的 Node 版本
 
       - name: Install pnpm
         run: npm install -g pnpm
@@ -24,12 +24,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Build Nuxt project
-        run: pnpm build
+      - name: Generate static site
+        run: pnpm generate
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.PERSONAL_TOKEN }}
+          github_token: ${{ secrets.PERSONAL_TOKEN }}  # 或使用 secrets.GITHUB_TOKEN
           publish_dir: .output/public
           publish_branch: gh-pages
