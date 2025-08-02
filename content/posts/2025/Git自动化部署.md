@@ -389,7 +389,7 @@ pm2 startup
 
 ### 动态部署
 
-1、2
+1、22
 
 ```sh
 #!/bin/bash
