@@ -1,7 +1,0 @@
-# START nuxt-robots (indexable)
-User-agent: *
-Disallow: /preview
-Disallow: /previews/*
-
-Sitemap: https://yingzya.top/sitemap.xml
-# END nuxt-robots
