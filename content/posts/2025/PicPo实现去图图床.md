@@ -1,8 +1,8 @@
 ---
-title: GicPo配置去图图床
-description: GicPo实现去图图床
+title: PicPo配置去图图床
+description: PicPo实现去图图床配置，通过下载第三方插件，配置HEAD以及Body实现上传以及和Typora的联动
 date: 2025-08-01 17:15:43
-updated: 2025-08-01 17:15:43
+updated: 2025-08-04 
 image: https://7.isyangs.cn/20250801/cc418048d677e4b6a6d512f75603b372.png
 # type: story
 categories: [配置]
