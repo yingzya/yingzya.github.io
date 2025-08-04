@@ -2,7 +2,7 @@
 	--font-family: "Inter-Local", "Inter", "Noto Sans SC-Local", "Noto Sans SC", sans-serif;
 	--font-serif: "Noto Serif SC-Local", "Noto Serif SC", "华文中宋", "Times New Roman", serif;
 	--font-creative: "Inter-Local", "Inter", "Noto Sans SC-Local", "Noto Sans SC", sans-serif;
-	--font-monospace: "JetBrains Mono-Local", "JetBrains Mono", "Monospace-Local", sans-serif, monospace;
+	--font-monospace: "JetBrains Mono-Local", "JetBrains Mono", "SFMono-Regular", "Cascadia Code", "Fira Code", "Menlo", "Monaco", "Consolas", "Noto Sans Mono", "monospace", sans-serif, monospace;
 
 	// 兼容了一点 IE
 	background-color: hsl(220deg 20% 98%);
@@ -21,15 +21,7 @@
 }
 
 // 有本地字体时不加载网络字体
-@font-face {
-	font-family: Inter-Local;
-	src: local("Inter"); // 这个好像有问题，调不到
-}
 
-@font-face {
-	font-family: "JetBrains Mono-Local";
-	src: local("JetBrains Mono");
-}
 
 @font-face {
 	font-family: "Noto Sans SC-Local";
@@ -41,10 +33,6 @@
 	src: local("Noto Serif SC");
 }
 
-@font-face {
-	font-family: Monospace-Local;
-	src: local("SFMono-Regular"), local("Cascadia Code"), local("Fira Code"), local("Menlo"), local("Monaco"), local("Consolas"), local("Noto Sans Mono"), local("monospace");
-}
 
 * {
 	margin: 0;
