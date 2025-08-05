@@ -11,9 +11,9 @@ export default defineAppConfig({
 	article: {
 		categories: <{ [category: string]: { icon: string, color?: string } }>{
 			经验分享: { icon: 'ph:mouse-bold', color: '#3af' },
-			生活: { icon: 'ph:shooting-star-bold', color: '#3ba' },
-			代码: { icon: 'ph:code-bold', color: '#77f' },
-			未分类: { icon: 'ph:folder-dotted-bold' },
+			配置: { icon: 'ph:shooting-star-bold', color: '#3ba' },
+			Linux: { icon: 'ph:code-bold', color: '#77f' },
+			算法: { icon: 'ph:folder-dotted-bold',color:'#3af' },
 		},
 		defaultCategoryIcon: 'ph:folder-bold',
 		/** 分类排序方式，键为排序字段，值为显示名称 */
