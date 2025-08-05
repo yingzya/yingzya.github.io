@@ -1,0 +1,1 @@
+import{s,k as o,o as r,G as n}from"./DRWZH2_d.js";const t={};function a(e,c){return r(),o("em",null,[n(e.$slots,"default")])}const _=Object.assign(s(t,[["render",a]]),{__name:"ProseEm"});export{_ as default};
