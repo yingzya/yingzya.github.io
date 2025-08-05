@@ -22,7 +22,7 @@ const blogConfig = {
 		name: '署名-非商业性使用-相同方式共享 4.0 国际',
 		url: 'https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans',
 	},
-	favicon: 'https://7.isyangs.cn/20250730/ad55d1177bff3a5566f072b44d5f9696.png',
+	favicon: 'https://7.isyangs.cn/20250805/c77df6ed888acf748d49f457f1eb9d72.jpg',
 	language: 'zh-CN',
 	timeEstablished: '2025-03-19',
 	timezone: 'Asia/Shanghai',
