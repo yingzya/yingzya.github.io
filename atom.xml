@@ -3,7 +3,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://yingzya.top/</id>
   <title>字节追风者</title>
-  <updated>2025-08-05T03:35:17.291Z</updated>
+  <updated>2025-08-05T03:58:05.132Z</updated>
   <description>个人博客，分享技术与生活。“折腾不止，摸鱼生活——摸门🙏🏻”。</description>
   <author>
     <name>字节追风者</name>
@@ -19,18 +19,18 @@
   <rights>© 2025 字节追风者</rights>
   <subtitle>博客爱好者</subtitle>
   <entry>
-    <id>https://yingzya.top/2025</id>
-    <title>认证</title>
+    <id>https://yingzya.top/2025/rss-verification</id>
+    <title>RSS订阅源验证</title>
     <updated>2025-08-05T11:27:06.000Z</updated>
     <author>
       <name>字节追风者</name>
     </author>
     <content type="html">
-      <![CDATA[ <p>认证</p> <a href="https://yingzya.top/2025">点击查看全文</a>]]>
+      <![CDATA[ <p>RSS订阅源验证文章</p> <a href="https://yingzya.top/2025/rss-verification">点击查看全文</a>]]>
     </content>
-    <link href="https://yingzya.top/2025"></link>
-    <summary>认证</summary>
-    <category term="测试"></category>
+    <link href="https://yingzya.top/2025/rss-verification"></link>
+    <summary>RSS订阅源验证文章</summary>
+    <category term="系统"></category>
     <published>2025-08-05T11:27:06.000Z</published>
   </entry>
   <entry>
