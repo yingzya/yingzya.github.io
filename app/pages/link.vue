@@ -38,14 +38,14 @@ const copyFields = {
 			<!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
 			<ProseA href="/zhilu.opml">友链源 OPML 聚合</ProseA>，可导入阅读器或
 			<!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
-			<ProseA href="https://app.folo.is/share/lists/72840182614552576">订阅 Folo List</ProseA>。
+			<ProseA href="https://app.folo.is/share/lists/175452965174113280">订阅 Folo List</ProseA>。
 		</p>
 	</div>
 	<div class="operations">
 		<ProseA href="/atom.xml" icon="ph:rss-simple-bold">
 			订阅源
 		</ProseA>
-		<ProseA href="https://app.folo.is/share/feeds/62533754566736896" icon="ph:list-plus-bold">
+		<ProseA href="https://app.folo.is/share/feeds/175391677983093760" icon="ph:list-plus-bold">
 			在 Folo 上订阅
 		</ProseA>
 	</div>
