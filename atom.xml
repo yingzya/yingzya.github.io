@@ -3,7 +3,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://yingzya.top/</id>
   <title>字节追风者</title>
-  <updated>2025-08-05T03:58:05.132Z</updated>
+  <updated>2025-08-05T07:05:27.503Z</updated>
   <description>个人博客，分享技术与生活。“折腾不止，摸鱼生活——摸门🙏🏻”。</description>
   <author>
     <name>字节追风者</name>
@@ -26,10 +26,10 @@
       <name>字节追风者</name>
     </author>
     <content type="html">
-      <![CDATA[ <p>RSS订阅源验证文章</p> <a href="https://yingzya.top/2025/rss-verification">点击查看全文</a>]]>
+      <![CDATA[ <p>This message is used to verify that this feed (feedId:175391677983093760) belongs to me (userId:173657204958860288). Join me in enjoying the next generation information browser https://folo.is.</p> <a href="https://yingzya.top/2025/rss-verification">点击查看全文</a>]]>
     </content>
     <link href="https://yingzya.top/2025/rss-verification"></link>
-    <summary>RSS订阅源验证文章</summary>
+    <summary>This message is used to verify that this feed (feedId:175391677983093760) belongs to me (userId:173657204958860288). Join me in enjoying the next generation information browser https://folo.is.</summary>
     <category term="系统"></category>
     <published>2025-08-05T11:27:06.000Z</published>
   </entry>
