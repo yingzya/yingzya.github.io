@@ -1,6 +1,6 @@
 ---
 title: RSS订阅源验证
-description: RSS订阅源验证文章
+description: This message is used to verify that this feed (feedId:175391677983093760) belongs to me (userId:173657204958860288). Join me in enjoying the next generation information browser https://folo.is.
 date: 2025-08-05 11:27:06
 updated: 2025-08-05 11:27:06
 categories: [系统]
