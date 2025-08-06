@@ -3,7 +3,7 @@ import { getGhAvatar } from './utils/img'
 
 export default [{
 	name: '漫游',
-	desc: '博客测试中，如有侵权请联系我。',
+	desc: '网上冲浪时发现的精彩内容与常读订阅，与君共享。',
 	entries: [{
 		author: '汐笺',
 		sitenick: '最小可读',

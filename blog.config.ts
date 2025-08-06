@@ -10,9 +10,9 @@ const blogConfig = {
 	title: '字节追风者',
 	subtitle: '博客爱好者',
 	// 长 description 利好于 SEO
-	description: '个人博客，分享技术与生活。“折腾不止，摸鱼生活——摸门🙏🏻”。',
+	description: '你好，我是轻语，一名热爱技术与探索的博客作者，立志成长为一名全栈工程师。在这里，我记录前端与后端的学习过程、实战项目心得，也分享日常生活中的点滴灵感。🚀 信奉“折腾不止，摸鱼生活”，希望在不断摸索中找到属于自己的技术之路。',
 	author: {
-		name: '字节追风者',
+		name: '轻语',
 		avatar: 'https://7.isyangs.cn/20250730/c65a56b5206f765b8a30203c71be985e.jpg',
 		email: 'yzy11235@qq.com',
 		homepage: 'https://yingzya.top/',
