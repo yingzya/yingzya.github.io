@@ -3,13 +3,14 @@
   <head>
     <title>字节追风者的友链订阅</title>
     <dateCreated>2025-03-19T00:00:00.000Z</dateCreated>
-    <dateModified>2025-08-06T00:57:08.355Z</dateModified>
-    <ownerName>字节追风者</ownerName>
+    <dateModified>2025-08-06T08:35:34.044Z</dateModified>
+    <ownerName>轻语</ownerName>
     <ownerEmail>yzy11235@qq.com</ownerEmail>
     <ownerId>https://yingzya.top/</ownerId>
     <docs>https://opml.org/spec2.opml</docs>
   </head>
   <body>
     <outline text="字节追风者" type="rss" xmlUrl="https://yingzya.top/atom.xml" created="2025-03-19T00:00:00.000Z" description="博客爱好者" htmlUrl="https://yingzya.top/"></outline>
+    <outline text="张洪Heo" type="rss" xmlUrl="https://blog.zhheo.com/atom.xml" created="2025-08-06T00:00:00.000Z" description="分享设计与科技生活" htmlUrl="https://blog.zhheo.com/"></outline>
   </body>
 </opml>
