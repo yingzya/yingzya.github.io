@@ -1,1 +1,0 @@
-import{s,k as o,o as r,G as n}from"./DMkGkPif.js";const t={};function a(e,c){return r(),o("p",null,[n(e.$slots,"default")])}const _=Object.assign(s(t,[["render",a]]),{__name:"ProseP"});export{_ as default};
