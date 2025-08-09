@@ -35,8 +35,8 @@ tags: [标签1, 标签2]
 ---
 \n\n`, 'utf8')
 
-// 使用 VS Code 打开文件
-exec(`code "${filePath}"`, (error) => {
+// 使用 Typora 打开文件
+exec(`typora "${filePath}"`, (error) => {
 	if (error) {
 		console.error(`无法打开文件: ${error.message}`)
 	}
