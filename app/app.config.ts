@@ -14,6 +14,7 @@ export default defineAppConfig({
 			配置: { icon: 'ph:shooting-star-bold', color: '#3ba' },
 			Linux: { icon: 'ph:code-bold', color: '#77f' },
 			算法: { icon: 'ph:folder-dotted-bold',color:'#3af' },
+			实战项目:{ icon: 'ph:rocket-launch-bold',color:'#f90' },
 		},
 		defaultCategoryIcon: 'ph:folder-bold',
 		/** 分类排序方式，键为排序字段，值为显示名称 */
