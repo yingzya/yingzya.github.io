@@ -39,7 +39,8 @@ export default [
  {
 	name: '网上邻居',
 	desc: '哔——啵——电波通讯中，欢迎常来串门。',
-	entries: [{
+	entries: [
+		{
 		author: '张洪Heo',
 		desc: '分享设计与科技生活',
 		link: 'https://blog.zhheo.com/',
@@ -49,6 +50,18 @@ export default [
 		archs: ['Hexo', '国内 CDN'],
 		date: '2025-08-06',
 		comment: '知名博主，其博客设计风格被众多人借鉴。',
-	}],
-}
+		}, 
+		{
+		author: 'Soulter',
+		desc: 'Code with love!',
+		link: 'https://blog.soulter.top',
+		feed: 'https://blog.soulter.top/atom.xml',
+		icon: 'https://avatars.githubusercontent.com/u/37870767?v=4',
+		avatar: 'https://avatars.githubusercontent.com/u/37870767?v=4',
+		archs: ['Hexo', '国内 CDN'],
+		date: '2025-08-09',
+		comment: '技术博主，GitHub获得超12k stars',
+		}
+	]
+},
 ] satisfies FeedGroup[]
