@@ -3,7 +3,7 @@
   <head>
     <title>字节追风者的友链订阅</title>
     <dateCreated>2025-03-19T00:00:00.000Z</dateCreated>
-    <dateModified>2025-08-06T11:09:43.205Z</dateModified>
+    <dateModified>2025-08-09T08:02:45.945Z</dateModified>
     <ownerName>轻语</ownerName>
     <ownerEmail>yzy11235@qq.com</ownerEmail>
     <ownerId>https://yingzya.top/</ownerId>
@@ -12,5 +12,6 @@
   <body>
     <outline text="字节追风者" type="rss" xmlUrl="https://yingzya.top/atom.xml" created="2025-03-19T00:00:00.000Z" description="博客爱好者" htmlUrl="https://yingzya.top/"></outline>
     <outline text="张洪Heo" type="rss" xmlUrl="https://blog.zhheo.com/atom.xml" created="2025-08-06T00:00:00.000Z" description="分享设计与科技生活" htmlUrl="https://blog.zhheo.com/"></outline>
+    <outline text="Soulter" type="rss" xmlUrl="https://blog.soulter.top/atom.xml" created="2025-08-09T00:00:00.000Z" description="Code with love!" htmlUrl="https://blog.soulter.top"></outline>
   </body>
 </opml>
