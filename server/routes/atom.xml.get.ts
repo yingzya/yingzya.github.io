@@ -22,7 +22,7 @@ function renderContent(post: ContentCollectionItem) {
 	return [
 		post.image && `<img src="${post.image}" />`,
 		post.description && `<p>${post.description}</p>`,
-		`<a href="${getUrl(post.path)}">点击查看全文</a>`,
+		`<a class="view-full" href="${getUrl(post.path)}" target="_blank">点击查看全文</a>`,
 	].join(' ')
 }
 
@@ -67,7 +67,7 @@ export default defineEventHandler(async (event) => {
 		generator: {
 			$uri: 'https://github.com/yingzya/yingzya.github.io',
 			$version: version,
-			_: 'Yangzy Blog',
+			_: 'QingYu Blog',
 		},
 		icon: blogConfig.favicon,
 		logo: blogConfig.author.avatar, // Ratio should be 2:1

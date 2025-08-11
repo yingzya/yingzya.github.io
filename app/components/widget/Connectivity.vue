@@ -19,7 +19,7 @@ const contentStyle = computed<CSSProperties>(() => ({
 	:style="contentStyle"
 >
 	<!-- TODO: 优化技术架构展示 -->
-	<p>托管于 Vercel；博客由 Nuxt Content 驱动，使用去图图床。</p>
+	<p>托管于 Vercel、阿里云；博客由 Nuxt Content 驱动，使用去图图床。</p>
 	<p>
 		秋天的风它不曾见过桃花
 	</p>

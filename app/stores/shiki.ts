@@ -1,7 +1,7 @@
 import type { BundledLanguage, CodeToHastOptions, HighlighterCore } from 'shiki'
 import { transformerColorizedBrackets } from '@shikijs/colorized-brackets'
-import { transformerMetaHighlight, transformerMetaWordHighlight, transformerNotationDiff, transformerNotationErrorLevel, transformerNotationFocus, 
-transformerNotationHighlight, transformerNotationWordHighlight, transformerRenderWhitespace } from '@shikijs/transformers'
+import { transformerMetaHighlight, transformerMetaWordHighlight, transformerNotationDiff, transformerNotationErrorLevel, transformerNotationFocus, transformerNotationHighlight, transformerNotationWordHighlight, transformerRenderWhitespace } from '@shikijs/transformers'
+
 let promise: Promise<HighlighterCore>
 let shiki: HighlighterCore
 
@@ -9,7 +9,6 @@ type CustomTransformerOptions = Array<
 	| 'ignoreRenderWhitespace'
 	| 'ignoreColorizedBrackets'
 >
-
 
 export const useShikiStore = defineStore('shiki', () => {
 	const getOptions = (lang: string, transformerOptions?: CustomTransformerOptions): CodeToHastOptions<BundledLanguage, string> => ({
@@ -38,29 +37,34 @@ export const useShikiStore = defineStore('shiki', () => {
 					children: (hast.children[0] as any).children[0].children,
 				}),
 				line(node, line) {
-					 node.properties['data-line'] = line 
-					},
+					node.properties['data-line'] = line
+				},
 			},
 		],
 	})
 
 	async function load() {
-		promise ??= loadShiki()
+		if (!promise) {
+			const [
+				{ createHighlighterCore },
+				{ createJavaScriptRegexEngine },
+				catppuccinLatte,
+				oneDarkPro,
+			] = await Promise.all([
+				import('shiki/core'),
+				import('shiki/engine-javascript.mjs'),
+				import('shiki/themes/catppuccin-latte.mjs'),
+				import('shiki/themes/one-dark-pro.mjs'),
+			])
+
+			promise = createHighlighterCore({
+				themes: [catppuccinLatte, oneDarkPro],
+				engine: createJavaScriptRegexEngine(),
+			})
+		}
+
 		shiki ??= await promise
 		return shiki
-	}
-
-	async function loadShiki() {
-		const { createHighlighterCore } = await import('shiki/core')
-		const { createJavaScriptRegexEngine } = await import('shiki/engine-javascript.mjs')
-
-		return createHighlighterCore({
-			themes: [
-				await import('shiki/themes/catppuccin-latte.mjs'),
-				await import('shiki/themes/one-dark-pro.mjs'),
-			],
-			engine: createJavaScriptRegexEngine(),
-		})
 	}
 
 	async function loadLang(...langs: string[]) {
