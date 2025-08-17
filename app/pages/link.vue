@@ -34,18 +34,18 @@ const copyFields = {
 			闲聊或技术交流。
 		</p>
 		<p>
-			本站的
+			我制作了本站的
 			<!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
 			<ProseA href="/zhilu.opml">友链源 OPML 聚合</ProseA>，可导入阅读器或
 			<!-- eslint-disable-next-line vue/singleline-html-element-content-newline -->
-			<ProseA href="https://app.folo.is/share/lists/175452965174113280">订阅 Folo List</ProseA>。
+			<ProseA href="https://app.folo.is/share/lists/72840182614552576">订阅 Folo List</ProseA>。
 		</p>
 	</div>
 	<div class="operations">
 		<ProseA href="/atom.xml" icon="ph:rss-simple-bold">
 			订阅源
 		</ProseA>
-		<ProseA href="https://app.folo.is/share/feeds/175391677983093760" icon="ph:list-plus-bold">
+		<ProseA href="https://app.folo.is/share/feeds/62533754566736896" icon="ph:list-plus-bold">
 			在 Folo 上订阅
 		</ProseA>
 	</div>
@@ -86,7 +86,7 @@ const copyFields = {
 	margin: 1rem;
 	padding: 0.8rem 1rem;
 	border-radius: 1rem;
-	background: var(--c-primary-soft);
+	background-color: var(--c-primary-soft);
 
 	.content {
 		flex-basis: 20em;

@@ -24,6 +24,7 @@ const archIcons = {
 	'WordPress': 'simple-icons:wordpress',
 	'ZBlog': 'mynaui:letter-z-hexagon-solid', // 不准确
 	'Zebaur': 'tabler:square-letter-z-filled', // 不准确
+	'NotionNext': 'simple-icons:notion',
 }
 
 export type Arch = keyof typeof archIcons

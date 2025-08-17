@@ -5,11 +5,9 @@ defineOptions({ inheritAttrs: false })
 const props = defineProps<ArticleProps>()
 
 const appConfig = useAppConfig()
-const publishedLabel = getPostDate(props.date)
-const updatedLabel = getPostDate(props.updated)
 
-const categoryLabel = props.categories?.[0]
-const categoryIcon = getCategoryIcon(categoryLabel)
+const categoryLabel = computed(() => props.categories?.[0])
+const categoryIcon = computed(() => getCategoryIcon(categoryLabel.value))
 
 const shareText = `【${appConfig.title}】${props.title}\n\n${
 	props.description ? `${props.description}\n\n` : ''}${
@@ -31,25 +29,38 @@ const { copy, copied } = useCopy(shareText)
 				文字分享
 			</ZButton>
 		</div>
+
 		<div v-if="!hideInfo" class="post-info">
-			<time v-if="date" v-tip="`创建于 ${getLocaleDatetime(props.date)}`" :datetime="getIsoDatetime(date)">
-				<Icon name="ph:calendar-dots-bold" /> {{ publishedLabel }}
+			<time
+				v-if="date"
+				v-tip="`创建于 ${getLocaleDatetime(props.date)}`"
+				:datetime="getIsoDatetime(date)"
+			>
+				<Icon name="ph:calendar-dots-bold" />
+				{{ getPostDate(props.date) }}
 			</time>
+
 			<time
 				v-if="isTimeDiffSignificant(date, updated, .999)"
 				v-tip="`修改于 ${getLocaleDatetime(props.updated)}`"
 				:datetime="getIsoDatetime(updated)"
 			>
-				<Icon name="ph:calendar-plus-bold" /> {{ updatedLabel }}
+				<Icon name="ph:calendar-plus-bold" />
+				{{ getPostDate(props.updated) }}
 			</time>
+
 			<span v-if="categoryLabel" class="article-category">
-				<Icon :name="categoryIcon" /> {{ categoryLabel }}
+				<Icon :name="categoryIcon" />
+				{{ categoryLabel }}
 			</span>
+
 			<span class="wordcount">
-				<Icon name="ph:paragraph-bold" /> {{ formatNumber(readingTime?.words) }} 字
+				<Icon name="ph:paragraph-bold" />
+				{{ formatNumber(readingTime?.words) }} 字
 			</span>
 		</div>
 	</div>
+
 	<h1 class="post-title" :class="getPostTypeClassName(type)">
 		{{ title }}
 	</h1>
@@ -81,17 +92,20 @@ const { copy, copied } = useCopy(shareText)
 		overflow: hidden;
 		min-height: 256px;
 		max-height: 320px;
-		text-shadow: 0 1px 1px #0003, 0 1px 2px #0003;
 		color: white;
 		transition: font-size 0.2s;
-		z-index: 0;
 
 		&:hover {
 			font-size: 0.8em;
 		}
 
+		.post-info {
+			filter: drop-shadow(0 1px 2px #000);
+		}
+
 		.post-title {
 			background-image: linear-gradient(transparent, #0003, #0005);
+			text-shadow: 0 1px 1px #0003, 0 1px 2px #0003;
 
 			&.text-story {
 				text-align: center;
@@ -124,13 +138,13 @@ const { copy, copied } = useCopy(shareText)
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-	z-index: -1;
 }
 
 .post-title {
 	padding: 0.8em 1rem;
 	font-size: 1.6em;
 	line-height: 1.2;
+	z-index: 1;
 }
 
 .post-nav {

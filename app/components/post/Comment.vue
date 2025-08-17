@@ -4,8 +4,8 @@ const appConfig = useAppConfig()
 onMounted(() => {
 	// @ts-expect-error windows上有twikoo实例
 	window.twikoo?.init?.({
-	// @ts-expect-error twikoo相关
 		envId: appConfig.twikoo?.envId,
+		// twikoo 会把挂载后的元素变为 #twikoo
 		el: '#twikoo',
 	})
 })
@@ -16,7 +16,7 @@ onMounted(() => {
 	<h3 class="text-creative">
 		评论区
 	</h3>
-		<div id="twikoo">
+	<div id="twikoo">
 		<p>评论加载中...</p>
 	</div>
 </section>
@@ -73,27 +73,17 @@ onMounted(() => {
 		margin: 0.2em 0;
 	}
 
-	// 段间距
-	br {
-		content: "";
-		display: block;
-		height: 0.2em;
-	}
-
 	menu, ol, ul {
-		margin-block: 0.5em;
+		margin: 0.5em 0;
 		padding: 0 0 0 1.5em;
 		list-style: revert;
-
-		&::marker {
-			color: var(--c-text-2);
-		}
 
 		> li {
 			margin: 0.2em 0;
 
 			&::marker {
 				font-size: 0.8em;
+				color: var(--c-primary);
 			}
 		}
 	}
@@ -123,7 +113,7 @@ onMounted(() => {
 	}
 
 	.tk-replies:not(.tk-replies-expand) {
-		mask: linear-gradient(#FFF 50%, transparent);
+		mask-image: linear-gradient(#FFF 50%, transparent);
 	}
 
 	.tk-expand {

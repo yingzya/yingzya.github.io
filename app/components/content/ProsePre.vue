@@ -119,7 +119,7 @@ onMounted(async () => {
 		pre {
 			overflow: hidden;
 			max-height: var(--collapsible-height);
-			mask: linear-gradient(to top, transparent 2rem, #FFF 4rem);
+			mask-image: linear-gradient(to top, transparent 2rem, #FFF 4rem);
 			animation: none;
 		}
 
@@ -152,7 +152,7 @@ figcaption {
 	> .language {
 		opacity: 0.4;
 		height: 0;
-		padding: 0.2em 0;
+		transform: translateY(0.2em);
 	}
 
 	> .operations {

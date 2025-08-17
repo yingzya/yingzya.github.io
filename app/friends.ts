@@ -62,6 +62,17 @@ export default [
 		date: '2025-08-09',
 		comment: '技术博主，GitHub获得超12k stars',
 		}
+		,{
+		author: '𝟞𝟙𝟡',
+		desc: '𝓙𝓾𝓼𝓽 𝓪 𝓬𝓵𝓸𝓾𝓭',
+		link: 'https://66619.eu.org',
+		feed: 'https://66619.eu.org/rss/feed.xml',
+		icon: 'https://image.66619.eu.org/file/3db3168b82b1137c0e4d7.png',
+		avatar: 'https://image.66619.eu.org/file/3db3168b82b1137c0e4d7.png',
+		archs: ['NotionNext', '国内 CDN'],
+		date: '2025-08-09',
+		comment: '分享技术与生活瞬间',
+		}
 	]
 },
 ] satisfies FeedGroup[]

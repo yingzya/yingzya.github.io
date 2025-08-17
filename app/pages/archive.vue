@@ -41,7 +41,8 @@ const yearlyWordCount = computed(() => {
 		v-model:category="category"
 		:categories
 	/>
-	<div
+
+	<section
 		v-for="[year, yearGroup] in listGrouped"
 		:key="year"
 		class="archive-group"
@@ -50,15 +51,18 @@ const yearlyWordCount = computed(() => {
 			<h2 class="archive-year">
 				{{ year }}
 			</h2>
+
 			<div class="archive-age">
 				<span>{{ Number(year) - birthYear }}</span>
 				<span class="age-label">岁</span>
 			</div>
+
 			<div class="archive-info">
 				<span>{{ yearlyWordCount[year] }}字</span>
 				<span>{{ yearGroup?.length }}篇</span>
 			</div>
 		</div>
+
 		<menu class="archive-list">
 			<TransitionGroup appear name="float-in">
 				<ZArchive
@@ -71,14 +75,14 @@ const yearlyWordCount = computed(() => {
 				/>
 			</TransitionGroup>
 		</menu>
-	</div>
+	</section>
 </div>
 </template>
 
 <style lang="scss" scoped>
 .archive {
 	margin: 1rem;
-	mask: linear-gradient(#FFF 50%, #FFF5);
+	mask-image: linear-gradient(#FFF 50%, #FFF5);
 }
 
 .archive-group {
@@ -98,17 +102,17 @@ const yearlyWordCount = computed(() => {
 	color: transparent;
 	transition: color 0.2s;
 
-	:hover > & {
+	&::selection, :hover > & {
 		color: var(--c-text-3);
+	}
 
-		.archive-age {
-			opacity: 0;
-		}
+	:hover > & .archive-age {
+		opacity: 0;
 	}
 
 	> .archive-year, .archive-age {
 		margin-bottom: -0.3em;
-		mask: linear-gradient(#FFF 50%, transparent);
+		mask-image: linear-gradient(#FFF 50%, transparent);
 		font-size: 3em;
 		font-weight: 800;
 		line-height: 1;
