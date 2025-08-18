@@ -2,7 +2,7 @@
 title: Java苍穹外卖
 description: 记录“Java苍穹外卖”实战项目开发过程，涵盖环境搭建与配置，如nginx反向代理、Swagger使用；功能开发细节，包括JWT认证、日期处理等；还涉及Redis缓存、Spring Task、WebSocket等技术应用，以及菜品管理、订单支付等功能实现。
 date: 2025-03-18 21:24:59
-updated: 
+updated: 2025-03-18 21:24:59
 image: https://7.isyangs.cn/20250809/22d30d32d7e2785b86b71a9f0a0c38c5.png
 # type: story
 categories: [实战项目]
