@@ -48,7 +48,7 @@ const blogConfig = {
 
 	scripts: [
 		// 自己部署的 Umami 统计服务
-		//{ 'src': 'https://zhi.zhilu.cyou/zhi.js', 'data-website-id': 'a1997c81-a42b-46f6-8d1d-8fbd67a8ef41', 'defer': true },
+		{ 'src': 'https://umami-beta-eight.vercel.app/script.js', 'data-website-id': 'a5e67a3b-2526-4cad-8382-e5bc258ca79b', 'defer': true },
 		// 自己网站的 Cloudflare Insights 统计服务
 		//{ 'src': 'https://static.cloudflareinsights.com/beacon.min.js', 'data-cf-beacon': '{"token": "97a4fe32ed8240ac8284e9bffaf03962"}', 'defer': true },
 		// Twikoo 评论系统
