@@ -3,7 +3,8 @@ const appConfig = useAppConfig()
 const timeEstablished = appConfig.timeEstablished
 
 const blogLog = [
-	{ date: '2025-08-11', content: 'Nuxt Content 博客上线' },
+	{ date: '2025-07-31', content: '博客框架迁移为 Nuxt + Nuxt Content'},
+	{ date: '2025-03-19', content: '博客上线，采用Butterfly主题'}
 ]
 </script>
 
