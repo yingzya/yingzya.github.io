@@ -929,6 +929,9 @@ packages:
   '@iconify-json/ph@1.2.2':
     resolution: {integrity: sha512-PgkEZNtqa8hBGjHXQa4pMwZa93hmfu8FUSjs/nv4oUU6yLsgv+gh9nu28Kqi8Fz9CCVu4hj1MZs9/60J57IzFw==}
 
+  '@iconify-json/solar@1.2.4':
+    resolution: {integrity: sha512-ruAh+bbYimlzqXW6MtqmvWlfatvFjE7o1fZWieps1h42Dx7AaHu4Z/dgOYSO1RR4MIhNzD+2xgEbFjASgBcEyg==}
+
   '@iconify/collections@1.0.586':
     resolution: {integrity: sha512-DI5HhgluzVBeXYJy50qF8dNbYQ7+JnV4z6TS9NAqKAOkAOlrZZT2VV0PYtzY+pkuiM9l2FqNLA9uUZHn6IZBow==}
 
@@ -7128,6 +7131,10 @@ snapshots:
   '@humanwhocodes/retry@0.4.3': {}
 
   '@iconify-json/ph@1.2.2':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/solar@1.2.4':
     dependencies:
       '@iconify/types': 2.0.0
 

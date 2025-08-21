@@ -27,14 +27,24 @@ tags: [线代, 概率论]
 
 **2、行列式展开、范德蒙行列式**
 
-![image-20250819194635093](https://7.isyangs.cn/20250819/b6c57c07d949a20302aabcb5b4d60caa.png)
+::pic
+---
+src: https://7.isyangs.cn/20250819/b6c57c07d949a20302aabcb5b4d60caa.png
+caption: 
+---
+::
 
  定义   
 
 - **余子式 $\boldsymbol{M_{ij}}$**：去掉行列式中元素 $\boldsymbol{a_{ij}}$ 所在的第 $\boldsymbol{i}$ 行和第 $\boldsymbol{j}$ 列，剩余元素构成的新行列式。  
 -  **代数余子式 $\boldsymbol{A_{ij}}$**：$\boldsymbol{A_{ij}=(-1)^{i+j}M_{ij}}$ （符号由元素位置的行标 $\boldsymbol{i}$、列标 $\boldsymbol{j}$ 决定 ）。    
 
-![image-20250819195148482](https://7.isyangs.cn/20250819/15f9526f0e403a8642098d91f0590367.png)
+::pic
+---
+src: https://7.isyangs.cn/20250819/15f9526f0e403a8642098d91f0590367.png
+caption: 
+---
+::
 
 **按行展开**   
 对 $n$ 阶行列式 $D$，取第 $\boldsymbol{i}$ 行（$i = 1,2,\dots,n$  ），有：   $$\boldsymbol{D = a_{i1}A_{i1} + a_{i2}A_{i2} + \cdots + a_{in}A_{in}}$$   其中，$\boldsymbol{a_{ij}}$ 是行列式第 $i$ 行第 $j$ 列的元素，$\boldsymbol{A_{ij}}$ 是 $\boldsymbol{a_{ij}}$ 的代数余子式（$A_{ij}=(-1)^{i+j}M_{ij}$ ，$M_{ij}$ 为余子式 ）。   

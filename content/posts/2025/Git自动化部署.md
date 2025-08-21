@@ -261,11 +261,21 @@ jobs:
 
 打开你Github的项目，然后settings，然后左侧点击Actions，点击Gereral，确保下面的两个勾选上了
 
-![10370](https://7.isyangs.cn/20250731/723b20ec409cf0976ee3459cf32c2809.png)
+::pic
+---
+src: https://7.isyangs.cn/20250731/723b20ec409cf0976ee3459cf32c2809.png
+caption: 
+---
+::
 
 记得配置下面的**Token**，如果访问权限不够的话。
 
-![10371](https://7.isyangs.cn/20250731/b67f9cf6ba2490e5d050a288d0ecca0f.png)
+::pic
+---
+src: https://7.isyangs.cn/20250731/b67f9cf6ba2490e5d050a288d0ecca0f.png
+caption: 
+---
+::
 
 **解决方法一：给 Actions 用一个 PAT 代替默认 token**
 

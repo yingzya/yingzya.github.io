@@ -11,9 +11,10 @@ export default defineAppConfig({
 	article: {
 		categories: <{ [category: string]: { icon: string, color?: string } }>{
 			经验分享: { icon: 'ph:mouse-bold', color: '#3af' },
-			配置: { icon: 'ph:shooting-star-bold', color: '#3ba' },
-			Linux: { icon: 'ph:code-bold', color: '#77f' },
-			算法: { icon: 'ph:folder-dotted-bold',color:'#3af' },
+			保研: { icon: 'ph:graduation-cap-bold', color: '#8b5cf6' },
+			配置: { icon: 'ph:wrench-bold', color: '#2f2f37ff' },
+			Linux: { icon: 'ph:linux-logo-bold', color: '#3b82f6' },
+			算法: { icon: 'ph:code-bold', color: '#8110b9ff' },         
 			实战项目:{ icon: 'ph:rocket-launch-bold',color:'#f90' },
 		},
 		defaultCategoryIcon: 'ph:folder-bold',
