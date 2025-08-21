@@ -1,4 +1,5 @@
 {
   "vue.format.template.initialIndent": false,
-  "yaml.format.singleQuote": true
+  "yaml.format.singleQuote": true,
+  "terminal.integrated.cwd": "E:/Project/blog"
 }

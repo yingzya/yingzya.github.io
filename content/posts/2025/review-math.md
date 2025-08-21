@@ -16,9 +16,13 @@ tags: [线代, 概率论]
 **1、行列式性质及计算**
 
 **①互换行（列），变号**：交换行列式的两行（列），行列式的值变号。比如$D=\begin{vmatrix}a_{11}&a_{12}\\a_{21}&a_{22}\end{vmatrix}$ ，交换两行得$\begin{vmatrix}a_{21}&a_{22}\\a_{11}&a_{12}\end{vmatrix}=-D$ 。
+
 **②提公因子**：行列式某一行（列）的所有元素都有公因子$k$ ，可把$k$提到行列式外面。即若$D=\begin{vmatrix}ka_{11}&ka_{12}\\a_{21}&a_{22}\end{vmatrix}$ ，则$D = k\begin{vmatrix}a_{11}&a_{12}\\a_{21}&a_{22}\end{vmatrix}$ 。 
+
 **③倍加**：把行列式某一行（列）的元素乘以数$k$后加到另一行（列）对应元素上，行列式的值不变。比如$D=\begin{vmatrix}a_{11}&a_{12}\\a_{21}&a_{22}\end{vmatrix}$ ，第一行乘$k$加到第二行，得$\begin{vmatrix}a_{11}&a_{12}\\a_{21}+ka_{11}&a_{22}+ka_{12}\end{vmatrix}=D$ 。
+
 **④拆分**：若行列式某一行（列）的元素都是两数之和，可拆成两个行列式之和。如$D=\begin{vmatrix}a_{11}+b_{11}&a_{12}+b_{12}\\a_{21}&a_{22}\end{vmatrix}$ ，则$D=\begin{vmatrix}a_{11}&a_{12}\\a_{21}&a_{22}\end{vmatrix}+\begin{vmatrix}b_{11}&b_{12}\\a_{21}&a_{22}\end{vmatrix}$ 。
+
 **⑤对应成比例，值为零**：若行列式有两行（列）对应元素成比例，行列式的值为$0$ 。比如$D=\begin{vmatrix}a_{11}&a_{12}\\ka_{11}&ka_{12}\end{vmatrix}$ ，两行成比例，$D = 0$ 。 
 
 **2、行列式展开、范德蒙行列式**
@@ -236,6 +240,7 @@ $b_1 = a_1$，$b_2 = a_2 - \frac{[a_2, b_1]}{[b_1, b_1]} \cdot b_1$
 
 ①$\lambda_1 + \lambda_2 + \cdots + \lambda_n = a_{11} + a_{22} + \cdots + a_{nn} \quad \text{（矩阵的迹：trA）}$
 
+
 ②$\lambda_1 \cdot \lambda_2 \cdot \cdots \cdot \lambda_n = |A|$
 
 ③ 若 $A$ 的特征值为 $\lambda$，则：
@@ -250,7 +255,7 @@ $b_1 = a_1$，$b_2 = a_2 - \frac{[a_2, b_1]}{[b_1, b_1]} \cdot b_1$
 
 **二次型与二次型矩阵的关系**
 
-对于 n 元二次型 $f(x_1, x_2, \dots, x_n)$，其一般形式可表示为:$f = \sum_{i=1}^n \sum_{j=1}^n a_{ij}x_ix_j \quad (a_{ij} = a_{ji}$) 对应的**二次型矩阵 A** 是一个 n 阶**对称矩阵**（$满足A^T = A$），其中：
+对于 n 元二次型 $f(x_1, x_2, \dots, x_n)$，其一般形式可表示为:$f = \sum_{i=1}^n \sum_{j=1}^n a_{ij}x_ix_j \quad (a_{ij} = a_{ji}$) 对应的**二次型矩阵 A** 是一个 n 阶**对称矩阵**（满足 $A^T = A$），其中：
 
 - 主对角线元素 $a_{ii}$ 是$x_{i}^2$项的系数
 - 非主对角线元素 $ a_{ij} \ (i \neq j)$ 是$x_ix_j $ 项系数的一半,因为$x_ix_j$ 会被拆分为$a_{ij}x_ix_j + a_{ji}x_jx_i$，且$a_{ij} = a_{ji}$。
