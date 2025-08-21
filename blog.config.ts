@@ -39,8 +39,8 @@ const blogConfig = {
 
 	imageDomains: [
 		// 自动启用本域名的 Nuxt Image
-		'yingzya.top',
-		'7.isyangs.cn',
+		// 'yingzya.top',
+		// '7.isyangs.cn',
 	],
 
 	// 禁止搜索引擎收录的路径
