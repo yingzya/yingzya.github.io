@@ -5,7 +5,7 @@ date: 2025-08-20 21:45:38
 updated: 2025-08-20 21:45:38
 # image:
 # type: story
-categories: [分类]
+categories: [复习]
 tags: [线代, 概率论]
 ---
 

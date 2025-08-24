@@ -11,11 +11,11 @@ export default defineAppConfig({
 	article: {
 		categories: <{ [category: string]: { icon: string, color?: string } }>{
 			经验分享: { icon: 'ph:mouse-bold', color: '#3af' },
-			保研: { icon: 'ph:graduation-cap-bold', color: '#8b5cf6' },
-			配置: { icon: 'ph:wrench-bold', color: '#2f2f37ff' },
-			Linux: { icon: 'ph:linux-logo-bold', color: '#3b82f6' },
-			算法: { icon: 'ph:code-bold', color: '#8110b9ff' },         
-			实战项目:{ icon: 'ph:rocket-launch-bold',color:'#f90' },
+			复习: { icon: 'ph:graduation-cap-bold', color: '#22c55e' },
+			配置: { icon: 'ph:wrench-bold', color: '#6b7280' },
+			Linux: { icon: 'ph:linux-logo-bold', color: '#facc15' },
+			算法: { icon: 'ph:code-bold', color: '#8b5cf6' },
+			实战项目: { icon: 'ph:rocket-launch-bold', color: '#f90' },
 		},
 		defaultCategoryIcon: 'ph:folder-bold',
 		/** 分类排序方式，键为排序字段，值为显示名称 */
