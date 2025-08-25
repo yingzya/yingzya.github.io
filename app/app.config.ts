@@ -36,6 +36,7 @@ export default defineAppConfig({
 		},
 	},
 
+	// @keep-sorted
 	footer: {
 		/** 页脚版权信息 */
 		copyright: `© ${new Date().getFullYear()} ${blogConfig.author.name}`,
@@ -75,8 +76,7 @@ export default defineAppConfig({
 				],
 			},
 		] satisfies Nav,
-		/** 页脚版权信息底部的其他信息 */
-		//message: '<a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener nofollow" data-v-e2b95aa8="">晋ICP备2025064396号-1</a>',
+
 	},
 
 	/** 左侧栏顶部 Logo */
@@ -86,14 +86,6 @@ export default defineAppConfig({
 		showTitle: true,
 		subtitle: blogConfig.subtitle,
 		emojiTail: ['📄', '🦌', '🙌', '🐟', '🏖️'],
-	},
-
-	pagination: {
-		perPage: 10,
-		/** 默认排序方式，需要是 this.article.order 中的键名 */
-		sortOrder: 'date' as const,
-		/** 允许（普通/预览/归档）文章列表正序，开启后排序方式左侧图标可切换顺序 */
-		allowAscending: false,
 	},
 
 	/** 左侧栏导航 */
@@ -108,10 +100,12 @@ export default defineAppConfig({
 		},
 	] satisfies Nav,
 
-	/** 风格化 blog-stats widget */
-	seasonal: {
-		// widgetBackground: 'https://wsrv.nl/?url=i2.hdslb.com/bfs/archive/46165212e09842103752c453d7987a470059760b.jpg@320w',
-		// emoji: '🧧',
+	pagination: {
+		perPage: 10,
+		/** 默认排序方式，需要是 this.article.order 中的键名 */
+		sortOrder: 'date' as const,
+		/** 允许（普通/预览/归档）文章列表正序，开启后排序方式左侧图标可切换顺序 */
+		allowAscending: false,
 	},
 
 	stats: {
