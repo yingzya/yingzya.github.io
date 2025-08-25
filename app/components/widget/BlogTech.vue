@@ -9,7 +9,7 @@ const [pm, pmVersion] = packageManager.split('@') as [string, string]
 
 const service = computed(() => ([
 	{ label: '托管平台', value: '▲Vercel ☁阿里云' },
-	{ label: '图片存储', value: () => [h('img', { src: 'https://7.isyangs.cn/1/6553112f89de6-1.png', alt: '去图图床', width: 16 }), '去图图床'] },
+	{ label: '图片存储', value: () => [h('img', { src: 'https://7.isyangs.cn/20250825/ff4fbcb2c5df614aaf97e7b6ab5e351c.webp', alt: '去图图床', width: 16 }), '去图图床'] },
 	{ label: '软件协议', value: 'MIT' },
 	{ label: '文章许可', value: appConfig.copyright.abbr },
 	{ label: '规范域名', value: getDomain(appConfig.url) },
