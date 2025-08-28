@@ -1,1 +1,0 @@
-import{z as s,k as r,h as n,H as o}from"./M_FrqsBG.js";const t={};function a(e,c){return n(),r("em",null,[o(e.$slots,"default")])}const _=Object.assign(s(t,[["render",a]]),{__name:"ProseEm"});export{_ as default};
