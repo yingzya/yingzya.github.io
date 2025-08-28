@@ -11,7 +11,7 @@ export default defineAppConfig({
 	article: {
 		categories: <{ [category: string]: { icon: string, color?: string } }>{
 			经验分享: { icon: 'ph:mouse-bold', color: '#3af' },
-			复习: { icon: 'ph:graduation-cap-bold', color: '#22c55e' },
+			复习: { icon: 'ph:graduation-cap-bold', color: '#415cb3ff' },
 			配置: { icon: 'ph:wrench-bold', color: '#6b7280' },
 			Linux: { icon: 'ph:linux-logo-bold', color: '#facc15' },
 			算法: { icon: 'ph:code-bold', color: '#8b5cf6' },
