@@ -58,3 +58,5 @@ patchedDependencies:
   vue-tippy: patches/vue-tippy.patch
 
 shamefullyHoist: true
+catalog:
+  supports-color: ^10.2.0
