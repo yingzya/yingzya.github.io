@@ -96,6 +96,9 @@ catalogs:
     embla-carousel-wheel-gestures:
       specifier: ^8.1.0
       version: 8.1.0
+    supports-color:
+      specifier: ^10.2.0
+      version: 10.2.0
     vue-tippy:
       specifier: ^6.7.1
       version: 6.7.1
@@ -262,7 +265,7 @@ importers:
         specifier: catalog:quality
         version: 16.23.1(supports-color@10.2.0)(typescript@5.9.2)
       supports-color:
-        specifier: ^10.2.0
+        specifier: catalog:ui
         version: 10.2.0
       terser:
         specifier: catalog:framework
