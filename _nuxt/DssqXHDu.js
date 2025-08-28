@@ -1,0 +1,1 @@
+import{z as s,k as a,h as r,H as t}from"./BPUsYTde.js";const n={};function o(e,c){return r(),a("thead",null,[t(e.$slots,"default")])}const _=Object.assign(s(n,[["render",o]]),{__name:"ProseThead"});export{_ as default};
