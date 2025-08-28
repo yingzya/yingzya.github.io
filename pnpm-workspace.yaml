@@ -34,6 +34,7 @@ catalogs:
     embla-carousel-wheel-gestures: ^8.1.0
     vue-tippy: ^6.7.1
     vue-virtual-scroller: 2.0.0-beta.8
+    supports-color: ^10.2.0
   util:
     '@pinia/nuxt': ^0.11.2
     '@vueuse/core': ^13.7.0
@@ -45,6 +46,10 @@ catalogs:
     minisearch: ^7.1.2
     parse-domain: ^8.2.2
     radash: ^12.1.1
+  conflicts_ui_c:
+    supports-color: c
+  conflicts_ui_ca:
+    supports-color: ca
 
 onlyBuiltDependencies:
   - '@parcel/watcher'

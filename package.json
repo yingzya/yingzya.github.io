@@ -56,7 +56,7 @@
     "sass-embedded": "catalog:framework",
     "shiki": "catalog:content",
     "stylelint": "catalog:quality",
-    "supports-color": "^10.2.0",
+    "supports-color": "catalog:ui",
     "terser": "catalog:framework",
     "typescript": "catalog:framework",
     "vue": "catalog:framework",
