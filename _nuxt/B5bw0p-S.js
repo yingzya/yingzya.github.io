@@ -1,1 +1,0 @@
-import{y as s,k as r,h as t,G as n}from"./DNsPGyAx.js";const o={};function a(e,c){return t(),r("td",null,[n(e.$slots,"default")])}const _=Object.assign(s(o,[["render",a]]),{__name:"ProseTd"});export{_ as default};
