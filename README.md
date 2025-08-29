@@ -1,4 +1,4 @@
-# ✨ Nuxt 4 博客自动部署到服务器
+##  Nuxt 4 博客
 
 [![CI Status](https://github.com/yingzya/yingzya.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/yingzya/yingzya.github.io/actions)
 [![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub_Pages-blue?logo=github)](https://yingzya.github.io/yingzya.github.io)
@@ -37,12 +37,13 @@ pnpm generate
 
 构建后的静态资源会生成在 `.output/public` 目录中。
 
-### 自动化部署
+### 自动化部署(GitHub App + Webhook)
 
-当将代码推送到 `main` 分支时，GitHub Actions与服务器将自动执行以下操作：
+当代码推送到 `main` 分支时，**GitHub App 会触发服务器 Webhook**，服务器会自动执行以下操作：
 
-1. 安装依赖
-2. 执行 `pnpm generate` 构建静态站点
-3. 将 `.output/public` 中的内容推送到 `gh-pages` 分支
-4. 服务器在接受到Github的WebHook发送的请求后，拉取仓库代码，更新内容。
-5. 自动更新服务器上的内容
+1. 拉取最新仓库代码。
+2. 构建静态站点（`.output/public`）。
+3. 覆盖服务器上博客目录的内容。
+4. 博客自动更新，无需手动操作。
+
+> ⚠️ 注意：服务器需要配置 Webhook 服务（例如 `webhook.js`）并确保正确运行。
