@@ -1,12 +1,13 @@
 ---
 title: 复习——数学篇
-description: 梳理了线性代数和概率论的核心概念与解题方法，涵盖行列式、矩阵、方程组、特征值及二次型等。概率论涉及分布、大数定理等。
+description: 本文系统总结线性代数与概率论核心知识，包括行列式、矩阵、向量、方程组、特征值对角化、二次型及概率公式、分布、大数定理、参数估计等考点与方法。
 date: 2025-08-20 21:45:38
-updated: 2025-08-28 10:54:38
-# image:
+updated: 2025-09-02 20:19:38
+image: https://7.isyangs.cn/20250902/36c5edbe3d2e695a658ad2658efa5df5.jpg
 # type: story
 categories: [复习]
 tags: [线代, 概率论]
+recommend: false
 ---
 
 ## 线性代数
@@ -30,27 +31,27 @@ tags: [线代, 概率论]
 ::pic
 ---
 src: https://7.isyangs.cn/20250819/b6c57c07d949a20302aabcb5b4d60caa.png
-caption: 
+caption:
 ---
 ::
 
- 定义   
+ 定义
 
-- **余子式 $\boldsymbol{M_{ij}}$**：去掉行列式中元素 $\boldsymbol{a_{ij}}$ 所在的第 $\boldsymbol{i}$ 行和第 $\boldsymbol{j}$ 列，剩余元素构成的新行列式。  
--  **代数余子式 $\boldsymbol{A_{ij}}$**：$\boldsymbol{A_{ij}=(-1)^{i+j}M_{ij}}$ （符号由元素位置的行标 $\boldsymbol{i}$、列标 $\boldsymbol{j}$ 决定 ）。    
+- **余子式 $\boldsymbol{M_{ij}}$**：去掉行列式中元素 $\boldsymbol{a_{ij}}$ 所在的第 $\boldsymbol{i}$ 行和第 $\boldsymbol{j}$ 列，剩余元素构成的新行列式。
+-  **代数余子式 $\boldsymbol{A_{ij}}$**：$\boldsymbol{A_{ij}=(-1)^{i+j}M_{ij}}$ （符号由元素位置的行标 $\boldsymbol{i}$、列标 $\boldsymbol{j}$ 决定 ）
 
 ::pic
 ---
 src: https://7.isyangs.cn/20250819/15f9526f0e403a8642098d91f0590367.png
-caption: 
+caption:
 ---
 ::
 
-**按行展开**   
+**按行展开**
 对 $n$ 阶行列式 $D$，取第 $\boldsymbol{i}$ 行（$i = 1,2,\dots,n$  ），有：   $$\boldsymbol{D = a_{i1}A_{i1} + a_{i2}A_{i2} + \cdots + a_{in}A_{in}}$$   其中，$\boldsymbol{a_{ij}}$ 是行列式第 $i$ 行第 $j$ 列的元素，$\boldsymbol{A_{ij}}$ 是 $\boldsymbol{a_{ij}}$ 的代数余子式（$A_{ij}=(-1)^{i+j}M_{ij}$ ，$M_{ij}$ 为余子式 ）。   
 
 **按列展开**
- 对 $n$ 阶行列式 $D$，取第 $\boldsymbol{j}$ 列（$j = 1,2,\dots,n$  ），有：   $$\boldsymbol{D = a_{1j}A_{1j} + a_{2j}A_{2j} + \cdots + a_{nj}A_{nj}}$$   同理，$\boldsymbol{a_{ij}}$ 是行列式第 $i$ 行第 $j$ 列的元素，$\boldsymbol{A_{ij}}$ 是对应代数余子式 。    
+ 对 $n$ 阶行列式 $D$，取第 $\boldsymbol{j}$ 列（$j = 1,2,\dots,n$  ），有：   $$\boldsymbol{D = a_{1j}A_{1j} + a_{2j}A_{2j} + \cdots + a_{nj}A_{nj}}$$   同理，$\boldsymbol{a_{ij}}$ 是行列式第 $i$ 行第 $j$ 列的元素，$\boldsymbol{A_{ij}}$ 是对应代数余子式 。
 
 ###  矩阵
 
@@ -306,3 +307,240 @@ $$
 
 ## 概率论
 
+### 事件的运算及概率
+
+**事件的基本概念**
+
+- 随机试验：在相同条件下可以重复进行，结果不唯一且事先不确定。
+- 样本空间 $\Omega$：试验所有可能结果的集合。
+- 事件：样本空间的子集。
+
+1. $A、B$独立
+   $A$,$\overline{B}$ 、 $\overline{A}$,$B$、 $\overline{A}$,$\overline{B}$ 也相互独立
+
+2. 若$A、B、C$相互独立
+   ① 两两独立
+   ② $P(ABC) = P(A)P(B)P(C)$
+
+3. 两两独立 $\neq$ $A、B、C$相互独立
+
+① **德摩根律**    口诀：长杠变短杠，开口换方向
+
+   $$   \overline{A \cup B} = \overline{A} \cap \overline{B} \quad     \overline{A \cap B} = \overline{A} \cup \overline{B}   $$
+
+② **加法公式**
+
+$$P(A \cup B) = P(A) + P(B) - P(AB)$$
+
+$$     \begin{aligned}P(A \cup B \cup C) = &P(A) + P(B) + P(C)- P(AB) - P(AC) - P(BC)+ P(ABC)  \end{aligned}     $$ 
+
+③ **减法公式**     $$P(A - B) = P(A\overline{B}) = P(A) - P(AB)$$ 
+
+④ **对立事件**     $$P(\overline{A}) = 1 - P(A)$$ 
+
+⑤ **独立事件**     $$P(AB) = P(A) \cdot P(B)$$
+
+**2、古典概型**
+
+$$ C_{n}^{1} = C_{n}^{n-1} = n $$
+
+$$ C_{n}^{m} = \frac{n \times (n-1) \times \cdots \times (n-m+1)}{m!} = \frac{n!}{m!(n-m)!} $$
+
+$$ n! = n \times (n-1) \times \cdots \times 1 $$
+
+### 全概率公式、贝叶斯公式
+
+**1、条件概率、乘法公式**
+
+条件概率：$$ P(B|A)=\frac{P(AB)}{P(A)} $$ $$ P(A|B)=\frac{P(AB)}{P(B)} $$
+
+乘法公式：$$ P(AB)=P(A)\cdot P(B|A) = P(B)\cdot P(A|B) $$
+
+**2、全概率、贝叶斯公式**
+
+① 设 $A$ 为发生的事件 
+
+② 找出完备事件组 $B_i$
+
+③写出： $P(B_i)$ 及 $P(A|B_i)$ 
+
+④ $$ P(A)=\sum_{i=1}^{n} P(B_i)P(A|B_i) $$(**全概率公式**)
+
+**贝叶斯**（逆概）公式：
+
+贝叶斯本质就一个条件概率公式 $P(A∣B)$，也就是在$B$事件发生的情况下，$A$事件发生的概率
+
+⑤ $$ P(B_i|A)=\frac{P(B_i)P(A|B_i)}{P(A)} $$
+
+### 五种重要分布
+
+1、离散型—— 二项分布
+
+记作：$ X\sim b(n,p) $  
+分布律：$ P\{X=k\}=C_{n}^{k}p^{k}(1-p)^{n-k} $
+
+2、离散型——泊松分布
+
+记作：$X\sim π(λ)$
+
+分布律：$$ P\{X = k\} = \frac{\lambda^{k}}{k!} e^{-\lambda} \quad (k = 0, 1, 2, \cdots) $$
+
+3、连续性——均匀分布
+
+记作：$ X \sim U(a, b) $
+
+概率密度：$$ f(x) =  \begin{cases} \frac{1}{b-a} & a < x < b \\ 0 & \text{其他} \end{cases} $$
+
+4、连续性——指数分布
+
+记作：$ X \sim E(\lambda) $
+
+概率密度：$$ f(x) =  \begin{cases} \lambda e^{-\lambda x} & x > 0 \\ 0 & \text{其他} \end{cases} $$
+
+5、连续性——正态分布
+
+记作：$ X \sim N(\mu, \sigma^{2}) $
+
+概率密度：$$ f(x) = \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{(x - \mu)^{2}}{2\sigma^{2}}} $$
+
+### 大数定理与中心极限定理
+
+若$X \sim B(n,p)$，则 $X $近似服从正态分布 $N(np, np(1 - p))$
+
+**大数定理**：当样本数量 $n \to \infty$ 时，样本均值趋近于总体的数学期望
+
+**常见的大数定理形式**
+
+(1)**切比雪夫大数定理**
+
+设随机变量 $X_1, X_2, \dots, X_n$ 独立同分布，且期望 $E[X_i] = \mu$，方差有限。
+ 则对任意 $\varepsilon > 0$：
+$$
+P\left( \left| \frac{1}{n}\sum_{i=1}^n X_i - \mu \right| \geq \varepsilon \right) \to 0 \quad (n \to \infty)
+$$
+ 含义：样本均值与真实均值的差异超过 $\varepsilon$ 的概率会趋近于 0。
+
+(2)**辛钦大数定理**（强大数定理的一种）
+
+如果 $X_1, X_2, \dots$ 独立同分布，期望为 $\mu$，那么
+$$
+\frac{1}{n}\sum_{i=1}^n X_i \to \mu \quad \text{几乎处处收敛} \quad (n \to \infty)
+$$
+含义：不仅在概率意义上，几乎所有的样本序列，长期平均值都会收敛到 $\mu$。
+
+### 参数估计
+
+1、矩估计
+
+先求数学期望， 求反函数，将变量换为样本均值
+
+**2、最大似然估计**
+
+设样本为
+$$
+X_1, X_2, \dots, X_n
+$$
+它们独立同分布，概率密度函数（或概率质量函数）为
+$$
+f(x;\theta)
+$$
+其中 $\theta$ 是未知参数。
+
+- **似然函数（Likelihood function）**：
+  $$
+  L(\theta) = \prod_{i=1}^{n} f(x_i; \theta)
+  $$
+  它表示“在参数取值为 $\theta$ 时，观察到当前样本的概率”。
+
+- **最大似然估计（MLE）**：
+   找到使似然函数最大的参数：
+  $$
+  \hat{\theta} = \arg\max_\theta L(\theta)
+  $$
+
+通常我们取对数（更方便计算）：
+$$
+\ell(\theta) = \ln L(\theta) = \sum_{i=1}^{n} \ln f(x_i; \theta)
+$$
+然后对 $\theta$ 求导，解方程 $\frac{\partial \ell(\theta)}{\partial \theta} = 0$，得到估计值。
+
+最大似然估计就是**找到一组参数，使得在这组参数下，样本出现的可能性最大**。
+
+## 离散数学
+
+### 集合论基础
+
+集合：由“元素”组成的整体。性质：无序性、相异性、确定性、任意性。
+
+幂集：集合 $A$ 的所有子集组成的集合，$|P(A)| = 2^n$。
+
+笛卡尔积：$A \times B = \{(a,b) | a \in A, b \in B\}$。
+
+### 关系
+
+**二元关系**：集合上的有序偶组成的子集。
+
+**等价关系**：自反、对称、传递。
+
+等价类：与某元素相关的所有元素集合。
+
+**偏序关系**：自反、反对称、传递。
+
+- 例：$(\mathbb{N}, \leq)$。
+
+- 空关系：$A \times B$ 的子集 $\varnothing$。在非空集上：反自反、对称、反对称、传递，但非自反。
+
+###  集合大小与函数
+
+无限集比较大小：通过建立一一对应。例：整数集 $\mathbb{Z}$ 与偶数集等势。
+
+函数：集合间的一种特殊关系。
+
+一个 $x$ 只能对应一个 $y$。
+
+单射：不同的输入对应不同的输出。
+满射：值域 = 陪域。
+双射：既单射又满射，一一对应。
+
+### 代数系统
+
+同构：同类型、等势、运算对应相同。
+**半群**：结合律。
+**群**：半群 + 单位元 + 逆元。
+**交换群（阿贝尔群）**：群且运算可交换。
+
+阿贝尔群是一个满足 **交换律** 的群。
+ 具体来说，设 $G$ 是一个集合，定义了一个二元运算 $*$，如果满足以下条件，则称 $(G, *)$ 是一个 **阿贝尔群**：
+
+1. **封闭性**：对任意 $a, b \in G$，有 $a * b \in G$。
+2. **结合律**：对任意 $a, b, c \in G$，有 $(a * b) * c = a * (b * c)$。
+3. **单位元存在**：存在一个元素 $e \in G$，使得对所有 $a \in G$，都有 $a * e = e * a = a$。
+4. **逆元存在**：对每个 $a \in G$，存在 $a^{-1} \in G$，使得 $a * a^{-1} = a^{-1} * a = e$。
+5. **交换律**：对所有 $a, b \in G$，有 $a * b = b * a$。
+
+> 如果一个群只满足前四条性质，就是**群（Group）**；如果再加上第 5 条，就成为**阿贝尔群（Abelian group）**。
+
+### 格与布尔代数
+
+格：满足交换律、结合律、吸收律。
+有补格：每个元素都有补元。
+**布尔代数**：有补分配格，满足交换律、分配律、同一律、互补律。
+
+### 图论
+
+完全图 $K_n$：任意两点间都有边。
+竞赛图：$K_n$ 上加方向得到的有向图。
+正则图：每个顶点度数相同。
+**哈密顿图**：存在一次经过所有顶点的回路。
+**欧拉图**：存在一次经过所有边的回路。
+条件：无向图连通且所有顶点度为偶数。
+
+### 数理逻辑
+
+命题：能判断真假的陈述句。
+原子命题：不可分。
+复合命题：由联结词组成。
+
+常见联结词：
+
+否定：¬，合取：∧，析取：∨，蕴涵：→，等价：↔
