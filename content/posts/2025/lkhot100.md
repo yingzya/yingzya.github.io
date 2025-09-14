@@ -573,11 +573,10 @@ public:
 否则，它们**重合**，我们需要用**当前**区间的**右端点**更新数组 merged 中最后一个区间的右端点，将其置为二者的较大值。
 
 ::pic
-
+---
 src: https://7.isyangs.cn/20250819/8f0b5e48eebee6a5b15307ad03e57ac7.png
-
-caption: 
-
+caption:
+---
 ::
 
 ```c++
@@ -746,7 +745,6 @@ public:
         if (matrix.size() == 0 || matrix[0].size() == 0) {
             return {};
         }
-        
         int rows = matrix.size(), columns = matrix[0].size();//行、列
         vector<vector<bool>> visited(rows, vector<bool>(columns));
         int total = rows * columns;
@@ -781,11 +779,10 @@ public:
 关键是在推出每个点的旋转涉及到四个点时，应该**旋转哪些点**。
 
 ::pic
-
+---
 src: https://7.isyangs.cn/20250822/e30ded2a642f00c5f3614895d87b9628.png
-
-caption: 
-
+caption:
+---
 ::
 
 偶数如图所示，只需枚举四个块中一个即可，为了方便起见，选择蓝色的块。而当奇数时，要考虑下，
@@ -793,7 +790,7 @@ caption:
 ::pic
 ---
 src: https://7.isyangs.cn/20250824/7dd6de267732fb29496be9516813ec7f.webp
-caption: 
+caption:
 ---
 ::
 
