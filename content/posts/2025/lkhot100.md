@@ -87,9 +87,9 @@ public:
 
 用到了set结构。set是自动排序(自动升序)。但是用到了一个**count**函数来模拟排序，因此用`unordered_set`，其不会自动排序，但是查找更快。
 
-**`set`**：有序、不重复，适合需要排序的场景。
+**`set`**：有序、**不重复**，适合需要排序的场景。
 
-**`unordered_set`**：无序、不重复，查找速度更快，适合只关心存在性而不关心顺序的场景。
+**`unordered_set`**：无序、**不重复**，查找速度更快，适合只关心存在性而不关心顺序的场景。
 
 `set`的**常用函数**如下:
 
@@ -394,6 +394,7 @@ public:
 
 - **如果存在**：返回指向该元素的迭代器（不是值）
 - **如果不存在**：返回 `mp.end()`（尾后迭代器）
+- `key`**唯一**
 
 `map`与`unordered_map`的**区别**：
 
@@ -572,10 +573,11 @@ public:
 否则，它们**重合**，我们需要用**当前**区间的**右端点**更新数组 merged 中最后一个区间的右端点，将其置为二者的较大值。
 
 ::pic
----
+
 src: https://7.isyangs.cn/20250819/8f0b5e48eebee6a5b15307ad03e57ac7.png
+
 caption: 
----
+
 ::
 
 ```c++
@@ -779,10 +781,11 @@ public:
 关键是在推出每个点的旋转涉及到四个点时，应该**旋转哪些点**。
 
 ::pic
----
+
 src: https://7.isyangs.cn/20250822/e30ded2a642f00c5f3614895d87b9628.png
+
 caption: 
----
+
 ::
 
 偶数如图所示，只需枚举四个块中一个即可，为了方便起见，选择蓝色的块。而当奇数时，要考虑下，
@@ -1007,6 +1010,61 @@ public:
 };
 
 ```
+
+### 环形链表
+
+```c++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        unordered_set<ListNode*> seen;
+        while(head != NULL){
+            if(seen.count(head)) return true;
+            seen.insert(head);
+            head = head->next;
+        } 
+        return false;
+    }
+};
+```
+
+### [环形链表 II](https://leetcode.cn/problems/linked-list-cycle-ii/)
+
+```c++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        unordered_set<ListNode*> seen;
+        while(head != NULL)
+        {
+            if(seen.count(head)) return head;
+            seen.insert(head);
+            head = head->next;
+        }
+        return NULL;
+    }
+};
+```
+
+### [合并两个有序链表](https://leetcode.cn/problems/merge-two-sorted-lists/)
+
+
 
 ## 回溯
 
