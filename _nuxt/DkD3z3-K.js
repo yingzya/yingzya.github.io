@@ -1,1 +1,0 @@
-import{y as s,k as r,h as n,G as o}from"./DPDv73ku.js";const t={};function a(e,c){return n(),r("em",null,[o(e.$slots,"default")])}const _=Object.assign(s(t,[["render",a]]),{__name:"ProseEm"});export{_ as default};
