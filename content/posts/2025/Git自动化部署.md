@@ -400,3 +400,25 @@ pm2 startup
 ## 进阶-GitHubApp
 
 每个 GitHub App 在不同仓库/组织下安装后，会生成一个 **Installation ID**。
+
+**1、准备**
+
+**App ID**（数字，GitHub App 设置页能看到）
+
+**私钥 PEM 文件**（你在 GitHub App 设置 → Generate a private key 生成的 `.pem` 文件）
+
+![image-20250927210102621](https://video.yangzy.top/picgo/image-20250927210102621.png)
+
+**2. 生成 JWT**
+
+JWT = Header + Payload + 签名（用私钥 PEM）
+
+**3. 获取 installation_id**
+
+用 JWT 调 API：
+
+```
+curl -s -H "Authorization: Bearer <JWT>" \
+     -H "Accept: application/vnd.github+json" \
+     https://api.github.com/app/installations
+```
