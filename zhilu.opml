@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<opml version="2.0">
+  <head>
+    <title>字节追风者的友链订阅</title>
+    <dateCreated>2025-03-19T00:00:00.000Z</dateCreated>
+    <dateModified>2025-09-27T11:44:11.057Z</dateModified>
+    <ownerName>轻语</ownerName>
+    <ownerEmail>yzy11235@qq.com</ownerEmail>
+    <ownerId>https://yangzy.top/</ownerId>
+    <docs>https://opml.org/spec2.opml</docs>
+  </head>
+  <body>
+    <outline text="字节追风者" type="rss" xmlUrl="https://blog.yangzy.top/atom.xml" created="2025-03-19T00:00:00.000Z" description="博客爱好者" htmlUrl="https://blog.yangzy.top/"></outline>
+    <outline text="张洪Heo" type="rss" xmlUrl="https://blog.zhheo.com/atom.xml" created="2025-08-06T00:00:00.000Z" description="分享设计与科技生活" htmlUrl="https://blog.zhheo.com/"></outline>
+    <outline text="Soulter" type="rss" xmlUrl="https://blog.soulter.top/atom.xml" created="2025-08-09T00:00:00.000Z" description="Code with love!" htmlUrl="https://blog.soulter.top"></outline>
+    <outline text="𝟞𝟙𝟡" type="rss" xmlUrl="https://66619.eu.org/rss/feed.xml" created="2025-08-09T00:00:00.000Z" description="𝓙𝓾𝓼𝓽 𝓪 𝓬𝓵𝓸𝓾𝓭" htmlUrl="https://66619.eu.org"></outline>
+  </body>
+</opml>
