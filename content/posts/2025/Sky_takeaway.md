@@ -86,7 +86,7 @@ caption:
 ::pic
 ---
 src: https://7.isyangs.cn/20250809/d24bf04cb55a965b6a5aab67b616a2b1.png
-caption: 
+caption:
 ---
 ::
 
