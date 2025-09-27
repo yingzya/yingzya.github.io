@@ -77,7 +77,7 @@ Knife4j是为Java MVC框架集成Swagger生成API文档的增强解决方案
 ::pic
 ---
 src: https://7.isyangs.cn/20250809/02b7bb89731f8c34f1e5daccd511eaf8.png
-caption: 
+caption:
 ---
 ::
 
