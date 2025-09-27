@@ -2,7 +2,7 @@
 title: Git自动化部署
 description: Git自动化部署
 date: 2025-07-31 19:42:40
-updated: 2025-07-31 19:42:40
+updated: 2025-09-27 21:13:40
 image: https://7.isyangs.cn/20250819/fd666e8034acd69bbf7d83d3b79de274.webp
 # type: story
 categories: [Linux]
@@ -405,7 +405,7 @@ pm2 startup
 
 **App ID**（数字，GitHub App 设置页能看到）
 
-**私钥 PEM 文件**（你在 GitHub App 设置 → Generate a private key 生成的 `.pem` 文件）
+**私钥 PEM 文件**（你在 GitHub App 设置 → Generate a private key 生成的 `.pem` 文件）——**核心步骤**
 
 ![image-20250927210102621](https://video.yangzy.top/picgo/image-20250927210102621.png)
 
