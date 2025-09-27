@@ -397,3 +397,6 @@ pm2 save
 pm2 startup
 ```
 
+## 进阶-GitHubApp
+
+每个 GitHub App 在不同仓库/组织下安装后，会生成一个 **Installation ID**。
