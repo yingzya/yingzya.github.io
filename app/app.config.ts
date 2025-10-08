@@ -69,7 +69,7 @@ export default defineAppConfig({
 			{
 				title: '信息',
 				items: [
-					{ icon: 'simple-icons:nuxtdotjs', text: `主题: Clarity ${version}`, url: 'https://github.com/L33Z22L11/blog-v3' },
+					{ icon: 'simple-icons:nuxtdotjs', text: `主题: Clarity 3.4.0`, url: 'https://github.com/L33Z22L11/blog-v3' },
 					{ icon: 'ph:swatches-bold', text: '主题和组件文档', url: 'https://blog.zhilu.site/theme' },
 					{ icon: 'ph:certificate-bold', text: '晋ICP备2025064396号-2', url: 'https://beian.miit.gov.cn/' },
 				],
