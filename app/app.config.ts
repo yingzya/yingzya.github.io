@@ -79,7 +79,7 @@ export default defineAppConfig({
 
 	/** 左侧栏顶部 Logo */
 	header: {
-		logo: 'https://7.isyangs.cn/20250730/c65a56b5206f765b8a30203c71be985e.jpg',
+		logo: 'https://video.yangzy.top/blog/avator.webp',
 		/** 展示标题文本，否则展示纯 Logo */
 		showTitle: true,
 		subtitle: blogConfig.subtitle,

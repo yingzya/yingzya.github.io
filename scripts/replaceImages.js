@@ -26,7 +26,7 @@ fs.readFile(filePath, 'utf-8', (err, data) => {
     // 构造新的格式：::pic ... :: 形式
     return `::pic\n---\nsrc: ${imgPath}\ncaption: \n---\n::`;
   });
-
+  
   // 如果内容有变化，则写回文件
   if (updatedData !== data) {
     fs.writeFile(filePath, updatedData, 'utf-8', (err) => {
