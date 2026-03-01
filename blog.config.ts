@@ -9,7 +9,7 @@ const basicConfig = {
 	description: '你好，我是轻语，一名热爱技术与探索的博客作者，立志成长为一名全栈工程师。在这里，我记录前端与后端的学习过程、实战项目心得，也分享日常生活中的点滴灵感。🚀 信奉“折腾不止，摸鱼生活”，希望在不断摸索中找到属于自己的技术之路。',
 	author: {
 		name: '轻语',
-		avatar: 'https://video.yangzy.top/blog/avator.webp',
+		avatar: 'https://assets.yangzy.top/avator.jpg',
 		email: 'yzy11235@qq.com',
 		homepage: 'https://yangzy.top/',
 	},
@@ -18,7 +18,7 @@ const basicConfig = {
 		name: '署名-非商业性使用-相同方式共享 4.0 国际',
 		url: 'https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans',
 	},
-	favicon: 'https://video.yangzy.top/blog/favicon.webp',
+	favicon: 'https://assets.yangzy.top/avator.jpg',
 	language: 'zh-CN',
 	timeEstablished: '2025-03-19',
 	timezone: 'Asia/Shanghai',

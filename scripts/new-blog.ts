@@ -169,7 +169,7 @@ if (permalink)
 const s = spinner()
 s.start('正在打开 Typora...')
 
-exec(`typora "${absPath}"`, (error) => {
+exec(`"D:\\SoftWare\\Typora\\Typora.exe" "${absPath}"`, (error) => {
 	if (!error)
 		return
 	s.stop('⚠️ 无法打开 Typora，请确认已将 Typora 添加到 PATH')
