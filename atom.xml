@@ -3,7 +3,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://blog.yangzy.top/</id>
   <title>字节追风者</title>
-  <updated>2026-03-01T12:07:12.487Z</updated>
+  <updated>2026-03-01T12:49:16.445Z</updated>
   <description>你好，我是轻语，一名热爱技术与探索的博客作者，立志成长为一名全栈工程师。在这里，我记录前端与后端的学习过程、实战项目心得，也分享日常生活中的点滴灵感。🚀 信奉“折腾不止，摸鱼生活”，希望在不断摸索中找到属于自己的技术之路。</description>
   <author>
     <name>轻语</name>
@@ -116,7 +116,7 @@
       <name>轻语</name>
     </author>
     <content type="html">
-      <![CDATA[<img src="https://7.isyangs.cn/20250902/36c5edbe3d2e695a658ad2658efa5df5.jpg" /> <p>本文系统总结线性代数与概率论核心知识，包括行列式、矩阵、向量、方程组、特征值对角化、二次型及概率公式、分布、大数定理、参数估计等考点与方法。</p> <a class="view-full" href="https://blog.yangzy.top/2025/review-math" target="_blank">点击查看全文</a>]]>
+      <![CDATA[<img src="https://assets.yangzy.top/math.webp" /> <p>本文系统总结线性代数与概率论核心知识，包括行列式、矩阵、向量、方程组、特征值对角化、二次型及概率公式、分布、大数定理、参数估计等考点与方法。</p> <a class="view-full" href="https://blog.yangzy.top/2025/review-math" target="_blank">点击查看全文</a>]]>
     </content>
     <link href="https://blog.yangzy.top/2025/review-math"></link>
     <summary>本文系统总结线性代数与概率论核心知识，包括行列式、矩阵、向量、方程组、特征值对角化、二次型及概率公式、分布、大数定理、参数估计等考点与方法。</summary>
