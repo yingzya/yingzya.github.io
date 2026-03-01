@@ -3,7 +3,7 @@ title: 复习——数学篇
 description: 本文系统总结线性代数与概率论核心知识，包括行列式、矩阵、向量、方程组、特征值对角化、二次型及概率公式、分布、大数定理、参数估计等考点与方法。
 date: 2025-08-20 21:45:38
 updated: 2025-09-02 20:19:38
-image: https://7.isyangs.cn/20250902/36c5edbe3d2e695a658ad2658efa5df5.jpg
+image: https://assets.yangzy.top/math.webp
 # type: story
 categories: [复习]
 tags: [线代, 概率论]
