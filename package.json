@@ -7,16 +7,20 @@
   "homepage": "https://github.com/yingzya/yingzya.github.io",
   "scripts": {
     "prepare": "pnpm clean && pnpm build:packages && nuxt prepare",
-    "dev": "nuxt dev --no-qr",
+    "clean": "rimraf .data node_modules/.cache",
+    "build:packages": "pnpm --filter ./packages/remark-music --filter ./packages/rehype-meta-slots build",
+    "dev": "nuxt dev --open",
     "dev:host": "nuxt dev --host",
-    "build": "cross-env NODE_OPTIONS='--no-deprecation' nuxt build",
+    "build": "nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "lint": "stylelint '**/*.{vue,scss}'",
+    "bump": "pnpx taze -w && rimraf pnpm-lock.yaml && pnpm update && pnpm dedupe",
+    "lint": "eslint && stylelint '**/*.{vue,scss}'",
     "lint:fix": "eslint --fix && stylelint '**/*.{vue,scss}' --fix",
-    "new": "node scripts/new-blog.ts",
-    "check:feed": "pnpx tsx scripts/framework/get-feed.ts",
-    "check:feed/all": "pnpx tsx scripts/framework/check-all-feeds.ts"
+    "init-project": "tsx scripts/init-project",
+    "new": "tsx scripts/new-blog",
+    "check:feed": "tsx scripts/framework/get-feed",
+    "check:feed/all": "tsx scripts/framework/check-all-feeds"
   },
   "dependencies": {
     "@nuxt/content": "catalog:content",
