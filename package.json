@@ -6,7 +6,7 @@
   "packageManager": "pnpm@10.17.1",
   "homepage": "https://github.com/yingzya/yingzya.github.io",
   "scripts": {
-    "prepare": "node -e \"const fs=require('fs');for (const p of ['.data','node_modules/.cache']) fs.rmSync(p,{recursive:true,force:true});\"",
+    "prepare": "pnpm clean && pnpm build:packages && nuxt prepare",
     "dev": "nuxt dev --no-qr",
     "dev:host": "nuxt dev --host",
     "build": "cross-env NODE_OPTIONS='--no-deprecation' nuxt build",
