@@ -3,7 +3,7 @@ title: 力扣Hot100
 description:  ​​力扣Hot100​​热门算法题库的题解，涵盖了​哈希、双指针、滑动窗口、子串、普通数组、矩阵、链表、回溯、贪心算法、动态规划​​等核心算法与数据结构。
 date: 2025-08-22 10:15:04
 updated: 2025-08-22 10:15:04
-# image:
+image: https://assets.yangzy.top/lkhot100.webp
 # type: story
 categories: [算法]
 tags: [力扣]
@@ -572,13 +572,6 @@ public:
 如果当前区间的**左端点**在数组 merged 中最后一个区间的**右端点**之后，那么它们不会重合，我们可以直接将这个区间加入数组 merged 的末尾；
 否则，它们**重合**，我们需要用**当前**区间的**右端点**更新数组 merged 中最后一个区间的右端点，将其置为二者的较大值。
 
-::pic
----
-src: https://7.isyangs.cn/20250819/8f0b5e48eebee6a5b15307ad03e57ac7.png
-caption:
----
-::
-
 ```c++
 class Solution {
 public:
@@ -777,24 +770,6 @@ public:
 参考题解:[旋转图像](https://leetcode.cn/problems/rotate-image/solutions/526980/xuan-zhuan-tu-xiang-by-leetcode-solution-vu3m/?envType=study-plan-v2&envId=top-100-liked)	
 
 关键是在推出每个点的旋转涉及到四个点时，应该**旋转哪些点**。
-
-::pic
----
-src: https://7.isyangs.cn/20250822/e30ded2a642f00c5f3614895d87b9628.png
-caption:
----
-::
-
-偶数如图所示，只需枚举四个块中一个即可，为了方便起见，选择蓝色的块。而当奇数时，要考虑下，
-
-::pic
----
-src: https://7.isyangs.cn/20250824/7dd6de267732fb29496be9516813ec7f.webp
-caption:
----
-::
-
-同样四种颜色块选一个，这里我们将图中垂直纸面向左外翻转，枚举青色的这块，正好和偶数的能够对应上了。
 
 ```c++
 
@@ -1061,7 +1036,488 @@ public:
 
 ### [合并两个有序链表](https://leetcode.cn/problems/merge-two-sorted-lists/)
 
+### [随机链表的复制](https://leetcode.cn/problems/copy-list-with-random-pointer/)
 
+```py
+class Solution:
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        cur = head
+        while cur:
+            cur.next = Node(cur.val,cur.next)
+            cur = cur.next.next # 跳过复制节点
+
+        cur = head
+        # cur原节点，cur.next是对应的复制节点
+        while cur:
+            if cur.random:
+                cur.next.random = cur.random.next
+            cur = cur.next.next
+
+        cur = dummy = Node(0,head)# 拆分新旧链表
+```
+
+### [排序链表](https://leetcode.cn/problems/sort-list/)
+
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def middleNode(self,head:Optional[ListNode]) -> Optional[ListNode]:
+        slow = fast = head
+        while fast and fast.next:
+            pre = slow
+            slow = slow.next
+            fast = fast.next.next
+        pre.next = None
+        return slow 
+
+    def mergeTwoLists(self,list1:Optional[ListNode],list2:Optional[ListNode])->Optional[ListNode]:
+        cur = dummy =  ListNode()
+        while list1 and list2:
+            if list1.val < list2.val:
+                cur.next = list1
+                list1 = list1.next
+            else:
+                cur.next = list2
+                list2 = list2.next
+            cur = cur.next
+        cur.next = list1 if list1 else list2
+        return dummy.next
+
+    def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if head is None or head.next is None:
+            return head
+        
+        head2 = self.middleNode(head)
+
+        head = self.sortList(head)
+        head2 = self.sortList(head2)
+
+        return self.mergeTwoLists(head,head2)
+        
+```
+
+### [合并 K 个升序链表](https://leetcode.cn/problems/merge-k-sorted-lists/)
+
+```python
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+ListNode.__lt__ = lambda a,b: a.val < b.val
+class Solution:
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        cur = dummy = ListNode()
+        h = [head for head in lists if head]
+        heapify(h) # 调整为堆
+        while h:
+            node = heappop(h)
+            if node.next:
+                heappush(h,node.next)
+            cur.next = node
+            cur = cur.next
+        return dummy.next
+```
+
+### [LRU 缓存](https://leetcode.cn/problems/lru-cache/)
+
+```python
+class LRUCache:
+
+    def __init__(self, capacity: int):
+        self.capacity = capacity
+        self.cache = OrderedDict()
+
+    def get(self, key: int) -> int:
+        if key not in self.cache:
+            return -1
+        self.cache.move_to_end(key,last = False)#移到最前
+        return self.cache[key]
+
+    def put(self, key: int, value: int) -> None:
+        self.cache[key] = value
+        self.cache.move_to_end(key,last = False)
+        if len(self.cache) > self.capacity:
+            self.cache.popitem()#去掉最后一个
+```
+
+## 二叉树
+
+### [二叉树的中序遍历](https://leetcode.cn/problems/binary-tree-inorder-traversal/)
+
+```python
+class Solution:
+    def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        def dfs(node:Optional[TreeNode]) ->None:
+            if node is None:
+                return
+            dfs(node.left)
+            ans.append(node.val)
+            dfs(node.right)
+
+        ans = []
+        dfs(root)
+        return ans
+```
+
+### [二叉树的最大深度](https://leetcode.cn/problems/maximum-depth-of-binary-tree/)
+
+```python
+class Solution:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:return 0
+        return max(self.maxDepth(root.left),self.maxDepth(root.right)) + 1
+```
+
+### [翻转二叉树](https://leetcode.cn/problems/invert-binary-tree/)
+
+```python
+class Solution:
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        if root is None: return
+        tmp = root.left
+        root.left = self.invertTree(root.right)
+        root.right = self.invertTree(tmp)
+        return root
+```
+
+### [对称二叉树](https://leetcode.cn/problems/symmetric-tree/)
+
+```python
+class Solution:
+    def isSymmetric(self, root: Optional[TreeNode]) -> bool:
+        def recur(L,R):
+            if not L and not R: return True
+            if not L or not R or L.val != R.val: return False
+            return recur(L.left,R.right) and recur(L.right,R.left)
+        
+        return not root or recur(root.left,root.right)
+```
+
+### [二叉树的直径](https://leetcode.cn/problems/diameter-of-binary-tree/)
+
+```python
+class Solution:
+    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
+        ans = 0
+        def dfs(node:Optional[TreeNode]) ->int:
+            if node is None:
+                return -1
+            l_len = dfs(node.left) + 1 # +1：把“当前节点到左孩子”这条边也算上
+            r_len = dfs(node.right) + 1
+            nonlocal ans
+            ans = max(ans,l_len + r_len)#从左边最深的节点 → 当前节点 → 右边最深的节点
+            return max(l_len,r_len)
+        dfs(root)   
+        return ans
+```
+
+### [二叉树的层序遍历](https://leetcode.cn/problems/binary-tree-level-order-traversal/)
+
+```python
+class Solution:
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+        if not root:return []
+        res,queue = [],collections.deque() # 双端队列
+        queue.append(root)
+        while queue:
+            tmp = []
+            for _ in range(len(queue)):
+                node = queue.popleft()
+                tmp.append(node.val)
+                if node.left: queue.append(node.left)
+                if node.right: queue.append(node.right)
+            res.append(tmp)
+        
+        return res
+```
+
+### [将有序数组转换为二叉搜索树](https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/)
+
+```python
+class Solution:
+    def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
+        if not nums:
+            return None
+        m = len(nums) // 2
+        left = self.sortedArrayToBST(nums[:m])
+        right = self.sortedArrayToBST(nums[m+1:])
+        return TreeNode(nums[m],left,right)
+```
+
+### [验证二叉搜索树](https://leetcode.cn/problems/validate-binary-search-tree/)
+
+```python
+class Solution:
+    def isValidBST(self, root: Optional[TreeNode],left = -inf,right =  inf) -> bool:
+        if root is None:
+            return True
+        x = root.val
+        return left < x < right and \
+        self.isValidBST(root.left,left,x) and \
+        self.isValidBST(root.right,x,right)
+```
+
+### [二叉搜索树中第 K 小的元素](https://leetcode.cn/problems/kth-smallest-element-in-a-bst/)
+
+```python
+class Solution:
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        ans = 0
+        def dfs(node:Optional[TreeNode]) ->None:
+            nonlocal k,ans
+            if node is None or k <= 0:
+                return 
+            dfs(node.left)
+            k -= 1
+            if k == 0 :
+                ans = node.val
+            dfs(node.right)
+        dfs(root)
+        return ans
+```
+
+### [二叉树的右视图](https://leetcode.cn/problems/binary-tree-right-side-view/)
+
+```python
+class Solution:
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
+        ans = []
+        def dfs(node:Optional[TreeNode],depth:int) ->None: # depth当前节点在第几层
+            if node is None:
+                return 
+            if depth == len(ans):
+                ans.append(node.val)
+            dfs(node.right,depth+1)
+            dfs(node.left,depth+1)
+        dfs(root,0)
+        return ans
+```
+
+### [二叉树展开为链表](https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/)
+
+```python
+class Solution:
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        preorderList = list()
+
+        def preorderTraversal(root:TreeNode):
+            if root:
+                preorderList.append(root)
+                preorderTraversal(root.left)
+                preorderTraversal(root.right)
+
+        preorderTraversal(root)
+        size = len(preorderList)
+        for i in range(1,size):
+            prev,cur = preorderList[i-1],preorderList[i]
+            prev.left = None
+            prev.right = cur
+```
+
+### [从前序与中序遍历序列构造二叉树](https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
+
+```python
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
+        index = {x:i for i,x in enumerate(inorder)}#值 -> 它在中序遍历里的下标
+
+        #当前子树在preorder里用的是preorder[pre_l:pre_r](左闭右开)，当前子树在inorder里是从 in_l开始的
+        def dfs(pre_l:int,pre_r:int,in_l:int) -> Optional[TreeNode]:
+            if pre_l == pre_r:
+                return None
+            left_size = index[preorder[pre_l]] - in_l
+            left = dfs(pre_l + 1,pre_l+1+left_size,in_l)
+            right = dfs(pre_l+1+left_size,pre_r,in_l+1+left_size)
+            return TreeNode(preorder[pre_l],left,right)
+
+        return dfs(0,len(preorder),0)
+```
+
+### [路径总和 III](https://leetcode.cn/problems/path-sum-iii/)
+
+```python
+class Solution:
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
+        prefix = collections.defaultdict(int)
+        prefix[0] = 1 #prefix[x]表示在当前这条从根往下走的路径上，前缀和等于x的情况出现了几次
+
+        def dfs(root,cur):# 到当前节点为止(包含当前节点)，前缀和是cur
+            if not root:
+                return 0
+
+            ret = 0
+            cur += root.val
+            ret += prefix[cur - targetSum]
+            prefix[cur] += 1
+            ret += dfs(root.left,cur)
+            ret += dfs(root.right,cur)
+            prefix[cur] -= 1 # 回溯
+
+            return ret
+        
+        return dfs(root,0)
+```
+
+### [二叉树的最近公共祖先](https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/)
+
+```python
+class Solution:
+    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
+        if not root or root == p or root == q: return root
+        left = self.lowestCommonAncestor(root.left,p,q)
+        right = self.lowestCommonAncestor(root.right,p,q)
+        if not left:return right
+        if not right: return left
+        return root # 左右子树都没找到的话
+```
+
+### [二叉树中的最大路径和](https://leetcode.cn/problems/binary-tree-maximum-path-sum/)
+
+```python
+class Solution:
+    def maxPathSum(self, root: Optional[TreeNode]) -> int:
+        ans = -inf
+        def dfs(node:Optional[TreeNode]) -> int:# 从node出发，向下延伸的一条路径，最大能提供多少收益
+            if node is None:
+                return 0
+            l_val = dfs(node.left) # 左子树能提供的最大收益
+            r_val = dfs(node.right) # 右子树能提供的最大收益
+            nonlocal ans
+            ans = max(ans,l_val+r_val+node.val) # 更新全局最大路径和
+            return max(max(l_val,r_val)+node.val,0)
+        dfs(root)
+        return ans  
+```
+
+## 图论
+
+### [岛屿数量](https://leetcode.cn/problems/number-of-islands/)
+
+ `enumerate(grid)` 每次给的不是一个值，而是**两个值组成的一对**：(下标, 元素)
+
+```python
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        m,n= len(grid),len(grid[0])
+
+
+        def dfs(i:int,j:int) -> None:
+            if i < 0 or i >= m or j < 0 or j >= n or grid[i][j] != '1':
+                return 
+            grid[i][j] = '2'
+            dfs(i,j-1)
+            dfs(i,j+1)
+            dfs(i-1,j)
+            dfs(i+1,j)
+
+        ans = 0
+        for i,row in enumerate(grid):
+            for j,c in enumerate(row):
+                if c == '1':
+                    ans += 1
+                    dfs(i,j)
+
+        
+        return ans
+```
+
+### [腐烂的橘子](https://leetcode.cn/problems/rotting-oranges/)
+
+```python
+class Solution:
+    def orangesRotting(self, grid: List[List[int]]) -> int:
+        m,n = len(grid),len(grid[0])
+        fresh = 0
+        q = []
+        for i,row in enumerate(grid):
+            for j,x in enumerate(row):
+                if x == 1:
+                    fresh += 1
+                elif x == 2:
+                    q.append((i,j))
+        
+        ans = 0
+        while q and fresh: # 不加fresh会在腐烂完后ans再加1
+            ans += 1
+            tmp = q
+            q = []
+            for x,y in tmp:
+                for i,j in (x-1,y),(x+1,y),(x,y-1),(x,y+1):
+                    if 0 <= i < m and 0 <= j < n and grid[i][j] == 1:
+                        fresh -= 1
+                        grid[i][j] = 2
+                        q.append((i,j))
+        
+        return -1 if fresh else ans
+```
+
+### [课程表](https://leetcode.cn/problems/course-schedule/)
+
+```python
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        g = [[] for _ in range(numCourses)]
+        for a,b in prerequisites:
+            g[b].append(a) # b是先修课程
+
+        colors = [0] * numCourses
+        def dfs(x:int) -> bool: # 从x出发，是否能找到环
+            colors[x] = 1 #  x 正在访问中
+            for y in g[x]:
+                if colors[y] == 1 or colors[y] == 0 and dfs(y):
+                    return True
+            
+            colors[x] = 2 # x完全访问完毕，从x出发无法找到环
+            return False
+
+        for i,c in enumerate(colors):
+            if c == 0 and dfs(i): # 图可能不是连通的
+                return False
+        return True
+```
+
+### [实现 Trie (前缀树)](https://leetcode.cn/problems/implement-trie-prefix-tree/)
+
+```python
+class Node:
+    __slots__ = 'son','end' #这个类的对象只允许有son和end这两个属性
+    def __init__(self):
+        self.son = {} # 从当前节点出发,下一个字符能走到谁
+        self.end = False # 表示这个节点是不是某个完整单词的结尾
+
+class Trie:
+
+    def __init__(self):
+        self.root = Node()
+
+    def insert(self, word: str) -> None:
+        cur = self.root
+        for c in word:
+            if c not in cur.son:
+                cur.son[c] = Node()
+            cur = cur.son[c]
+        cur.end = True
+
+    def find(self,word:str) ->int:
+        cur = self.root
+        for c in word:
+            if c not in cur.son:
+                return 0
+            cur = cur.son[c]
+        return 2 if cur.end else 1 # 2--是一个完整单词，1--路径存在，但不是完整单词结尾
+
+    def search(self, word: str) -> bool:
+        return self.find(word) == 2
+
+    def startsWith(self, prefix: str) -> bool:
+        return self.find(prefix) != 0
+```
 
 ## 回溯
 
@@ -1089,6 +1545,159 @@ public:     //output是待排列数组
     }
 };
 ```
+
+### [子集](https://leetcode.cn/problems/subsets/)
+
+```python
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        n = len(nums)
+        ans = []
+        path = []
+
+        def dfs(i :int) -> None: # i表示当前已经选了几个数
+            if i == n:
+                ans.append(path.copy())
+                return 
+            
+            dfs(i+1) # 不选
+
+            path.append(nums[i])# 选
+            dfs(i+1) 
+            path.pop() # 恢复现场，别的子集不一定选该元素
+
+        dfs(0)
+        return ans
+```
+
+### [电话号码的字母组合](https://leetcode.cn/problems/letter-combinations-of-a-phone-number/)
+
+```python
+MAPPING = "","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        n = len(digits)
+        if n == 0:
+            return []
+        
+        ans = []
+        path = ['']*n # 用来存放当前正在拼的那个字符串
+
+        def dfs(i : int) -> None: # 当前正在处理第i位数字，从0开始
+            if i == n:
+                ans.append(''.join(path))
+                return
+            for c in MAPPING[int(digits[i])]:
+                path[i] = c # 直接覆盖
+                dfs(i+1)
+            
+        dfs(0)
+        return ans
+```
+
+### [组合总和](https://leetcode.cn/problems/combination-sum/)
+
+```python
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        candidates.sort()
+        ans = []
+        path = []
+
+        def dfs(i:int,left:int) -> None:
+            if left == 0:
+                ans.append(path.copy())
+                return
+            
+            if i == len(candidates) or left < candidates[i]:
+                return
+            dfs(i+1,left)
+
+            path.append(candidates[i])
+            dfs(i,left-candidates[i])
+            path.pop()
+
+
+        dfs(0,target)
+        return ans 
+```
+
+### [括号生成](https://leetcode.cn/problems/generate-parentheses/)
+
+```python
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        ans = []
+        path=[''] * (n*2)
+
+        def dfs(left: int,right:int) -> None:
+            if right == n:
+                ans.append(''.join(path))
+                return 
+            
+            if left < n:
+                path[left+right] = '(' # 已经放了left + right 个字符，下一个位置自然是left+right
+                dfs(left+1,right)
+            if right < left:
+                path[left+right] = ')'
+                dfs(left,right+1)
+            
+        
+        dfs(0,0)
+        return ans
+```
+
+### [单词搜索](https://leetcode.cn/problems/word-search/)
+
+```python
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        cnt = Counter(c for row in board for c in row)
+        if not cnt >= Counter(word):
+            return False
+        if cnt[word[-1]] < cnt[word[0]]: # 最后一个字母更少，反向搜索
+            word = word[::-1]
+
+        m,n = len(board),len(board[0])
+        def dfs(i:int,j:int,k:int) -> bool: #当前来到格子 (i, j)，要匹配word[k]
+            if board[i][j] != word[k]:
+                return False
+            if k == len(word) - 1: # 最后一个字符，并且相等
+                return True
+            board[i][j] = ''
+            for x,y in(i,j-1),(i,j+1),(i-1,j),(i+1,j):
+                if 0 <= x < m and 0 <= y < n and dfs(x,y,k+1):
+                    return True
+            
+            board[i][j] = word[k]
+            return False
+        return any(dfs(i,j,0) for i in range(m) for j in range(n))
+```
+
+### [分割回文串](https://leetcode.cn/problems/palindrome-partitioning/)
+
+```python
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        n = len(s)
+        ans = []
+        path = [] # path：存当前这一种切法
+        def dfs(i:int)->None: # 从s[i]开始切
+            if i == n:
+                ans.append(path.copy())
+                return
+            for j in range(i,n):
+                t = s[i:j+1]
+                if t == t[::-1]:
+                    path.append(t)
+                    dfs(j+1)
+                    path.pop() # 改了公共变量所以要回溯
+        
+        dfs(0)
+        return ans  
+```
+
+
 
 ### [N 皇后](https://leetcode.cn/problems/n-queens/)
 
@@ -1131,6 +1740,324 @@ public:
         return res;
     }
 };
+
+```
+
+## 二分查找
+
+二分的**条件**：
+
+>能不能找到一个条件，使得数组被分成两段。
+>
+>一段都满足这个条件，另一段都不满足这个条件。
+
+### [搜索插入位置](https://leetcode.cn/problems/search-insert-position/)
+
+库函数：
+
+```python
+class Solution:
+    def searchInsert(self, nums: List[int], target: int) -> int:
+        return bisect_left(nums,target)
+   """
+   nums 是升序有序的，bisect_left(nums, target) 返回的是
+   如果 target 在数组里，返回它最左边出现的位置
+   如果 target 不在数组里，返回它应该插入的位置
+   """
+```
+
+闭区间：
+
+```python
+class Solution:
+    def searchInsert(self, nums: List[int], target: int) -> int:
+        left,right = 0,len(nums) - 1
+        while left <= right:
+            mid = (left + right) // 2
+            if nums[mid] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+        return left
+```
+
+### [搜索二维矩阵](https://leetcode.cn/problems/search-a-2d-matrix/)
+
+闭区间：
+
+```python
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        m,n = len(matrix),len(matrix[0])
+        left,right = 0,m*n - 1
+        while left  <= right:
+            mid = (left+right) // 2
+            x = matrix[mid // n][mid % n]
+            if x == target:
+                return True
+            if x < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+        return False
+```
+
+### [在排序数组中查找元素的第一个和最后一个位置](https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/)
+
+```python
+class Solution:
+    def lower_bound(self,nums:List[int],target:int)->int:
+        left,right = 0,len(nums)-1
+        while left <= right:
+            mid = (left+right) // 2
+            if nums[mid] >= target:
+                right = mid -1
+            else:
+                left = mid + 1
+        return left # 第一个大于等于target的位置
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        start = self.lower_bound(nums,target)
+        if start == len(nums) or nums[start] != target:
+            return [-1,-1]
+        end =  self.lower_bound(nums,target+1) - 1
+        return [start,end]
+```
+
+### [搜索旋转排序数组](https://leetcode.cn/problems/search-in-rotated-sorted-array/)
+
+```python
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        left, right = 0, len(nums) - 1
+        ans = 0
+
+        while left <= right:
+            mid = (left + right) // 2
+            if nums[mid] <= nums[-1]:
+                ans = mid
+                right = mid - 1
+            else:
+                left = mid + 1
+
+        return ans
+
+    def lower_bound(self, nums: List[int], left: int, right: int, target: int) -> int:
+        while left <= right:
+            mid = (left + right) // 2
+            if nums[mid] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+        return left if left < len(nums) and nums[left] == target else -1
+
+    def search(self, nums: List[int], target: int) -> int:
+        i = self.findMin(nums)
+        if target > nums[-1]:
+            return self.lower_bound(nums, 0, i - 1, target)
+        return self.lower_bound(nums, i, len(nums) - 1, target)
+```
+
+### [寻找旋转排序数组中的最小值](https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/)
+
+```python
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        left, right = 0, len(nums) - 1 # 以nums[-1]为分界
+        pos = len(nums) - 1
+
+        while left <= right:
+            mid = (left + right) // 2
+            if nums[mid] <= nums[-1]:
+                pos = mid
+                right = mid - 1
+            else:
+                left = mid + 1
+
+        return nums[pos]
+```
+
+### [寻找两个正序数组的中位数](https://leetcode.cn/problems/median-of-two-sorted-arrays/)
+
+>i 和 j 表示左半部分一共要放多少个数
+>
+>j： `a` 里拿 `i` 个放到左边，从 `b` 里拿 `j` 个放到左边
+
+```python
+class Solution:
+    def findMedianSortedArrays(self, a: List[int], b: List[int]) -> float:
+        if len(a) > len(b):
+            a,b = b,a
+
+        m,n = len(a),len(b)
+        a = [-inf] + a + [inf]
+        b = [-inf] + b + [inf]
+
+        i,j = 0,(m+n+1) // 2
+        while True:
+            if a[i] <= b[j+1] and b[j] <= a[i+1]: # 左半部分小于等于右半部分，且个数正好一半，所以找到了即是答案
+                max1 = max(a[i],b[j])
+                min2 = min(a[i+1],b[j+1])
+                return max1 if (m+n) % 2 else (max1+min2) / 2 # 奇偶判断
+            i += 1
+            j -= 1
+```
+
+## 栈
+
+### [有效的括号](https://leetcode.cn/problems/valid-parentheses/)
+
+```python
+class Solution:
+    def isValid(self, s: str) -> bool:
+        dic = {'{':'}','[':']','(':')','?':'?'}
+        stack = ['?']
+        for c in s:
+            if c in dic: stack.append(c)
+            elif dic[stack.pop()] != c: return False
+        return len(stack) == 1
+```
+
+### [最小栈](https://leetcode.cn/problems/min-stack/)
+
+```python
+class MinStack:
+
+    def __init__(self):
+        self.stack = []
+        self.min_stack = []
+
+    def push(self, x: int) -> None:
+        self.stack.append(x)
+        if not self.min_stack or x <= self.min_stack[-1]:
+            self.min_stack.append(x)
+
+    def pop(self) -> None:
+        if self.stack.pop() == self.min_stack[-1]: # self.stack.pop()已取出元素
+            self.min_stack.pop()
+        
+
+    def top(self) -> int:
+        return self.stack[-1]
+
+    def getMin(self) -> int:
+        return self.min_stack[-1]
+```
+
+### [字符串解码](https://leetcode.cn/problems/decode-string/)
+
+```python
+class Solution:
+    def decodeString(self, s: str) -> str:
+        stack,res,multi = [],"",0
+        for c in s:
+            if c == '[':
+                stack.append([multi,res])
+                res,multi = "",0
+            elif c == ']':
+                cur_multi,last_res = stack.pop()
+                res = last_res + cur_multi * res
+            elif '0' <= c <= '9':
+                multi = multi * 10 + int(c)
+            else:
+                res += c
+        return res
+```
+
+### 每日温度
+
+```python
+class Solution:
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        length = len(temperatures)
+        ans = [0]*length
+        stack = []
+        for i in range(length):
+            temperature = temperatures[i]
+            while stack and temperature > temperatures[stack[-1]]:#栈顶那天终于等到了一个更热的天
+                prev_index = stack.pop()
+                ans[prev_index] = i - prev_index
+            stack.append(i)
+        return ans
+```
+
+### [柱状图中最大的矩形](https://leetcode.cn/problems/largest-rectangle-in-histogram/)
+
+```python
+class Solution:
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        n = len(heights)
+        left = [-1]*n # 第 i 根柱子左边最近的、更矮的柱子下标
+        st = [] # 存下标
+        for i,h in enumerate(heights):
+            #只要栈不空，并且栈顶柱子的高度 >= 当前柱子高度 h，就把栈顶弹出去。
+            while st and heights[st[-1]] >= h:
+                st.pop()
+            if st:
+                left[i] = st[-1]
+            st.append(i)
+        
+        right = [n]*n
+        st.clear()
+        for i in range(n-1,-1,-1):
+            h = heights[i]
+            while st and heights[st[-1]] >= h:
+                st.pop()
+            if st:
+                right[i] = st[-1]
+            st.append(i)
+        ans = 0
+        for h,l,r in zip(heights,left,right):
+            ans = max(ans,h*(r-l-1))
+        return ans
+```
+
+## 堆
+
+### [数组中的第K个最大元素](https://leetcode.cn/problems/kth-largest-element-in-an-array/)
+
+```python
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        return sorted(nums)[len(nums) - k]
+```
+
+### [前 K 个高频元素](https://leetcode.cn/problems/top-k-frequent-elements/)
+
+```python
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        d = {}
+        for i in nums:
+            d[i] = d.get(i,0)+1
+        ls = list(d.items())
+        ls.sort(key=lambda x:x[1],reverse=True)
+        ans = []
+        for i in range(k):
+            ans.append(ls[i][0])
+        return ans
+
+```
+
+### [数据流的中位数](https://leetcode.cn/problems/find-median-from-data-stream/)
+
+```python
+class MedianFinder:
+
+    def __init__(self):
+        self.A = [] # 小跟堆，保存较大的一半
+        self.B = [] # 大根堆，保存较小的一半，所以存的时候存负号
+        # Python 只有小根堆，没有大根堆
+    def addNum(self, num: int) -> None:
+        if len(self.A) != len(self.B): # 当前A存的数比B多，将这个数放B里，但不能直接放，需要进行过滤
+            heappush(self.A,num)
+            heappush(self.B,-heappop(self.A))
+        else: # A和B一样多，放A里，也需要过滤
+            heappush(self.B,-num)
+            heappush(self.A,-heappop(self.B))# 因为B里是取反值，A要真实值
+        
+
+    def findMedian(self) -> float:
+        return self.A[0] if len(self.A) != len(self.B) else (self.A[0] - self.B[0]) / 2.0
 
 ```
 
@@ -1306,4 +2233,287 @@ public:
 ```
 
 ### [零钱兑换](https://leetcode.cn/problems/coin-change/)
+
+```python
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        dp = [float('inf')] * (amount + 1)
+        dp[0] = 0 # dp[x]表示：凑出金额 x，最少需要多少枚硬币
+        
+        for coin in coins: # 一个硬币一个硬币地考虑
+            for x in range(coin, amount + 1):#看这个硬币能不能帮我更新每个金额
+            # 因为比 coin 小的金额，肯定没法用这个硬币凑
+                dp[x] = min(dp[x], dp[x - coin] + 1) #要凑出金额x，我可以先凑出x - coin，然后再加上一枚coin
+        return dp[amount] if dp[amount] != float('inf') else -1 
+```
+
+### [单词拆分](https://leetcode.cn/problems/word-break/)
+
+```python
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        max_len = max(map(len,wordDict))#求出单词表里，最长单词的长度
+        words = set(wordDict)
+
+        @cache
+        def dfs(i:int) ->bool: #判断s的前i个字符，能不能被拆分成功
+            if i == 0:
+                return True
+            for j in range(i-1,max(i-max_len-1,-1),-1):
+                if s[j:i] in words and dfs(j):
+                    return True
+            return False
+        return dfs(len(s))
+```
+
+### [最长递增子序列](https://leetcode.cn/problems/longest-increasing-subsequence/)
+
+```python
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        if not nums: return 0
+        dp = [1] * len(nums)
+        for i in range(len(nums)): # 枚举每一个位置
+            for j in range(i):#哪些 nums[j] 可以接到 nums[i] 前面
+                if nums[j] < nums[i]:
+                    dp[i] = max(dp[i],dp[j]+1)
+        return max(dp)
+```
+
+### [乘积最大子数组](https://leetcode.cn/problems/maximum-product-subarray/)
+
+```python
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        n = len(nums)
+        f_max = [0] * n # f_max[i]：以 nums[i] 结尾的子数组里，乘积最大是多少
+        f_min = [0] * n # f_min[i]：以 nums[i] 结尾的子数组里，乘积最小是多少
+        f_max[0] = f_min[0] = nums[0]
+        for i in range(1,n):
+            x = nums[i]
+            f_max[i] = max(f_max[i-1]*x,f_min[i-1]*x,x)
+            f_min[i] = min(f_max[i-1]*x,f_min[i-1]*x,x)
+        return max(f_max)
+```
+
+### [分割等和子集](https://leetcode.cn/problems/partition-equal-subset-sum/)
+
+```python
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        @cache
+        def dfs(i:int,j:int)->bool:#从 nums[0] 到 nums[i] 这些数里选，能不能凑出和 j
+            if i < 0 :
+                return j == 0
+            return j >= nums[i] and dfs(i-1,j-nums[i]) or dfs(i-1,j) # 选/不选
+        
+        s = sum(nums)
+        return s % 2 == 0 and dfs(len(nums) - 1,s // 2)
+```
+
+### [最长有效括号](https://leetcode.cn/problems/longest-valid-parentheses/)
+
+```python
+class Solution:
+    def longestValidParentheses(self, s: str) -> int:
+        n = len(s)
+        if n == 0:
+            return 0
+        dp = [0] * n # dp[i]表示：以 s[i] 这个位置结尾的最长有效括号长度
+        stk = [] # 存没有被匹配的左括号的下标
+        for i,c in enumerate(s):
+            if c == '(':
+                stk.append(i)
+            elif len(stk) > 0:
+                top = stk[-1]
+                stk.pop()
+                # 已形成的有效长度＋之前的最长有效长度
+                dp[i] = i - top + 1 + (dp[top-1] if top >= 1 else 0 )
+        return max(dp)
+```
+
+## 多维动态规划
+
+### [不同路径](https://leetcode.cn/problems/unique-paths/)
+
+```python
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        @cache
+        def dfs(i:int,j:int) ->int: #dfs(i, j)表示：走到位置 (i, j)，一共有多少种走法。
+            if i < 0 or j < 0:
+                return 0
+            if i == 0 and j == 0:
+                return 1
+            return dfs(i-1,j) + dfs(i,j-1)
+        return dfs(m-1,n-1)
+```
+
+### [最小路径和](https://leetcode.cn/problems/minimum-path-sum/)
+
+```python
+class Solution:
+    def minPathSum(self, grid: List[List[int]]) -> int:
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if i == j == 0:continue
+                #grid[i][j] 表示：从左上角走到 (i,j) 这个位置的最小路径和
+                elif i == 0: grid[i][j] = grid[i][j-1] + grid[i][j]
+                elif j == 0: grid[i][j] = grid[i-1][j] + grid[i][j]
+                else: grid[i][j] = min(grid[i-1][j],grid[i][j-1])+grid[i][j]
+        return grid[-1][-1]
+```
+
+### [最长回文子串](https://leetcode.cn/problems/longest-palindromic-substring/)
+
+```python
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        n = len(s)
+        if n < 2:
+            return s
+        
+        max_len = 1 # 当前找到的最长回文子串长度
+        begin = 0 # 这个最长回文子串的起始位置
+        dp = [[False] * n for _ in range(n)] # dp[i][j] 表示：子串 s[i:j+1] 是不是回文串
+        for i in range(n):
+            dp[i][i] = True
+        
+        for L in range(2,n+1): # 当前考虑的子串长度
+            for i in range(n): # i是起点，L是长度，j是终点
+                j = L + i - 1
+                if j >= n:
+                    break
+                if s[i] != s[j]:
+                    dp[i][j] = False
+                else:
+                    if j - i < 3: # 长度为2 / 3
+                        dp[i][j] = True
+                    else:
+                        dp[i][j] = dp[i+1][j-1] # 看中间那段是不是回文
+
+                if dp[i][j] and j-i+1 > max_len:
+                    max_len = j - i + 1
+                    begin = i
+        return s[begin:begin+max_len]
+```
+
+### [最长公共子序列](https://leetcode.cn/problems/longest-common-subsequence/)
+
+```python
+class Solution:
+    def longestCommonSubsequence(self, s: str, t: str) -> int:
+        n,m = len(s),len(t)
+        @cache
+        def dfs(i:int,j:int) ->int: # dfs(i, j)表示：s[0~i] 和 t[0~j] 这两段字符串的最长公共子序列长度
+            if i < 0  or j < 0:
+                return 0
+            if s[i] == t[j]:
+                return dfs(i-1,j-1) + 1
+            return max(dfs(i-1,j),dfs(i,j-1))# 选大的
+        # 选大的
+        return dfs(n-1,m-1)
+```
+
+### 编辑距离
+
+```python
+class Solution:
+    def minDistance(self, word1: str, word2: str) -> int:
+        n = len(word1)
+        m = len(word2)
+
+        if n * m == 0:
+            return n + m
+        
+        #D[i][j]表示word1的前 i 个字符，变成word2的前 j 个字符，最少需要多少步
+        D = [ [0] * (m+1) for _ in range(n+1)]
+
+        for i in range(n+1):
+            D[i][0] = i
+        for j in range(m+1):
+            D[0][j] = j
+
+        for i in range(1,n+1):
+            for j in range(1,m+1):
+                # 先把 word1 前 i-1 个字符变成 word2 前 j 个字符，然后再删除 word1 的第 i 个字符
+                left = D[i-1][j] + 1
+                down = D[i][j-1] + 1 # 插入
+                left_down = D[i-1][j-1]  # 替换
+                if word1[i-1] != word2[j-1]:
+                    left_down += 1
+                D[i][j] = min(left,down,left_down)
+            
+        return D[n][m]
+```
+
+## 技巧
+
+### [只出现一次的数字](https://leetcode.cn/problems/single-number/)
+
+```python
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        x = 0
+        for num in nums:
+            x ^= num # 异或
+        return x
+```
+
+### [多数元素](https://leetcode.cn/problems/majority-element/)
+
+```python
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        votes = 0 # 当前候选人 x 的“票数优势”
+        for num in nums:
+            if votes == 0: x = num # 如果票数是 0，就换候选人
+            votes += 1 if num == x else -1
+        return x
+```
+
+### [颜色分类](https://leetcode.cn/problems/sort-colors/)
+
+```python
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        p0 = p1 = 0 # p0表示：下一个应该放 0 的位置
+        # p1表示：下一个应该放 1 的位置
+        for i,x in enumerate(nums):
+            nums[i] = 2
+            if x <= 1:
+                nums[p1] = 1
+                p1 += 1
+            if x == 0:
+                nums[p0] = 0
+                p0 += 1
+```
+
+### [下一个排列](https://leetcode.cn/problems/next-permutation/)
+
+```python
+class Solution:
+    def nextPermutation(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        n = len(nums)
+        i = n - 2 #为了“只大一点点”，应该尽量改靠右的位置
+        while i >= 0 and nums[i] >= nums[i+1]:
+            i -=  1
+
+        if i >= 0: # 从右边找一个数来跟nums[i]交换
+            j = n - 1
+            while nums[j] <= nums[i]: # 从右往左，第一个比 nums[i] 大的数
+                j -= 1
+            nums[i],nums[j] = nums[j],nums[i]
+        
+        left,right = i + 1, n - 1  # 反转 nums[i+1:]
+        while left < right:
+            nums[left],nums[right] = nums[right],nums[left]
+            left += 1
+            right -= 1
+```
+
+
 

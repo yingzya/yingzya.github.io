@@ -3,8 +3,8 @@ import type { FeedEntry } from './app/types/feed'
 export { zhCN as dateLocale } from 'date-fns/locale/zh-CN'
 
 const basicConfig = {
-	title: '字节追风者',
-	subtitle: '博客爱好者',
+	title: '雨落川',
+	subtitle: '云青青兮欲雨，水澹澹兮生烟',
 	// 长 description 利好于 SEO
 	description: '你好，我是轻语，一名热爱技术与探索的博客作者，立志成长为一名全栈工程师。在这里，我记录前端与后端的学习过程、实战项目心得，也分享日常生活中的点滴灵感。🚀 信奉“折腾不止，摸鱼生活”，希望在不断摸索中找到属于自己的技术之路。',
 	author: {
