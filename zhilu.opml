@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <opml version="2.0">
   <head>
-    <title>字节追风者的友链订阅</title>
+    <title>雨落川的友链订阅</title>
     <dateCreated>2025-03-19T00:00:00.000Z</dateCreated>
-    <dateModified>2026-03-02T08:08:43.331Z</dateModified>
+    <dateModified>2026-04-09T11:51:30.959Z</dateModified>
     <ownerName>轻语</ownerName>
     <ownerEmail>yzy11235@qq.com</ownerEmail>
     <ownerId>https://yangzy.top/</ownerId>
     <docs>https://opml.org/spec2.opml</docs>
   </head>
   <body>
-    <outline text="字节追风者" type="rss" xmlUrl="https://blog.yangzy.top/atom.xml" created="2025-03-19T00:00:00.000Z" description="博客爱好者" htmlUrl="https://blog.yangzy.top/"></outline>
+    <outline text="雨落川" type="rss" xmlUrl="https://blog.yangzy.top/atom.xml" created="2025-03-19T00:00:00.000Z" description="云青青兮欲雨，水澹澹兮生烟" htmlUrl="https://blog.yangzy.top/"></outline>
     <outline text="张洪Heo" type="rss" xmlUrl="https://blog.zhheo.com/atom.xml" created="2025-08-06T00:00:00.000Z" description="分享设计与科技生活" htmlUrl="https://blog.zhheo.com/"></outline>
     <outline text="Soulter" type="rss" xmlUrl="https://blog.soulter.top/atom.xml" created="2025-08-09T00:00:00.000Z" description="Code with love!" htmlUrl="https://blog.soulter.top"></outline>
     <outline text="𝟞𝟙𝟡" type="rss" xmlUrl="https://66619.eu.org/rss/feed.xml" created="2025-08-09T00:00:00.000Z" description="𝓙𝓾𝓼𝓽 𝓪 𝓬𝓵𝓸𝓾𝓭" htmlUrl="https://66619.eu.org"></outline>
+    <outline text="Echo" type="rss" xmlUrl="https://liveout.cn/feed/" created="2026-04-09T00:00:00.000Z" description="Life is a coding,I will debug it." htmlUrl="https://www.liveout.cn/"></outline>
   </body>
 </opml>
