@@ -7,15 +7,13 @@
 [![License](https://img.shields.io/github/license/yingzya/yingzya.github.io?color=orange)](./LICENSE)
 [![Vite](https://img.shields.io/badge/Bundler-Vite-646CFF?logo=vite)](https://vitejs.dev/)
 [![PNPM](https://img.shields.io/badge/Package_Manager-pnpm-222222?logo=pnpm)](https://pnpm.io/)
-[![Blog Theme](https://img.shields.io/badge/Theme-纸鹿-violet)](https://github.com/L33Z22L11/blog-v3)
+[![Blog Theme](https://img.shields.io/badge/Theme-Clarity-violet)](https://github.com/L33Z22L11/blog-v3)
 
 > 本项目是一个基于 **Nuxt 4** 的静态博客系统，支持通过 **GitHub Actions 自动构建并部署到服务器**，无需手动上传构建文件，部署简单高效。
 
 源项目链接：[纸鹿](https://github.com/L33Z22L11/blog-v3) ✍️
 
-博客地址：[字节追风者](https://yingzya.top)
-
-
+博客地址：[雨落川](https://blog.yangzy.top/)
 
 ### 分支结构说明
 

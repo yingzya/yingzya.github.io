@@ -23,7 +23,7 @@ const [pm, pmVersion] = packageManager.split('@') as [string, string]
 
 const service = computed(() => ([
 	...ci ? [{ label: '构建平台', value: ciPlatform }] : [],
-	{ label: '图片存储', value: () => [h(Icon, { name: 'simple-icons:cloudflare', alt: '' }), ' R2'] },
+	{ label: '图片存储', value: () => [h(Icon, { name: 'devicon:cloudflare' }), ' R2'] },
 	{ label: '软件协议', value: 'MIT' },
 	{ label: '文章许可', value: appConfig.copyright.abbr },
 	{ label: '规范域名', value: getDomain(appConfig.url) },
@@ -44,7 +44,7 @@ const expand = ref(false)
 </script>
 
 <template>
-<ZWidget card title="技术信息">
+<ZWidget card grayscale title="技术信息">
 	<ZDlGroup :items="service" />
 	<ZExpand v-model="expand" in-place name="构建信息">
 		<ZDlGroup size="small" :items="techstack" />
