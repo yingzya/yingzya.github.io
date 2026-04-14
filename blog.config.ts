@@ -77,8 +77,8 @@ const blogConfig = {
 
 	/** 自己部署的 Twikoo 服务 */
 	twikoo: {
-		envId: 'https://yingzya.netlify.app/.netlify/functions/twikoo',
-		preload: 'https://twikoo.zhilu.cyou/',
+		envId: 'https://twikoo.yangzy.top/',
+		preload: 'https://twikoo.yangzy.top/',
 	},
 }
 
