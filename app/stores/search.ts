@@ -4,6 +4,7 @@ export const useSearchStore = defineStore('search', () => {
 	const layoutStore = useLayoutStore()
 	const popoverStore = usePopoverStore()
 	const word = ref('')
+	const debouncedWord = refDebounced(word)
 
 	function toggle() {
 		layoutStore.toggle('search')
@@ -16,6 +17,7 @@ export const useSearchStore = defineStore('search', () => {
 	})
 
 	return {
+		debouncedWord,
 		word,
 		toggle,
 	}

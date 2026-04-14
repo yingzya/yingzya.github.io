@@ -5,31 +5,37 @@ const props = defineProps<{
 	show?: boolean
 }>()
 
-// await 会阻塞渲染
-const { data, status } = useAsyncData(
+const appConfig = useAppConfig()
+const segmenter = Intl.Segmenter && new Intl.Segmenter(appConfig.language, { granularity: 'word' })
+
+const { data, status } = useLazyAsyncData(
 	'search',
 	() => queryCollectionSearchSections('content', {
 		ignoredTags: ['pre'],
 	}),
 )
 
-// TODO: 优化中文分词逻辑
 const miniSearch = new MiniSearch({
 	fields: ['title', 'content'],
 	storeFields: ['title', 'titles', 'content', 'level'],
 	searchOptions: {
 		prefix: true,
 		fuzzy: 0.2,
+		combineWith: 'AND',
+		boost: { title: 3, titles: 2 },
 	},
+	processTerm: segmenter
+		? term => Array.from(segmenter.segment(term), segment => segment.segment.toLowerCase())
+		: undefined,
 })
 
 const searchStore = useSearchStore()
 const searchInput = ref<HTMLInputElement>()
 
-const { word } = storeToRefs(searchStore)
+const { debouncedWord, word } = storeToRefs(searchStore)
 const result = computed(() => {
 	void data.value
-	return miniSearch.search(word.value)
+	return miniSearch.search(debouncedWord.value)
 })
 
 const isKeyboardMode = ref(false)
@@ -46,7 +52,7 @@ watch(status, (newStatus) => {
 	}
 })
 
-watch(word, () => {
+watch(debouncedWord, () => {
 	activeIndex.value = 0
 })
 
@@ -109,12 +115,12 @@ function openActiveItem() {
 			</form>
 
 			<TransitionGroup name="expand">
-				<div v-if="word && status === 'success' && !result?.length" class="no-result">
+				<div v-if="debouncedWord && status === 'success' && !result?.length" class="no-result">
 					无结果
 				</div>
 
 				<ol
-					v-if="word && result?.length"
+					v-if="debouncedWord && result?.length"
 					ref="list-result"
 					class="scrollcheck-y search-result"
 				>
@@ -128,7 +134,7 @@ function openActiveItem() {
 					/>
 				</ol>
 
-				<div v-if="word && result?.length" class="tip" @click="searchInput?.focus()">
+				<div v-if="debouncedWord && result?.length" class="tip" @click="searchInput?.focus()">
 					<Key code="ArrowUp" prevent @press="updateActiveIndex(activeIndex - 1, true)" />
 					<Key code="ArrowDown" prevent @press="updateActiveIndex(activeIndex + 1, true)" />
 					切换&emsp;
@@ -160,6 +166,7 @@ function openActiveItem() {
 }
 
 #z-search {
+	contain: paint;
 	overflow: hidden;
 	width: 95%;
 	max-width: $breakpoint-mobile;

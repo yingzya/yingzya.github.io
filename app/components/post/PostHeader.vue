@@ -69,6 +69,7 @@ const { copy, copied } = useCopy(shareText)
 
 <style lang="scss" scoped>
 .post-header {
+	contain: paint;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -83,7 +84,8 @@ const { copy, copied } = useCopy(shareText)
 		border-radius: 0;
 	}
 
-	&:hover .operations {
+	&:hover .operations,
+	&:focus-within .operations {
 		opacity: 1;
 	}
 

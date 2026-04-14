@@ -1,6 +1,6 @@
 import type { NitroConfig } from 'nitropack'
 import process from 'node:process'
-import ci, { name } from 'ci-info'
+import ci from 'ci-info'
 import blogConfig from './blog.config'
 import packageJson from './package.json'
 import redirectList from './redirects.json'
@@ -55,6 +55,10 @@ export default defineNuxtConfig({
 		'@/assets/css/main.scss',
 		'@/assets/css/reusable.scss',
 	],
+
+	experimental: {
+		extractAsyncDataHandlers: true,
+	},
 
 	features: {
 		inlineStyles: false,
@@ -165,6 +169,11 @@ ${packageJson.homepage}
 	},
 
 	icon: {
+		clientBundle: {
+			scan: {
+				globInclude: ['**/*.{vue,jsx,tsx,ts,md,mdc,mdx}'],
+			},
+		},
 		customCollections: [
 			{ prefix: 'zi', dir: './app/assets/icons' },
 		],
@@ -173,6 +182,7 @@ ${packageJson.homepage}
 	image: {
 		// Netlify 需要特殊处理
 		provider: process.env.NUXT_IMAGE_PROVIDER,
+		densities: [1, 1.5, 2],
 		format: ['avif', 'webp'],
 	},
 

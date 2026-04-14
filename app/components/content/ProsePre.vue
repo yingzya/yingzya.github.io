@@ -115,6 +115,7 @@ onMounted(async () => {
 .z-codeblock {
 	--line-height: 1.4em;
 
+	contain: paint;
 	position: relative;
 	overflow: clip;
 	margin: 0.5em 0;
@@ -172,7 +173,8 @@ figcaption {
 		background-color: var(--c-bg-2);
 		transition: opacity 0.2s;
 
-		:hover > & {
+		:hover > &,
+		:focus-within > & {
 			opacity: 1;
 		}
 
