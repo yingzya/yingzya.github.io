@@ -3,7 +3,7 @@
   <head>
     <title>雨落川的友链订阅</title>
     <dateCreated>2025-03-19T00:00:00.000Z</dateCreated>
-    <dateModified>2026-04-14T03:01:20.945Z</dateModified>
+    <dateModified>2026-04-24T11:35:27.592Z</dateModified>
     <ownerName>轻语</ownerName>
     <ownerEmail>yzy11235@qq.com</ownerEmail>
     <ownerId>https://yangzy.top/</ownerId>
@@ -15,6 +15,5 @@
     <outline text="Soulter" type="rss" xmlUrl="https://blog.soulter.top/atom.xml" created="2025-08-09T00:00:00.000Z" description="Code with love!" htmlUrl="https://blog.soulter.top"></outline>
     <outline text="𝟞𝟙𝟡" type="rss" xmlUrl="https://66619.eu.org/rss/feed.xml" created="2025-08-09T00:00:00.000Z" description="𝓙𝓾𝓼𝓽 𝓪 𝓬𝓵𝓸𝓾𝓭" htmlUrl="https://66619.eu.org"></outline>
     <outline text="Echo" type="rss" xmlUrl="https://liveout.cn/feed" created="2026-04-09T00:00:00.000Z" description="Life is a coding,I will debug it." htmlUrl="https://www.liveout.cn"></outline>
-    <outline text="哎呀哎呀呀" type="rss" xmlUrl="https://liveout.cn/feed/" created="2026-04-13T00:00:00.000Z" description="迷失的人迷失了-相逢的人会再相逢" htmlUrl="https://ayayy.com"></outline>
   </body>
 </opml>
