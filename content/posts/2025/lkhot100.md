@@ -646,32 +646,25 @@ public:
 
 我们的思路是首先，**正数**的范围为$[1,N+1]$，为$N+1$是$[1,N]$都出现，则$N+1$是缺少的数,其余则是$[1,N]$然后，将数组中出现的正数进行标记，对于负数和0则不标记，那么，从小到大，没标记的第一个正整数就是缺失的数。
 
-具体来说，对于遍历到的数$x$ ，如果它在 $[1,N] $的范围内，那么就将数组中的第$x−1 $个位置打上标记
+具体来说，对于遍历到的数$x$ ，如果它在 $[1,N]$的范围内，那么就将数组中的第 $x−1$个位置打上标记
 
 **也就是说**，数组下标$i$对应着正数$i+1$，第一个没被标记的位置，其就是答案，对应的数为$i+1$
 
-```c++
-class Solution {
-public:
-    int firstMissingPositive(vector<int>& nums) {
-        int n = nums.size();
-        for(int &i : nums){
-            if(i <= 0) i = n + 1;
-        }
+```python
+class Solution:
+    def firstMissingPositive(self, nums: List[int]) -> int:
+        n = len(nums)
+        for i in range(n):
+            if nums[i] <= 0: nums[i] = n + 1
+        for i in range(n):
+            num = abs(nums[i])
+            if num <= n: # 原来是正数
+                nums[num-1] = -abs(nums[num-1])
+        for i in range(n):
+            if nums[i] > 0: return i + 1
+        
+        return n + 1
 
-        for(int i = 0; i < n;  i++)
-        {
-            int num = abs(nums[i]);
-            if(num <= n)//进行标记
-                nums[num-1] = -abs(nums[num-1]);//变成负数
-        }
-        for(int i = 0;i < n; i ++)
-        {
-            if(nums[i] > 0) return i + 1;
-        }
-        return n + 1;//1-n的正数全部出现
-    }
-};
 ```
 
 ## 矩阵
