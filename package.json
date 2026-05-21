@@ -72,6 +72,7 @@
     "sass-embedded": "catalog:framework",
     "strip-ansi": "catalog:util",
     "stylelint": "catalog:quality",
+    "tsx": "catalog:framework",
     "typescript": "catalog:framework",
     "unplugin-yaml": "catalog:framework"
   }
