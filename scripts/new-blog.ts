@@ -165,17 +165,23 @@ log.info(`✅ 已创建: ${absPath}`)
 if (permalink)
 	log.info(`🔗 文章链接: ${new URL(permalink, blogConfig.url)}`)
 
-// 打开 Typora
+// 打开编辑器（跨平台兼容）
 const s = spinner()
-s.start('正在打开 Typora...')
+s.start('正在打开编辑器...')
 
-exec(`"D:\\SoftWare\\Typora\\Typora.exe" "${absPath}"`, (error) => {
-	if (!error)
+const platform = process.platform
+const openCmd = platform === 'win32'
+	? `start "" "${absPath}"`
+	: platform === 'darwin'
+		? `open "${absPath}"`
+		: `xdg-open "${absPath}"`
+
+exec(openCmd, (error) => {
+	if (!error) {
+		s.stop('📝 已打开文件')
+		outro('🎉 开始书写吧！')
 		return
-	s.stop('⚠️ 无法打开 Typora，请确认已将 Typora 添加到 PATH')
-	log.error(error.message)
-	process.exit(1)
+	}
+	s.stop('⚠️ 无法自动打开编辑器')
+	log.warn(`请手动打开文件: ${absPath}`)
 })
-
-s.stop('⌨ 已通过 Typora 打开文件')
-outro(`🎉 开始书写吧！`)
