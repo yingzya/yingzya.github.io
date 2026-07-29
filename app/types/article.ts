@@ -21,6 +21,8 @@ export default interface ArticleProps extends Partial<{
 	image: string
 	recommend: number
 	references: { title?: string, link?: string }[]
+	/** Markdown 原文，供 AI 按钮等使用 */
+	rawbody: string
 
 	meta: {
 		coverRevert?: boolean

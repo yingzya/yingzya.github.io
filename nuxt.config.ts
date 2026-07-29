@@ -19,7 +19,6 @@ export default defineNuxtConfig({
 				{ rel: 'icon', href: blogConfig.favicon },
 				{ rel: 'alternate', type: 'application/atom+xml', href: '/atom.xml' },
 				{ rel: 'preconnect', href: blogConfig.twikoo.preload },
-				{ rel: 'stylesheet', href: 'https://lib.baomitu.com/KaTeX/0.16.9/katex.min.css', media: 'print', onload: 'this.media="all"' },
 				// "InterVariable", "Inter", "InterDisplay"
 				{ rel: 'stylesheet', href: 'https://rsms.me/inter/inter.css', media: 'print', onload: 'this.media="all"' },
 				// "JetBrains Mono", 思源黑体 "Noto Sans SC", 思源宋体 "Noto Serif SC"
@@ -56,10 +55,6 @@ export default defineNuxtConfig({
 		'@/assets/css/reusable.scss',
 	],
 
-	experimental: {
-		extractAsyncDataHandlers: true,
-	},
-
 	features: {
 		inlineStyles: false,
 	},
@@ -68,12 +63,13 @@ export default defineNuxtConfig({
 	routeRules: {
 		...Object.entries(redirectList)
 			.reduce<NitroConfig['routeRules']>((acc, [from, to]) => {
-				acc![from] = { redirect: { to, statusCode: 308 } }
+				acc![from] = { redirect: { to: to as string, statusCode: 308 } }
 				return acc
 			}, {}),
 		'/api/stats': { prerender: true, headers: { 'Content-Type': 'application/json' } },
 		'/atom.xml': { prerender: true, headers: { 'Content-Type': 'application/xml' } },
 		'/favicon.ico': { redirect: { to: blogConfig.favicon } },
+		'/llms.txt': { prerender: true, headers: { 'Content-Type': 'text/plain; charset=utf-8' } },
 		'/zhilu.opml': { prerender: true, headers: { 'Content-Type': 'application/xml' } },
 	},
 
@@ -198,7 +194,25 @@ ${packageJson.homepage}
 	robots: {
 		disableNuxtContentIntegration: true,
 		disallow: blogConfig.article.robotsNotIndex,
+		groups: [
+			// 显式声明对主流 AI 爬虫的许可策略（如需禁止训练抓取，将 allow 改为 disallow）
+			{
+				userAgent: [
+					'GPTBot',
+					'ChatGPT-User',
+					'OAI-SearchBot',
+					'ClaudeBot',
+					'Claude-User',
+					'Claude-SearchBot',
+					'PerplexityBot',
+					'Perplexity-User',
+					'Google-Extended',
+				],
+				allow: ['/'],
+			},
+		],
 	},
+
 
 	site: {
 		name: blogConfig.title,

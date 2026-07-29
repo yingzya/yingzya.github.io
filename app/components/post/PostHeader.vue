@@ -28,6 +28,13 @@ const { copy, copied } = useCopy(shareText)
 			>
 				文字分享
 			</ZButton>
+
+			<PostAiActions
+				:title
+				:description
+				:path
+				:rawbody
+			/>
 		</div>
 
 		<div v-if="!meta?.hideInfo" class="post-info">

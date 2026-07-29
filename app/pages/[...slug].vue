@@ -23,6 +23,12 @@ if (post.value) {
 		ogImage: post.value.image,
 		description: post.value.description,
 	})
+	// KaTeX CSS 仅含数学公式的文章加载，非数学页面不再全局引入
+	if (post.value.rawbody && /\$\$/.test(post.value.rawbody)) {
+		useHead({
+			link: [{ rel: 'stylesheet', href: 'https://lib.baomitu.com/KaTeX/0.16.9/katex.min.css', media: 'print', onload: 'this.media="all"' }],
+		})
+	}
 	layoutStore.setAside(post.value.meta?.aside as WidgetName[])
 }
 else {
@@ -38,7 +44,6 @@ else {
 <template v-if="post">
 	<PostHeader v-bind="post" />
 	<PostExcerpt v-if="excerpt" :excerpt />
-	<!-- 使用 float-in 动画会导致搜索跳转不准确 -->
 	<ContentRenderer
 		class="article"
 		:class="getPostTypeClassName(post?.type, { prefix: 'md' })"

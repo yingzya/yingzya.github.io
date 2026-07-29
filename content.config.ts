@@ -20,6 +20,9 @@ const articleSchema = z.object({
 	draft: z.boolean().default(false),
 	url: z.string().optional(),
 
+	/** 声明后 @nuxt/content 会注入 Markdown 原文，供"复制 Markdown"等 AI 功能使用 */
+	rawbody: z.string().optional(),
+
 	readingTime: z.object({
 		text: z.string(),
 		minutes: z.number(),

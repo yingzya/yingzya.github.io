@@ -1,17 +1,33 @@
 <script setup lang="ts">
 const appConfig = useAppConfig()
 
+const COMMENT_SCRIPT = 'https://lib.baomitu.com/twikoo/1.6.44/twikoo.min.js'
+const commentSection = ref<HTMLElement>()
+
 onMounted(() => {
-	window.twikoo?.init({
-		envId: appConfig.twikoo?.envId,
-		// twikoo 会把挂载后的元素变为 #twikoo
-		el: '#twikoo',
-	})
+	// 评论区滚动进入视口前 200px 时开始加载 twikoo，避免全站首屏开销
+	const observer = new IntersectionObserver((entries) => {
+		if (!entries[0]?.isIntersecting) return
+		observer.disconnect()
+
+		const script = document.createElement('script')
+		script.src = COMMENT_SCRIPT
+		script.defer = true
+		script.addEventListener('load', () => {
+			window.twikoo?.init({
+				envId: appConfig.twikoo?.envId,
+				el: '#twikoo',
+			})
+		})
+		document.head.append(script)
+	}, { rootMargin: '200px' })
+
+	if (commentSection.value) observer.observe(commentSection.value)
 })
 </script>
 
 <template>
-<section class="z-comment">
+<section ref="commentSection" class="z-comment">
 	<h3 class="text-creative">
 		评论区
 	</h3>
