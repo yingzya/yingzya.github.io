@@ -47,7 +47,7 @@ tags: [蓝桥杯, c++]
 
 **第二步：构造 `tm` 结构体**
 
-```c++
+```cpp
 tm t = {0, 0, 0, d, m - 1, y - 1900};
 ```
 
@@ -55,7 +55,7 @@ tm t = {0, 0, 0, d, m - 1, y - 1900};
 
 结构如下：
 
-```c++
+```cpp
 struct tm {
 int tm_sec;   // 秒
 int tm_min;   // 分
@@ -76,7 +76,7 @@ int tm_year;  // 年（从 1900 开始）❗️
 
 第三步：日期 +1 天
 
-```c++
+```cpp
 t.tm_mday += 1;
 ```
 
@@ -86,7 +86,7 @@ t.tm_mday += 1;
 
 **第四步：让系统帮你“进位”**
 
-```c++
+```cpp
 mktime(&t);
 ```
 
@@ -110,7 +110,7 @@ mktime(&t);
 
 S=n*(n+1) / 2
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -139,7 +139,7 @@ int main()
 
 一道比较简单的dfs，这里需要考虑的是最多有几种方案，因为题目说n最大5000，但是从题目意思可知，美味程度最大是30.数据量较小，如果非要说确定的话，3的10次方，最多开6w即可。
 
-```c++
+```cpp
 
 #include<bits/stdc++.h>
 
@@ -180,7 +180,7 @@ int main()
 
 ## P1618三连击
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -236,7 +236,7 @@ int main()
 
 因此要设置一个参数来控制选数的顺序，每次选的时候只从他后面选，即可。
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -277,7 +277,7 @@ int main()
 
 该题的意思就是从给定的一个全排列，顺序往下m个，然后输出他。那么在写的时候按全排列写即可，第一次直接定位到输入的全排列即可
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -328,7 +328,7 @@ int main()
 
 ## P3799小Y拼木棒
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 #define int long long
 		
@@ -366,7 +366,7 @@ signed main()
 
 ## P1044栈
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -426,7 +426,7 @@ int main()
 
 ## P1464记忆化搜索
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -467,7 +467,7 @@ signed main()
 
 ## P1928 外星密码
 
-```c++
+```cpp
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -503,7 +503,7 @@ int main() {
 
 ## P1255 数楼梯
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -547,7 +547,7 @@ int main()
 
 **暴力dfs版本**(果然TLE了)
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -588,7 +588,7 @@ int main()
 
 说的简单一些，这三个方程，**每一个都是在吃与不吃之间抉择**。若钱充足，办法总数就等于吃这道菜的办法数与不吃这道菜的办法数之和；若不充足，办法总数就只能承袭吃前i-1道菜的办法总数。依次递推，在最后，我们只要输出f[n][m]的值即可。
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -647,7 +647,7 @@ F[N]的转移方程就是：
 
 
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -691,7 +691,7 @@ cOW−>cOW  cOW*−>*cOWcOW  cOWcOW
 
 因为如果是原串的最后一个位置，假设原串长为L，则复制后的串为2L，若位置x - L / 2 - 1 == 0 即是原串的最后一个位置，则将他赋值为i
 
-```c++
+```cpp
 #include <bits/stdc++.h>
 using namespace std;
 string s;
@@ -720,7 +720,7 @@ int main()
 
 但是注意当**o*与空位交换之后**，连续的白棋**只剩三个**的时候规律发生了变化，此时直接打表。
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -769,7 +769,7 @@ int main()
 
 ## P1010幂次方
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -837,7 +837,7 @@ void dfs(ll x, ll y, ll a,ll b, ll l)//**(x,y)是障碍点**,**(a,b)是当前棋
 
 我们可以将n = 4时的解法可以推广到一般情况，既当n = 2 k时，我们均可以将问题划分为4个n = 2 k – 1的子问题，然后分治解决即可。
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -893,7 +893,7 @@ int main()
 
 ## P1498 南蛮图腾
 
-```c++
+```cpp
 for(int j=i;j>0;j--)a[j]^=a[j-1];//修改数组
 ```
 
@@ -911,7 +911,7 @@ for(int j=i;j>0;j--)a[j]^=a[j-1];//修改数组
 - 原数组：`[1, 2, 1]`（但这里只关心奇偶性，实际存储的是 `[1, 0, 1]`）
 - 生成第4行时，需要从右向左更新，避免覆盖前一行数据。
 
-```c++
+```cpp
 #include<iostream>
 using namespace std;
 int n,a[1030]={1};//初始化数组,第一个元素为1,其余为0
@@ -938,7 +938,7 @@ int main(){
 
 ## P1223 排队接水
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -979,7 +979,7 @@ int main()
 
 这道题**贪心的思路**是每次选择**结束时间最早**的，这样能为后面留下更多的时间参赛。
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -1022,7 +1022,7 @@ int main()
 
 sort复杂度是O(nlogn)
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -1065,7 +1065,7 @@ int main()
 
 我们用这个写法：
 
-```c++
+```cpp
 priority_queue<int, vector<int>, greater<int>> q;
 ```
 
@@ -1077,7 +1077,7 @@ priority_queue<int, vector<int>, greater<int>> q;
 
 🪄 你可以记住这个**最小堆**模板：
 
-```c++
+```cpp
 priority_queue<类型, vector<类型>, greater<类型>> 变量名;
 ```
 
@@ -1093,7 +1093,7 @@ priority_queue<类型, vector<类型>, greater<类型>> 变量名;
 
 **贪心**思路：每次选择**最小**的两堆**进行合并**
 
-```c++
+```cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -1130,7 +1130,7 @@ int main() {
 
 为什么要**吃右边盒子的糖**：这是因为如果我们吃掉左边盒子里的糖，就只会减少这一轮相邻两个盒子糖果的数量；如果我们吃掉右边盒子里的糖，那么这次操作还可以减少**下一轮相邻两个盒子糖果的数量**，符合贪心的逻辑。
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -1163,7 +1163,7 @@ sort函数的用法
 
 默认是从小到大排序，如果要从大到小排序，则可写成如下格式：
 
-```c++
+```cpp
 sort(a,a+len,greater<int>());
 ```
 
@@ -1171,14 +1171,14 @@ sort(a,a+len,greater<int>());
 
 🧠 我们先说 **string 的 erase 用法**
 
-```c++
+```cpp
 string str = "abcdef";
 str.erase(pos, len);  // 从 pos的索引位置开始，删除 len 个字符
 ```
 
 ✅ 示例 3：只给一个参数，删除从**这个位置到末尾**
 
-```c++
+```cpp
 string str = "abcdef";
 str.erase(3); // 删除从索引3开始（含）之后的所有字符
 cout << str;  // 输出 abc
@@ -1188,14 +1188,14 @@ cout << str;  // 输出 abc
 
 这里只给一个参数，只能删除给定位置索引的元素，不会删后面的
 
-```c++
+```cpp
 vector<int> v = {1, 2, 3, 4, 5};
 v.erase(v.begin() + 2); // 删除索引为 2 的元素（也就是 3）
 ```
 
 你也可以删除一个范围：(**含头不含尾**)
 
-```c++
+```cpp
 v.erase(v.begin() + 1, v.begin() + 4); // 删除 2~4（含头不含尾），结果是 {1, 5}
 ```
 
@@ -1212,7 +1212,7 @@ v.erase(v.begin() + 1, v.begin() + 4); // 删除 2~4（含头不含尾），结�
 所以：
  **从左往右找到第一个比后面大的数，删掉它，最有“贡献”**！
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 using namespace std;
 int main(){
@@ -1235,7 +1235,7 @@ int main(){
 
 **解法二：**
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -1271,7 +1271,7 @@ int main()
 
 贪心的思路是先取花费力气少的，留下更多的力气去拿后面的。
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -1322,7 +1322,7 @@ int main()
 - 如果 `a[i]` 比 `a[i-1]` 大，直接填充当前的差值 `a[i] - a[i-1]`，这相当于我们处理一个新坑的深度。
 - 如果 `a[i]` 比 `a[i-1]` 小，那么前一个坑已经处理过它并填充了这个部分，当前坑不需要额外的操作。
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -1344,7 +1344,7 @@ int main()
 
 ##  P1208Mixing Milk
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -1391,7 +1391,7 @@ int main()
 
 重复以上过程，直到 *x*>*y* 时停止循环。
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -1423,7 +1423,7 @@ int main()
 
 记得开**long long**，因为hi最大可能为1e4，平方完1e8，继续加可能爆int
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -1457,7 +1457,7 @@ int main()
 
 更**便捷**的写法：
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 using namespace std;
 unsigned long long ans=0;
@@ -1488,7 +1488,7 @@ signed main()
 
 **🌟 简要定义**
 
-```c++
+```cpp
 std::map<KeyType, ValueType>
 ```
 
@@ -1510,7 +1510,7 @@ std::map<KeyType, ValueType>
 
 **✅ 正确写法回顾**
 
-```c++
+```cpp
 std::map<int, int> m;
 auto i = m.begin();
 // 第一种写法（解引用 + 点）
@@ -1519,7 +1519,7 @@ auto i = m.begin();
 i->second--;
 ```
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -1575,7 +1575,7 @@ int main()
 - **计算时**（如乘法）用“低位在前”顺序（便于进位）
 - **结果保存/比较/输出时**用“高位在前”顺序（符合人类习惯）
 
-```c++
+```cpp
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -1680,11 +1680,11 @@ int main() {
 
 **所以，每个 `int` 被填成：**
 
-```c++
+```cpp
 0x3f3f3f3f
 ```
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -1718,7 +1718,7 @@ int main()
 
 ## P1219八皇后 checker challenge
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -1771,7 +1771,7 @@ int main()
 
 > **第一次到达某个点的时候，所走的步数就是最短的。**
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 # define PII pair<int,int>
@@ -1818,7 +1818,7 @@ int main()
 
 **dfs**结果**超时**
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -1873,7 +1873,7 @@ int main()
 
 > **BFS 是一层一层地找最短路的，如果一个点你已经访问过，说明你之前已经用更短的时间走到它了！现在再来一次，就是浪费时间，还可能是“更慢的路径”。**
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -1942,7 +1942,7 @@ int main()
 
 ## P8218 求区间和
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -1971,7 +1971,7 @@ int main()
 
 **暴力DFS写法**
 
-```c++
+```cpp
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -2059,12 +2059,12 @@ int main()
 
 `memcpy` 的正确用法是：
 
-```c++
+```cpp
 void *memcpy(void *dest, const void *src, size_t n);
 ```
 
 也就是：
 
-```c++
+```cpp
 memcpy(目标地址, 源地址, 拷贝的字节数);
 ```

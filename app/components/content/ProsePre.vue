@@ -40,28 +40,6 @@ const isWrap = ref(meta.value.wrap)
 
 const codeblock = useTemplateRef('codeblock')
 const { copy, copied } = useCopy(codeblock)
-
-const shikiStore = useShikiStore()
-const rawHtml = ref(escapeHtml(props.code))
-
-onMounted(async () => {
-	const shiki = await shikiStore.load()
-	await shikiStore.loadLang(props.language)
-	// 处理 Markdown 高亮内代码块中的语言
-	// 加载 TeX 语言有概率导致 LaTeX 语言高亮炸掉
-	if (props.language === 'markdown' || props.language.startsWith('md')) {
-		const mdLangRegex = /^\s*`{3,}(\S+)/gm
-		const langs = Array
-			.from(props.code.matchAll(mdLangRegex))
-			.map(match => match[1])
-			.filter(lang => lang !== undefined)
-		await shikiStore.loadLang(...langs)
-	}
-	rawHtml.value = shiki.codeToHtml(
-		props.code.trimEnd(),
-		shikiStore.getOptions(props.language),
-	)
-})
 </script>
 
 <template>
@@ -87,13 +65,11 @@ onMounted(async () => {
 		</div>
 	</figcaption>
 
-	<!-- 嘿嘿，不要换行 -->
 	<pre
 		ref="codeblock"
 		class="shiki scrollcheck-x"
 		:class="[props.class, { wrap: isWrap }]"
-		v-html="rawHtml"
-	/>
+	><slot /></pre>
 
 	<button
 		v-if="collapsible"

@@ -1,27 +1,5 @@
-<script setup lang="ts">
-const props = defineProps<{
-	language?: string
-	code: string
-}>()
-
-const shikiStore = useShikiStore()
-const rawHtml = ref(escapeHtml(props.code))
-
-onMounted(async () => {
-	if (!props.language)
-		return
-	const shiki = await shikiStore.load()
-	await shikiStore.loadLang(props.language)
-	rawHtml.value = shiki.codeToHtml(
-		props.code,
-		shikiStore.getOptions(props.language, ['ignoreColorizedBrackets']),
-	)
-})
-</script>
-
 <template>
-<code v-if="language" class="shiki" v-html="rawHtml" />
-<code v-else><slot /></code>
+<code class="shiki"><slot /></code>
 </template>
 
 <style lang="scss" scoped>

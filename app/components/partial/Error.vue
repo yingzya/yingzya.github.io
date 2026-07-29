@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import type { BundledLanguage } from 'shiki'
-
 withDefaults(defineProps<{
 	icon?: string
 	title?: string
 	message?: string
 	code?: string
-	language?: BundledLanguage
+	language?: string
 }>(), {
 	icon: 'solar:siren-rounded-bold-duotone',
 	language: 'log',

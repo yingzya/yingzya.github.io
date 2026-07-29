@@ -49,7 +49,7 @@ tags: [C++, YOLO]
 
 - 不考虑继承，类指针与结构体指针类似  
 
-```c++
+```cpp
 student *p; //新建一个student类指针
 student aa; //新建aa对象
 p = &aa; //p指针指向aa对象
@@ -59,7 +59,7 @@ p -> study(); //这个相当于aa.study()，对aa执行成员函数
 
 - 实际程序中使用更高级写法： 
 
-```c++
+```cpp
 student *p = new student(20, '张三'); 
 delete p; //调用析构函数
 ```
@@ -67,7 +67,7 @@ delete p; //调用析构函数
 把继承考虑进去，复杂一点：
 类定义省略，且只考虑公有继承
 
-```c++
+```cpp
 student *p1;//新建一个student父类指针
 postgraduate *p2;//新建一个postgraduate子类指针
 student aa; // 新建父类对象 aa
@@ -93,7 +93,7 @@ p2 = &aa; // 子类研究生指针指向父类学生对象，这里报错
 
 **动态多态（运行时多态）**：通过虚函数实现。
 
-```c++
+```cpp
 class Animal {
 public:
     virtual void speak() { cout << "Animal sound" << endl; }
@@ -118,7 +118,7 @@ public:
 
 **隐藏**和**覆盖**的**同名函数**的参数可以完全一样
 
-```c++
+```cpp
 class student//类定义，没写全，为了突出重点省略了构造函数和属性
 {
 public:

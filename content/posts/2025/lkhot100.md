@@ -17,7 +17,7 @@ tags: [力扣]
 
 C++ 会自动根据函数的返回类型（这里是 `vector<int>`）把 `{i, j}` 当作构造这个 `vector` 的初始化列表。
 
-```c++
+```cpp
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
@@ -60,7 +60,7 @@ public:
 
 **`emplace_back`**：**直接构造**对象在容器末尾，无需临时对象
 
-```c++
+```cpp
 class Solution {
 public:
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
@@ -107,7 +107,7 @@ public:
 | `lower_bound(x)`    | 返回 ≥ x 的第一个迭代器         |
 | `upper_bound(x)`    | 返回 > x 的第一个迭代器         |
 
-```c++
+```cpp
 class Solution {
 public:
     int longestConsecutive(vector<int>& nums) {
@@ -144,7 +144,7 @@ public:
 
 因为要把0一到数组的最后，因此要移动的数应该是右指针不为0
 
-```c++
+```cpp
 class Solution {
 public:
     void moveZeroes(vector<int>& nums) {
@@ -165,7 +165,7 @@ public:
 
 ### [盛最多水的容器](https://leetcode.cn/problems/container-with-most-water/)
 
-```c++
+```cpp
 [1, 8, 6, 2, 5, 4, 8, 3, 7]
  ^                       ^
 ```
@@ -176,7 +176,7 @@ public:
 
 如果我们移动数字较大的那个指针，那么前者「两个指针指向的数字中较小值」不会增加，后者「指针之间的距离」会减小，那么这个乘积会减小。因此，我们移动数字较大的那个指针是不合理的。因此，我们移动数字**较小**的那个指针。
 
-```c++
+```cpp
 class Solution {
 public:
     int maxArea(vector<int>& height) {
@@ -201,7 +201,7 @@ public:
  **在 `i` 后面的数组里，找两个数 `nums[j]` 和 `nums[k]`，使得 `nums[j] + nums[k] = -nums[i]`。**
 注意去重，避免结果重复
 
-```c++
+```cpp
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
@@ -248,7 +248,7 @@ public:
 
 在得到数组 $leftMax $和 $rightMax$ 的每个元素值之后，对于 $0≤i<n$，下标$ i $处能接的雨水量等于 $min(leftMax[i],rightMax[i])−height[i]$。遍历每个下标位置即可得到能接的雨水总量。
 
-```c++
+```cpp
 class Solution {
 public:
     int trap(vector<int>& height) {
@@ -289,7 +289,7 @@ public:
 
 就是每次判断在**两个**柱子中，**选择哪个柱子**接水。思路还是和动态规划一样，每次选择柱子两侧最大值的**最低点**来算。正如第一种情况的话，$i、j$两个柱子的话，因为$left$比$right$小了，那么$rightMax$一定会比$leftMax$大，又因为左边柱子的$leftMax$一定会比右边柱子的$rightMax$大，所以$min$的值就是$leftMax$，这里**省略**掉了只是。
 
-```c++
+```cpp
 class Solution {
 public:
     int trap(vector<int>& height) {
@@ -322,7 +322,7 @@ public:
 
 ### [无重复字符的最长子串](https://leetcode.cn/problems/longest-substring-without-repeating-characters/)
 
-```c++
+```cpp
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
@@ -348,7 +348,7 @@ public:
 
 ### [找到字符串中所有字母异位词](https://leetcode.cn/problems/find-all-anagrams-in-a-string/)
 
-```c++
+```cpp
 class Solution {
 public:
     vector<int> findAnagrams(string s, string p) {
@@ -417,7 +417,7 @@ public:
  - **如果这个键存在**，就返回它对应的 `value` 的引用。
  - **如果这个键不存在**，就会 **自动插入** 一个新的键值对：
 
-```c++
+```cpp
 class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
@@ -473,7 +473,7 @@ public:
 - 把 i 放到队尾。
 - 再把队头如果已经滑出窗口（下标 <= i - k）就弹掉。
 
-```c++
+```cpp
 class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
@@ -504,7 +504,7 @@ public:
 
 在滑动窗口类型的问题中都会有两个指针，一个用于「延伸」现有窗口的 r 指针，和一个用于「收缩」窗口的 l 指针。在任意时刻，只有一个指针运动，而另一个保持静止。**我们在 s 上滑动窗口，通过移动 r 指针不断扩张窗口。当窗口包含 t 全部所需的字符后，如果能收缩，我们就收缩窗口直到得到最小窗口。**
 
-```c++
+```cpp
 class Solution {
 public:
     unordered_map<char,int> ori,cnt;//cnt当前窗口各字符出现次数
@@ -542,7 +542,7 @@ public:
 
 ### [最大子数组和](https://leetcode.cn/problems/maximum-subarray/)
 
-```c++
+```cpp
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
@@ -572,7 +572,7 @@ public:
 如果当前区间的**左端点**在数组 merged 中最后一个区间的**右端点**之后，那么它们不会重合，我们可以直接将这个区间加入数组 merged 的末尾；
 否则，它们**重合**，我们需要用**当前**区间的**右端点**更新数组 merged 中最后一个区间的右端点，将其置为二者的较大值。
 
-```c++
+```cpp
 class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
@@ -601,7 +601,7 @@ public:
 
 它不直接关心原来的容量，但如果原容量不够，会自动扩容。
 
-```c++
+```cpp
 class Solution {
 public:
     void rotate(vector<int>& nums, int k) {
@@ -619,7 +619,7 @@ public:
 
 ### [除自身以外数组的乘积](https://leetcode.cn/problems/product-of-array-except-self/)
 
-```c++
+```cpp
 class Solution {
 public:
     vector<int> productExceptSelf(vector<int>& nums) {
@@ -688,7 +688,7 @@ class Solution:
 
 下面是我的做法，通过利用2个set来存储出现0的位置，如果出现就将其变为0，否则不做变化。
 
-```c++
+```cpp
 class Solution {
 public:
     void setZeroes(vector<vector<int>>& matrix) {
@@ -721,7 +721,7 @@ public:
 
 当路径超出界限或者进入之前访问过的位置时，顺时针旋转，进入下一个方向
 
-```c++
+```cpp
 class Solution {
 private:
     //右下左上
@@ -764,7 +764,7 @@ public:
 
 关键是在推出每个点的旋转涉及到四个点时，应该**旋转哪些点**。
 
-```c++
+```cpp
 
 class Solution {
 public:
@@ -788,7 +788,7 @@ public:
 
 直接暴力枚举，因为数据较小，不会超时
 
-```c++
+```cpp
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
@@ -819,7 +819,7 @@ public:
 
 - 如果所有元素都小于 value，返回 `last`（即末尾迭代器）。
 
-```c++
+```cpp
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
@@ -837,7 +837,7 @@ public:
 
 要求片段数**尽可能的多**，同时**一个字母只能出现在一个片段中**。
 
-```c++
+```cpp
 class Solution {
 public:
     vector<int> partitionLabels(string s) {
@@ -863,7 +863,7 @@ public:
 
 ### [相交链表](https://leetcode.cn/problems/intersection-of-two-linked-lists/)
 
-```c++
+```cpp
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -893,7 +893,7 @@ public:
 
 ### [反转链表](https://leetcode.cn/problems/reverse-linked-list/)
 
-```c++
+```cpp
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -926,7 +926,7 @@ public:
 
 通过快慢指针，得到中点位置，然后对两段进行比较。
 
-```c++
+```cpp
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
@@ -978,7 +978,7 @@ public:
 
 ### 环形链表
 
-```c++
+```cpp
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -1003,7 +1003,7 @@ public:
 
 ### [环形链表 II](https://leetcode.cn/problems/linked-list-cycle-ii/)
 
-```c++
+```cpp
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -1516,7 +1516,7 @@ class Trie:
 
 ### [全排列](https://leetcode.cn/problems/permutations/)
 
-```c++
+```cpp
 class Solution {
 public:     //output是待排列数组
     void backtrack(vector<vector<int>>& res,vector<int>& output,int first,int len)
@@ -1698,7 +1698,7 @@ class Solution:
 
 `assign` 是 **STL 容器的方法**（如 `vector`, `string`, `deque`, …），作用是**把容器重新赋值（替换内容）**。 它和 `=` 类似，但更灵活
 
-```c++
+```cpp
 class Solution {
 public:
     vector<vector<string>> res;  // 存所有解
@@ -2060,7 +2060,7 @@ class MedianFinder:
 
 ### [买卖股票的最佳时机](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/)
 
-```c++
+```cpp
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
@@ -2080,7 +2080,7 @@ public:
 
 只需每次考虑最远能跳到哪。维护一个当前能够跳到最远的变量$rightmost$,遍历数组，先看当前位置是否在当前能跳到的位置上，如果可以，更新$rightmost$。然后判断当前的$rightmost$是否$>=n-1$
 
-```c++
+```cpp
 class Solution {
 public:
     bool canJump(vector<int>& nums) {
@@ -2111,7 +2111,7 @@ public:
 
 $nums[n-2]<=0$，题目中说$0 <= nums[i] <= 1000$，即$nums[n-2]=0$，那么在此刻$maxPos$是无法通过更新来比$n-2$大的，即无法到达$n-1$，而题目中说了，**保证可以到达**$n-1$,因此**假设错误**，即**访问最后一个元素之前，我们的边界一定大于等于最后一个位置**。
 
-```c++
+```cpp
 class Solution {
 public:
     int jump(vector<int>& nums) {
@@ -2136,7 +2136,7 @@ public:
 
 ### [爬楼梯](https://leetcode.cn/problems/climbing-stairs/)
 
-```c++
+```cpp
 class Solution {
 public:
     int climbStairs(int n) {
@@ -2152,7 +2152,7 @@ public:
 
 ### [杨辉三角](https://leetcode.cn/problems/pascals-triangle/)
 
-```c++
+```cpp
 class Solution {
 public:
     vector<vector<int>> generate(int numRows) {
@@ -2171,7 +2171,7 @@ public:
 
 ### [打家劫舍](https://leetcode.cn/problems/house-robber/)
 
-```c++
+```cpp
 class Solution {
 public:
     int rob(vector<int>& nums) {
@@ -2207,7 +2207,7 @@ $f[i]$ 表示最少需要多少个数的平方来表示整数$i$
 - `f[12] = min(f[11], f[8], f[3]) + 1 = 3` → 4+4+4
 - `f[13] = min(f[12], f[9], f[4]) + 1 = 2` → 4+9
 
-```c++
+```cpp
 class Solution {
 public:
     int numSquares(int n) {
