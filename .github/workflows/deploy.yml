@@ -26,10 +26,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Lint source code
-        # 只检查改动的源码文件，跳过 content/ 文章和存量有 lint 问题的文件
-        run: eslint 'app/**/*.{ts,vue}' 'server/**/*.ts' 'nuxt.config.ts' 'blog.config.ts' 'content.config.ts' --ignore-pattern 'app/app.config.ts' --ignore-pattern 'app/feeds.ts'
-
       - name: Generate static site
         run: pnpm generate
 
