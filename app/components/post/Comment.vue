@@ -7,7 +7,8 @@ const commentSection = ref<HTMLElement>()
 onMounted(() => {
 	// 评论区滚动进入视口前 200px 时开始加载 twikoo，避免全站首屏开销
 	const observer = new IntersectionObserver((entries) => {
-		if (!entries[0]?.isIntersecting) return
+		if (!entries[0]?.isIntersecting)
+			return
 		observer.disconnect()
 
 		const script = document.createElement('script')
@@ -22,7 +23,8 @@ onMounted(() => {
 		document.head.append(script)
 	}, { rootMargin: '200px' })
 
-	if (commentSection.value) observer.observe(commentSection.value)
+	if (commentSection.value)
+		observer.observe(commentSection.value)
 })
 </script>
 

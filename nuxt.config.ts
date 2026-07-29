@@ -213,7 +213,6 @@ ${packageJson.homepage}
 		],
 	},
 
-
 	site: {
 		name: blogConfig.title,
 		url: blogConfig.url,
