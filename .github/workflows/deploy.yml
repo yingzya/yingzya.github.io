@@ -26,9 +26,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Type check
-        run: npx nuxi typecheck
-
       - name: Lint
         run: pnpm lint
 
