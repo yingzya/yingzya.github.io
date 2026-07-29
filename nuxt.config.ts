@@ -59,10 +59,6 @@ export default defineNuxtConfig({
 		inlineStyles: false,
 	},
 
-	experimental: {
-		viewTransition: true,
-	},
-
 	// @keep-sorted
 	routeRules: {
 		...Object.entries(redirectList)
@@ -181,7 +177,6 @@ ${packageJson.homepage}
 
 	image: {
 		// Netlify 需要特殊处理
-		domains: ['assets.yangzy.top'],
 		provider: process.env.NUXT_IMAGE_PROVIDER,
 		densities: [1, 1.5, 2],
 		format: ['avif', 'webp'],
