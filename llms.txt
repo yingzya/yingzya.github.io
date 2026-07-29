@@ -1,0 +1,22 @@
+# 雨落川
+
+> 你好，我是轻语，一名热爱技术与探索的博客作者，立志成长为一名全栈工程师。在这里，我记录前端与后端的学习过程、实战项目心得，也分享日常生活中的点滴灵感。🚀 信奉“折腾不止，摸鱼生活”，希望在不断摸索中找到属于自己的技术之路。
+
+- 作者: [轻语](https://yangzy.top/)
+- 订阅: [Atom Feed](https://blog.yangzy.top/atom.xml)
+- 许可: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans)
+
+## 文章
+
+- [python_essay](https://blog.yangzy.top/2026/python_essay): Python八股自用
+- [反向SSH内网服务器远程连接](https://blog.yangzy.top/2026/ssh): 在实验室服务器没有外网IP的情况下，通过反向SSH来远程操作实验室服务器
+- [Paper Reading：Hallucination](https://blog.yangzy.top/2025/llm-cd): 随记查看的幻觉文献
+- [专业课复习](https://blog.yangzy.top/2025/course): 文章概述了计算机网络分层、数据库ER图和主键，以及操作系统的并发、共享等核心特征。
+- [B树与B+树](https://blog.yangzy.top/2025/b+_tree): B树和B+树是常用的多路平衡查找树，常用于数据库和文件系统索引。B树每个节点同时存放键和数据，而B+树的非叶子节点只存储键作为索引，所有数据则集中存储在叶子节点。这让B+树在范围查询和磁盘I/O方面更具优势，且更容易获得更高的缓存命中率。此外，文章还介绍了将哈希表与B+树结合以实现接近O(1)的平均查询速度
+- [C++面向对象与YOLO目标检测](https://blog.yangzy.top/2025/c++andyolo): C++面向对象涵盖封装、继承、多态，支持运算符重载与隐藏；YOLO单阶段检测高效实时，擅长小目标识别，部署便捷。
+- [力扣Hot100](https://blog.yangzy.top/2025/lkhot100): ​​力扣Hot100​​热门算法题库的题解，涵盖了​哈希、双指针、滑动窗口、子串、普通数组、矩阵、链表、回溯、贪心算法、动态规划​​等核心算法与数据结构。
+- [复习——数学篇](https://blog.yangzy.top/2025/review-math): 本文系统总结线性代数与概率论核心知识，包括行列式、矩阵、向量、方程组、特征值对角化、二次型及概率公式、分布、大数定理、参数估计等考点与方法。
+- [PicGo配置去图图床](https://blog.yangzy.top/2025/picgo): PicGo实现去图图床配置，通过下载第三方插件，配置HEAD以及Body实现上传以及和Typora的联动
+- [Git自动化部署](https://blog.yangzy.top/2025/git): Git自动化部署
+- [2025蓝桥杯突击训练](https://blog.yangzy.top/2025/lanqiao2025): 汇总了2025蓝桥杯突击训练过程中的经典算法题解及代码示例，涵盖暴力枚举、递归与递推、贪心算法、搜索算法等多种算法类型
+- [Java苍穹外卖](https://blog.yangzy.top/2025/sky_takeaway): 记录“Java苍穹外卖”实战项目开发过程，涵盖环境搭建与配置，如nginx反向代理、Swagger使用；功能开发细节，包括JWT认证、日期处理等；还涉及Redis缓存、Spring Task、WebSocket等技术应用，以及菜品管理、订单支付等功能实现。
