@@ -1,0 +1,1 @@
+#z-root{display:flex;gap:1rem;justify-content:center;min-width:0}#z-aside,#z-sidebar{flex-shrink:0;height:100vh;height:100dvh;position:sticky;scrollbar-width:thin;top:0;width:280px}@media (max-width:1080px){#z-aside,#z-sidebar{flex-shrink:.2}}#content{display:flex;gap:1rem;min-width:0;width:1080px}#content>main{flex-grow:1;min-width:0}
