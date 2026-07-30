@@ -3,7 +3,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://blog.yangzy.top/</id>
   <title>雨落川</title>
-  <updated>2026-07-29T09:41:52.754Z</updated>
+  <updated>2026-07-30T01:59:22.456Z</updated>
   <description>你好，我是轻语，一名热爱技术与探索的博客作者，立志成长为一名全栈工程师。在这里，我记录前端与后端的学习过程、实战项目心得，也分享日常生活中的点滴灵感。🚀 信奉“折腾不止，摸鱼生活”，希望在不断摸索中找到属于自己的技术之路。</description>
   <author>
     <name>轻语</name>
@@ -86,7 +86,7 @@
       <name>轻语</name>
     </author>
     <content type="html">
-      <![CDATA[<img src="https://7.isyangs.cn/20250819/fd666e8034acd69bbf7d83d3b79de274.webp" /> <p>Git自动化部署</p> <a class="view-full" href="https://blog.yangzy.top/2025/git" target="_blank">点击查看全文</a>]]>
+      <![CDATA[ <p>Git自动化部署</p> <a class="view-full" href="https://blog.yangzy.top/2025/git" target="_blank">点击查看全文</a>]]>
     </content>
     <link href="https://blog.yangzy.top/2025/git"></link>
     <summary>Git自动化部署</summary>
@@ -161,7 +161,7 @@
       <name>轻语</name>
     </author>
     <content type="html">
-      <![CDATA[<img src="https://7.isyangs.cn/20250801/cc418048d677e4b6a6d512f75603b372.png" /> <p>PicGo实现去图图床配置，通过下载第三方插件，配置HEAD以及Body实现上传以及和Typora的联动</p> <a class="view-full" href="https://blog.yangzy.top/2025/picgo" target="_blank">点击查看全文</a>]]>
+      <![CDATA[ <p>PicGo实现去图图床配置，通过下载第三方插件，配置HEAD以及Body实现上传以及和Typora的联动</p> <a class="view-full" href="https://blog.yangzy.top/2025/picgo" target="_blank">点击查看全文</a>]]>
     </content>
     <link href="https://blog.yangzy.top/2025/picgo"></link>
     <summary>PicGo实现去图图床配置，通过下载第三方插件，配置HEAD以及Body实现上传以及和Typora的联动</summary>
@@ -176,7 +176,7 @@
       <name>轻语</name>
     </author>
     <content type="html">
-      <![CDATA[<img src="https://7.isyangs.cn/20250731/1e40d3e28e500126d257c30072340d5b.png" /> <p>汇总了2025蓝桥杯突击训练过程中的经典算法题解及代码示例，涵盖暴力枚举、递归与递推、贪心算法、搜索算法等多种算法类型</p> <a class="view-full" href="https://blog.yangzy.top/2025/lanqiao2025" target="_blank">点击查看全文</a>]]>
+      <![CDATA[ <p>汇总了2025蓝桥杯突击训练过程中的经典算法题解及代码示例，涵盖暴力枚举、递归与递推、贪心算法、搜索算法等多种算法类型</p> <a class="view-full" href="https://blog.yangzy.top/2025/lanqiao2025" target="_blank">点击查看全文</a>]]>
     </content>
     <link href="https://blog.yangzy.top/2025/lanqiao2025"></link>
     <summary>汇总了2025蓝桥杯突击训练过程中的经典算法题解及代码示例，涵盖暴力枚举、递归与递推、贪心算法、搜索算法等多种算法类型</summary>
@@ -191,7 +191,7 @@
       <name>轻语</name>
     </author>
     <content type="html">
-      <![CDATA[<img src="https://7.isyangs.cn/20250809/22d30d32d7e2785b86b71a9f0a0c38c5.png" /> <p>记录“Java苍穹外卖”实战项目开发过程，涵盖环境搭建与配置，如nginx反向代理、Swagger使用；功能开发细节，包括JWT认证、日期处理等；还涉及Redis缓存、Spring Task、WebSocket等技术应用，以及菜品管理、订单支付等功能实现。</p> <a class="view-full" href="https://blog.yangzy.top/2025/sky_takeaway" target="_blank">点击查看全文</a>]]>
+      <![CDATA[ <p>记录“Java苍穹外卖”实战项目开发过程，涵盖环境搭建与配置，如nginx反向代理、Swagger使用；功能开发细节，包括JWT认证、日期处理等；还涉及Redis缓存、Spring Task、WebSocket等技术应用，以及菜品管理、订单支付等功能实现。</p> <a class="view-full" href="https://blog.yangzy.top/2025/sky_takeaway" target="_blank">点击查看全文</a>]]>
     </content>
     <link href="https://blog.yangzy.top/2025/sky_takeaway"></link>
     <summary>记录“Java苍穹外卖”实战项目开发过程，涵盖环境搭建与配置，如nginx反向代理、Swagger使用；功能开发细节，包括JWT认证、日期处理等；还涉及Redis缓存、Spring Task、WebSocket等技术应用，以及菜品管理、订单支付等功能实现。</summary>
