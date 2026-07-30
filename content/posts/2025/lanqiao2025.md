@@ -3,7 +3,6 @@ title: 2025蓝桥杯突击训练
 description: 汇总了2025蓝桥杯突击训练过程中的经典算法题解及代码示例，涵盖暴力枚举、递归与递推、贪心算法、搜索算法等多种算法类型
 date: 2025-03-27 23:45:35
 updated: 2025-03-27 23:45:35
-image: https://7.isyangs.cn/20250731/1e40d3e28e500126d257c30072340d5b.png
 # type: story
 categories: [算法]
 tags: [蓝桥杯, c++]
@@ -645,8 +644,6 @@ F[N]的转移方程就是：
 
 ![image-20250404092007618](https://cdn.jsdelivr.net/gh/yingzya/markdown_pic/img/image-20250404092007618.png)
 
-
-
 ```cpp
 #include<bits/stdc++.h>
 
@@ -1029,7 +1026,6 @@ using namespace std;
 int n;//果子的种类数
 typedef long long ll;
 ll ans;
-
 
 int main()
 {
@@ -1692,7 +1688,6 @@ const int N = 210;
 int k[N],dist[N];
 int n,a,b;
 
-
 void dfs(int id,int step)//id表示当前在几楼,step表示到该楼的最小步数
 {
 	dist[id] = step;
@@ -1936,8 +1931,6 @@ int main()
 }
 ```
 
-
-
 # 算法2-1前缀和、差分与离散化
 
 ## P8218 求区间和
@@ -2052,8 +2045,6 @@ int main()
 	return 0;
 }
 ```
-
-
 
 # Ac贪心:
 

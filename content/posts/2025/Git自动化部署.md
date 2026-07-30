@@ -3,7 +3,6 @@ title: Git自动化部署
 description: Git自动化部署
 date: 2025-07-31 19:42:40
 updated: 2025-09-27 21:13:40
-image: https://7.isyangs.cn/20250819/fd666e8034acd69bbf7d83d3b79de274.webp
 # type: story
 categories: [Linux]
 tags: [Git]
@@ -260,21 +259,7 @@ jobs:
 
 打开你Github的项目，然后settings，然后左侧点击Actions，点击Gereral，确保下面的两个勾选上了
 
-::pic
----
-src: https://7.isyangs.cn/20250731/723b20ec409cf0976ee3459cf32c2809.png
-caption: 
----
-::
-
 记得配置下面的**Token**，如果访问权限不够的话。
-
-::pic
----
-src: https://7.isyangs.cn/20250731/b67f9cf6ba2490e5d050a288d0ecca0f.png
-caption: 
----
-::
 
 **解决方法一：给 Actions 用一个 PAT 代替默认 token**
 

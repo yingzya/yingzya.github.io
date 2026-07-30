@@ -28,24 +28,10 @@ recommend: false
 
 **2、行列式展开、范德蒙行列式**
 
-::pic
----
-src: https://7.isyangs.cn/20250819/b6c57c07d949a20302aabcb5b4d60caa.png
-caption:
----
-::
-
  定义
 
 - **余子式 $\boldsymbol{M_{ij}}$**：去掉行列式中元素 $\boldsymbol{a_{ij}}$ 所在的第 $\boldsymbol{i}$ 行和第 $\boldsymbol{j}$ 列，剩余元素构成的新行列式。
 -  **代数余子式 $\boldsymbol{A_{ij}}$**：$\boldsymbol{A_{ij}=(-1)^{i+j}M_{ij}}$ （符号由元素位置的行标 $\boldsymbol{i}$、列标 $\boldsymbol{j}$ 决定 ）
-
-::pic
----
-src: https://7.isyangs.cn/20250819/15f9526f0e403a8642098d91f0590367.png
-caption:
----
-::
 
 **按行展开**
 对 $n$ 阶行列式 $D$，取第 $\boldsymbol{i}$ 行（$i = 1,2,\dots,n$  ），有：   $$\boldsymbol{D = a_{i1}A_{i1} + a_{i2}A_{i2} + \cdots + a_{in}A_{in}}$$   其中，$\boldsymbol{a_{ij}}$ 是行列式第 $i$ 行第 $j$ 列的元素，$\boldsymbol{A_{ij}}$ 是 $\boldsymbol{a_{ij}}$ 的代数余子式（$A_{ij}=(-1)^{i+j}M_{ij}$ ，$M_{ij}$ 为余子式 ）。   
@@ -81,7 +67,6 @@ $\boldsymbol{
 A=\begin{pmatrix}1&2&3\\1&3&4\\3&1&2\end{pmatrix},\quad
 A^{\text{T}}=\begin{pmatrix}1&1&3\\2&3&1\\3&4&2\end{pmatrix}
 }$
-
 
  2）伴随矩阵  $A^{*}=\begin{pmatrix}A_{11}&A_{21}&\cdots&A_{n1}\\A_{12}&A_{22}&\cdots&A_{n2}\\\vdots&\vdots&\ddots&\vdots\\A_{1n}&A_{2n}&\cdots&A_{nn}\end{pmatrix}$ 
 
@@ -258,7 +243,6 @@ $b_1 = a_1$，$b_2 = a_2 - \frac{[a_2, b_1]}{[b_1, b_1]} \cdot b_1$
 **4、特征值的性质**
 
 ①$\lambda_1 + \lambda_2 + \cdots + \lambda_n = a_{11} + a_{22} + \cdots + a_{nn} \quad \text{（矩阵的迹：trA）}$
-
 
 ②$\lambda_1 \cdot \lambda_2 \cdot \cdots \cdot \lambda_n = |A|$
 

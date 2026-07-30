@@ -3,7 +3,6 @@ title: Java苍穹外卖
 description: 记录“Java苍穹外卖”实战项目开发过程，涵盖环境搭建与配置，如nginx反向代理、Swagger使用；功能开发细节，包括JWT认证、日期处理等；还涉及Redis缓存、Spring Task、WebSocket等技术应用，以及菜品管理、订单支付等功能实现。
 date: 2025-03-18 21:24:59
 updated: 2025-03-18 21:24:59
-image: https://7.isyangs.cn/20250809/22d30d32d7e2785b86b71a9f0a0c38c5.png
 # type: story
 categories: [实战项目]
 tags: [Java, 后端]
@@ -33,13 +32,11 @@ server {
 
 nginx负载均衡策略：
 
-
 | 名称 | 说明|
 | -------- | -------- | 
 | weight   | 权重方式，默认为1，权重越高，被分配的客户端就越多 | 
 | ip_hash  | 依据ip分配方式，每个访客可以固定访问一个后端服务	| 
 | least_coon | 最少连接方式，把优先请求分配给连接数少的后端服务  | 
-
 
 ### Swagger
 
@@ -74,74 +71,23 @@ Knife4j是为Java MVC框架集成Swagger生成API文档的增强解决方案
 
 先进行登录，获取token。注意的是要先进行**开发环境的服务器配置**。
 
-::pic
----
-src: https://7.isyangs.cn/20250809/02b7bb89731f8c34f1e5daccd511eaf8.png
-caption:
----
-::
-
 然后登录，获取token。
-
-::pic
----
-src: https://7.isyangs.cn/20250809/d24bf04cb55a965b6a5aab67b616a2b1.png
-caption:
----
-::
-
-
 
 接下来，在新增员工接口中的**Auth**中选择**API Key**，**保存**之后点击发送即可。
 
 要注意，**token是有时限的**，一般2小时，如果错误，记得**更新token**
 
-::pic
----
-src: https://7.isyangs.cn/20250809/89ce8d0290f0d0c23b6e6c5fd5e91b41.png
-caption: 
----
-::
-
 成功如下图所示：
-
-::pic
----
-src: https://7.isyangs.cn/20250809/d6b17443ef5621375b58605f5141015e.png
-caption: 
----
-::
 
 #### 500错误
 
 使用Apifox调试登录时报500错误，
 
-::pic
----
-src: https://7.isyangs.cn/20250809/906415061f9ba7a61121ac3d8f761e76.png
-caption: 
----
-::
-
 一般是数据库错误。
-
-::pic
----
-src: https://7.isyangs.cn/20250809/33b459c66ad327ade68c515409e16067.png
-caption: 
----
-::
 
 下面的值要和employee实体的属性值一一对应，而上面的则是数据库中的字段。
 
 ### JWT token
-
-::pic
----
-src: https://7.isyangs.cn/20250809/eeb8a3cedc9c9e07837916902518f115.png
-caption: 
----
-::
 
 #### JWT 令牌
 
@@ -179,13 +125,6 @@ ThreadLocal为每个线程提供单独一份存储空间，具有线程隔离的
 
 1、在属性上加注解，对日期进行格式化
 
-::pic
----
-src: https://7.isyangs.cn/20250809/033427f7be6847c7d198842242453631.png
-caption: 
----
-::
-
 2、在WebMvcConfiguration中扩展Spring MVC的消息转换器，统一对日期类型进行格式化处理
 
 ```java
@@ -205,34 +144,13 @@ caption:
 
 ### 修改密码
 
-::pic
----
-src: https://7.isyangs.cn/20250809/cf0052caf2f02ea84350239fdd9f8c99.png
-caption: 
----
-::
-
 之前修改忘记买md5加密了。
 
 可以看到我的原密码是1234567，那么接下来再修改回之前的123456.
 
 成功如下图所示：
 
-::pic
----
-src: https://7.isyangs.cn/20250809/03814f9ff31e8c1ebcca7b2ece96f8cb.png
-caption: 
----
-::
-
 同时查看数据库中，密码确实是**加密**后的123456
-
-::pic
----
-src: https://7.isyangs.cn/20250809/73a8234ea5483f85744d09f34234f3df.png
-caption: 
----
-::
 
 步骤如下：
 
@@ -315,13 +233,6 @@ MyBatis 使用 `#{}` 来引用传递给 SQL 语句的参数。
 ## Day03
 
 #### 1、图片前端无法回显
-
-::pic
----
-src: https://7.isyangs.cn/20250809/a49383c18a9c3b96aa01fae56815b8d0.png
-caption: 
----
-::
 
 如果在前端添加菜品的图片无法回显，就将阿里云OSS的读写权限改为公共读即可。
 
@@ -424,13 +335,6 @@ MyBatis 的核心就是使用 XML 配置文件或注解来定义 SQL 语句，�
 
 先看接口文档，是GET请求，并且传入的是菜品的id，我们可以发现这个和根据分类id查分类非常相似，于是模仿着写即可。
 
-::pic
----
-src: https://7.isyangs.cn/20250809/4a8ddd3b5317aa98d5e704486379dc97.png
-caption: 
----
-::
-
 在**DishController**中添加如下代码：
 
 ```java
@@ -498,20 +402,7 @@ DishMapper.xml:
 
 #### 点击修改如果无法回显
 
-::pic
----
-src: https://7.isyangs.cn/20250809/f73cf5a59e5b3d8a963d24384bbc0071.png
-caption: 
----
-::
-
 点击修改如果无法回显则说明数据库忘记插入了。如下图，记得加上：
-::pic
----
-src: https://7.isyangs.cn/20250809/7418a2e058f2c612fd4820e76e6247ac.png
-caption: 
----
-::
 
 #### 数据删除
 
@@ -701,13 +592,6 @@ LLEN key		 # 获取列表长度
 RPOP key         # 移除并获取列表最后一个元素
 ```
 
-::pic
----
-src: https://7.isyangs.cn/20250809/9a0e318a1d693b2d8c137bab59a58eac.png
-caption: 
----
-::
-
 ##### **3. Hash（哈希）**
 
 **常用命令：**
@@ -719,13 +603,6 @@ HDEL key field       #删除存储在哈希表中的指定字段
 HKEYS key 			 #获取哈希表中的所有字段
 HVALS key			 #获取哈希表中的所有值
 ```
-
-::pic
----
-src: https://7.isyangs.cn/20250809/19bde0e4a870deaa29cef51d2bcea5c0.png
-caption: 
----
-::
 
 ##### **4. Set（集合）**
 
@@ -740,13 +617,6 @@ SUNION key1 [key2]  # 返回给定所有集合的并集
 SREM key [value1] [value2]    # 删除集合中的一个或多个成员	
 ```
 
-::pic
----
-src: https://7.isyangs.cn/20250809/4157886a174c7e8edb409d496ac60ae2.png
-caption: 
----
-::
-
 ##### **5. ZSet（Sorted Set，有序集合）**
 
 **常用命令：**
@@ -758,12 +628,7 @@ ZINCRBY key increment member #有序集合中对指定成员的分数加上增�
 ZREM key member [member2...] #移除有序集合中的一个或多个成员
 ```
 
-::pic
----
-src: https://7.isyangs.cn/20250809/4b7050775780404540004358f45ffc33.png
-caption: 
----
-::、
+、
 
 ##### 6、通用命令
 
@@ -813,25 +678,11 @@ HttpClient是ApacheJakartaCommon下的子项目，可以用来提供高效的、
 | json     | 否   | 页面配置   |
 | wxss     | 否   | 页面样式表 |
 
-::pic
----
-src: https://7.isyangs.cn/20250809/740e7dc2dd34e8b43491c73e5d354f60.png
-caption: 
----
-::
-
 ## Day07
 
 ### 缓存菜品
 
 通过Redis来缓存菜品数据，减少数据库查询操作。
-
-::pic
----
-src: https://7.isyangs.cn/20250809/d29d98d89a8848e638f9b51c825b9a9f.png
-caption: 
----
-::
 
 **缓存逻辑：**
 
@@ -857,21 +708,7 @@ caption:
 
 **停售**之后，用户端还能**看到菜品**。
 
-::pic
----
-src: https://7.isyangs.cn/20250809/3e4b09400f1662c6dc5c5f5195a72309.png
-caption: 
----
-::
-
 经过代码查看，发现原来写的时候只是修改状态，没做相应的判断。
-
-::pic
----
-src: https://7.isyangs.cn/20250809/bfd1e5292c54e97b70ecdf3533ddf22d.png
-caption: 
----
-::
 
 修改如下：(来自**黑马资料**)
 
@@ -921,28 +758,9 @@ List<Dish> getBySetmealId(Long setmealId);
 
 我以为是没考虑上面的停售起售逻辑，但是通过控制台请求发现，status为0的也被查到了，因此我判断是**数据库的查询**出了问题，如下图所示，我查询的时候只**根据了种类id**，**没有加售卖状态**，因此导致全查到了。
 
-::pic
----
-src: https://7.isyangs.cn/20250809/52d8daa45a16ce7e7774db558c0f1753.png
-caption: 
----
-::
-
 修改如下即可：
-::pic
----
-src: https://7.isyangs.cn/20250809/dbf7b3f4bd2b8171f695462369b48ffa.png
-caption: 
----
-::
 
 这时即可正常进行查询：
-::pic
----
-src: https://7.isyangs.cn/20250809/687a122880b4d2a064996ba1e14c18d1.png
-caption: 
----
-::
 
 ### 缓存套餐
 
@@ -996,13 +814,6 @@ Spring Cache 常用注解如下：
 ## Day08
 
 ### 订单支付
-
-::pic
----
-src: https://7.isyangs.cn/20250809/dadd359f908aeeeef73017f4361bc3e1.png
-caption: 
----
-::
 
 通过该命令获得临时的公网IP
 
