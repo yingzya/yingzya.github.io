@@ -1,0 +1,1 @@
+import{z as s,k as o,h as t,H as a}from"#entry";const c={},n={class:"shiki"};function r(e,d){return t(),o("code",n,[a(e.$slots,"default",{},void 0,!0)])}const f=Object.assign(s(c,[["render",r],["__scopeId","data-v-e366a103"]]),{__name:"ProseCode"});export{f as default};
