@@ -8,6 +8,7 @@
 
 ## 文章
 
+- [SSE](https://blog.yangzy.top/2026/sse): OcEasy项目SSE流式输出实战解析
 - [python_essay](https://blog.yangzy.top/2026/python_essay): Python八股自用
 - [反向SSH内网服务器远程连接](https://blog.yangzy.top/2026/ssh): 在实验室服务器没有外网IP的情况下，通过反向SSH来远程操作实验室服务器
 - [Paper Reading：Hallucination](https://blog.yangzy.top/2025/llm-cd): 随记查看的幻觉文献
