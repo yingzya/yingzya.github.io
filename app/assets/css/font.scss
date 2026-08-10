@@ -33,7 +33,7 @@ $font-weights: (
 		font-family: Inter-Local;
 		font-style: italic;
 		font-weight: $weight;
-		src: local("Inter #{if($weight == 400, 'Italic', '#{$name} Italic')}");
+		src: local("Inter #{if(sass($weight == 400): 'Italic'; else: '#{$name} Italic')}");
 	}
 }
 
