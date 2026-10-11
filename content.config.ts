@@ -33,7 +33,12 @@ const articleSchema = z.object({
 
 export const collections = {
 	content: defineCollection(asSitemapCollection({
-		source: '**',
+		source: {
+			include: '**',
+			// 排除编辑器产生的非内容文件。@nuxt/content 以 dot: true 匹配 glob，
+			// 若不过滤，Obsidian 的 .obsidian/*.json 会被解析成内容页
+			exclude: ['**/.obsidian', '**/.obsidian/**'],
+		},
 		type: 'page',
 		schema: articleSchema,
 	})),

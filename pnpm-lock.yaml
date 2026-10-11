@@ -37,9 +37,6 @@ catalogs:
     ci-info:
       specifier: ^4.3.0
       version: 4.3.0
-    cross-env:
-      specifier: ^10.0.0
-      version: 10.0.0
     nuxt:
       specifier: ^4.1.2
       version: 4.1.2
@@ -105,9 +102,6 @@ catalogs:
     vue-tippy:
       specifier: ^6.7.1
       version: 6.7.1
-    vue-virtual-scroller:
-      specifier: 2.0.0-beta.8
-      version: 2.0.0-beta.8
   util:
     '@clack/prompts':
       specifier: ^0.11.0
@@ -248,9 +242,6 @@ importers:
       vue-tippy:
         specifier: catalog:ui
         version: 6.7.1(vue@3.5.22(typescript@5.9.2))
-      vue-virtual-scroller:
-        specifier: catalog:ui
-        version: 2.0.0-beta.8(vue@3.5.22(typescript@5.9.2))
     devDependencies:
       '@antfu/eslint-config':
         specifier: catalog:quality
@@ -270,9 +261,6 @@ importers:
       '@zinkawaii/stylelint-config':
         specifier: catalog:quality
         version: 0.3.3(postcss-html@1.8.0)(postcss@8.5.6)(stylelint@16.24.0(typescript@5.9.2))
-      cross-env:
-        specifier: catalog:framework
-        version: 10.0.0
       cspell:
         specifier: catalog:quality
         version: 9.2.1
@@ -791,9 +779,6 @@ packages:
 
   '@emnapi/wasi-threads@1.1.0':
     resolution: {integrity: sha512-WI0DdZ8xFSbgMjR1sFsKABJ/C5OnRrjT06JXbZKexJGrDuPTzZdDYfFlsgcCXCyf+suG5QU2e/y1Wo2V/OapLQ==}
-
-  '@epic-web/invariant@1.0.0':
-    resolution: {integrity: sha512-lrTPqgvfFQtR/eY/qkIzp98OGdNJu0m5ji3q/nJI8v3SXkRKEnWiOxMmbvcSoAIzv/cGiuvRy57k4suKQSAdwA==}
 
   '@es-joy/jsdoccomment@0.50.2':
     resolution: {integrity: sha512-YAdE/IJSpwbOTiaURNCKECdAwqrJuFiZhylmesBcIRawtYKnBR2wxPhoIewMg+Yu+QuYvHfJNReWpoxGBKOChA==}
@@ -3040,11 +3025,6 @@ packages:
     resolution: {integrity: sha512-p9nwwR4qyT5W996vBZhdvBCnMhicY5ytZkR4D1Xj0wuTDEiMnjwR57Q3RXYY/s0EpX6Ay3vgIcfaR+ewGHsi+g==}
     engines: {node: '>=18.0'}
 
-  cross-env@10.0.0:
-    resolution: {integrity: sha512-aU8qlEK/nHYtVuN4p7UQgAwVljzMg8hB4YK5ThRqD2l/ziSnryncPNn7bMLt5cFYsKVKBh8HqLqyCoTupEUu7Q==}
-    engines: {node: '>=20'}
-    hasBin: true
-
   cross-spawn@7.0.6:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
     engines: {node: '>= 8'}
@@ -4665,9 +4645,6 @@ packages:
   minizlib@3.1.0:
     resolution: {integrity: sha512-KZxYo1BUkWD2TVFLr0MQoM8vUUigWD3LlD83a/75BqC+4qE0Hb1Vo5v1FgcfaNXvfXzr+5EhQ6ing/CaBijTlw==}
     engines: {node: '>= 18'}
-
-  mitt@2.1.0:
-    resolution: {integrity: sha512-ILj2TpLiysu2wkBbWjAmww7TkZb65aiQO+DkVdUTBpBXq+MHYiETENkKFMtsJZX1Lf4pe4QOrTSjIfUwN5lRdg==}
 
   mitt@3.0.1:
     resolution: {integrity: sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==}
@@ -6425,16 +6402,6 @@ packages:
     peerDependencies:
       eslint: ^8.57.0 || ^9.0.0
 
-  vue-observe-visibility@2.0.0-alpha.1:
-    resolution: {integrity: sha512-flFbp/gs9pZniXR6fans8smv1kDScJ8RS7rEpMjhVabiKeq7Qz3D9+eGsypncjfIyyU84saU88XZ0zjbD6Gq/g==}
-    peerDependencies:
-      vue: ^3.0.0
-
-  vue-resize@2.0.0-alpha.1:
-    resolution: {integrity: sha512-7+iqOueLU7uc9NrMfrzbG8hwMqchfVfSzpVlCMeJQe4pyibqyoifDNbKTZvwxZKDvGkB+PdFeKvnGZMoEb8esg==}
-    peerDependencies:
-      vue: ^3.0.0
-
   vue-router@4.5.1:
     resolution: {integrity: sha512-ogAF3P97NPm8fJsE4by9dwSYtDwXIY1nFY9T6DyQnGHd1E2Da94w9JIolpe42LJGIl0DwOHBi8TcRPlPGwbTtw==}
     peerDependencies:
@@ -6442,11 +6409,6 @@ packages:
 
   vue-tippy@6.7.1:
     resolution: {integrity: sha512-gdHbBV5/Vc8gH87hQHLA7TN1K4BlLco3MAPrTb70ZYGXxx+55rAU4a4mt0fIoP+gB3etu1khUZ6c29Br1n0CiA==}
-    peerDependencies:
-      vue: ^3.2.0
-
-  vue-virtual-scroller@2.0.0-beta.8:
-    resolution: {integrity: sha512-b8/f5NQ5nIEBRTNi6GcPItE4s7kxNHw2AIHLtDp+2QvqdTjVN0FgONwX9cr53jWRgnu+HRLPaWDOR2JPI5MTfQ==}
     peerDependencies:
       vue: ^3.2.0
 
@@ -7126,8 +7088,6 @@ snapshots:
     dependencies:
       tslib: 2.8.1
     optional: true
-
-  '@epic-web/invariant@1.0.0': {}
 
   '@es-joy/jsdoccomment@0.50.2':
     dependencies:
@@ -9466,11 +9426,6 @@ snapshots:
 
   croner@9.1.0: {}
 
-  cross-env@10.0.0:
-    dependencies:
-      '@epic-web/invariant': 1.0.0
-      cross-spawn: 7.0.6
-
   cross-spawn@7.0.6:
     dependencies:
       path-key: 3.1.1
@@ -11494,8 +11449,6 @@ snapshots:
   minizlib@3.1.0:
     dependencies:
       minipass: 7.1.2
-
-  mitt@2.1.0: {}
 
   mitt@3.0.1: {}
 
@@ -13765,14 +13718,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vue-observe-visibility@2.0.0-alpha.1(vue@3.5.22(typescript@5.9.2)):
-    dependencies:
-      vue: 3.5.22(typescript@5.9.2)
-
-  vue-resize@2.0.0-alpha.1(vue@3.5.22(typescript@5.9.2)):
-    dependencies:
-      vue: 3.5.22(typescript@5.9.2)
-
   vue-router@4.5.1(vue@3.5.22(typescript@5.9.2)):
     dependencies:
       '@vue/devtools-api': 6.6.4
@@ -13782,13 +13727,6 @@ snapshots:
     dependencies:
       tippy.js: 6.3.7
       vue: 3.5.22(typescript@5.9.2)
-
-  vue-virtual-scroller@2.0.0-beta.8(vue@3.5.22(typescript@5.9.2)):
-    dependencies:
-      mitt: 2.1.0
-      vue: 3.5.22(typescript@5.9.2)
-      vue-observe-visibility: 2.0.0-alpha.1(vue@3.5.22(typescript@5.9.2))
-      vue-resize: 2.0.0-alpha.1(vue@3.5.22(typescript@5.9.2))
 
   vue@3.5.22(typescript@5.9.2):
     dependencies:

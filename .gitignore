@@ -25,4 +25,7 @@ logs
 
 # Custom
 .vercel
+.pnpm-store
 content/posts/test.md
+# Obsidian 本地库配置（编辑器状态，会随使用频繁变动）
+**/.obsidian/

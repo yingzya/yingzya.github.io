@@ -32,9 +32,15 @@ if (post.value) {
 	layoutStore.setAside(post.value.meta?.aside as WidgetName[])
 }
 else {
-	// // BUG: 部分文章在 Vercel 上以 404 状态码呈现，在 Linux SSG 模式下展示异常
-	// const event = useRequestEvent()
-	// event && setResponseStatus(event, 404)
+	// 该路由不参与预渲染，真正的 404 状态码只能由静态服务器返回
+	// （nginx 配置见 README「部署 → 静态托管需返回真实 404」）。
+	// 此处保证回退页本身带正确的标题且不被搜索引擎收录。
+	// 注：曾在此调用 setResponseStatus(event, 404)，会导致部分文章在
+	// Vercel / Linux SSG 模式下呈现异常，故不在应用层设置状态码。
+	useSeoMeta({
+		title: '内容为空或页面不存在',
+		robots: 'noindex, nofollow',
+	})
 	route.meta.title = '404'
 	layoutStore.setAside(['blog-log'])
 }

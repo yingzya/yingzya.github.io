@@ -1,11 +1,11 @@
+import { defineConfig } from '@nuxtjs/mdc/config'
+import { transformerColorizedBrackets } from '@shikijs/colorized-brackets'
 import {
-	transformerNotationWordHighlight,
 	transformerMetaHighlight,
 	transformerMetaWordHighlight,
+	transformerNotationWordHighlight,
 	transformerRenderWhitespace,
 } from '@shikijs/transformers'
-import { transformerColorizedBrackets } from '@shikijs/colorized-brackets'
-import { defineConfig } from '@nuxtjs/mdc/config'
 
 export default defineConfig({
 	shiki: {

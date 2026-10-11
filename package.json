@@ -4,6 +4,10 @@
   "version": "1.4.1",
   "private": true,
   "packageManager": "pnpm@10.17.1",
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=10"
+  },
   "homepage": "https://github.com/yingzya/yingzya.github.io",
   "scripts": {
     "prepare": "pnpm clean && nuxt prepare",
@@ -16,8 +20,10 @@
     "bump": "pnpx taze -w && rimraf pnpm-lock.yaml && pnpm update && pnpm dedupe",
     "lint": "eslint && stylelint '**/*.{vue,scss}'",
     "lint:fix": "eslint --fix && stylelint '**/*.{vue,scss}' --fix",
+    "lint:source": "eslint app modules server scripts *.ts *.mjs && stylelint '**/*.{vue,scss}'",
     "init-project": "tsx scripts/init-project",
     "new": "tsx scripts/new-blog",
+    "replace-images": "node scripts/replaceImages.js",
     "check:feed": "tsx scripts/framework/get-feed",
     "check:feed/all": "tsx scripts/framework/check-all-feeds"
   },
@@ -46,8 +52,7 @@
     "shiki": "catalog:content",
     "vue": "catalog:framework",
     "vue-router": "catalog:framework",
-    "vue-tippy": "catalog:ui",
-    "vue-virtual-scroller": "catalog:ui"
+    "vue-tippy": "catalog:ui"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:quality",
@@ -56,7 +61,6 @@
     "@iconify-json/catppuccin": "catalog:ui",
     "@iconify-json/ph": "catalog:ui",
     "@zinkawaii/stylelint-config": "catalog:quality",
-    "cross-env": "catalog:framework",
     "cspell": "catalog:quality",
     "eslint": "catalog:quality",
     "fast-xml-parser": "catalog:util",

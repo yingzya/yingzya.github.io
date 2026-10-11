@@ -4,7 +4,10 @@ import { alphabetical } from 'radash'
 
 export function useArticleIndex(path = 'posts/%') {
 	return useAsyncData(
-		`index_${path}`,
+		// key 会被 Nuxt 写入 `shared_<key>` 缓存，而 Nitro 的缓存驱动会对该 key
+		// 做 decodeURIComponent。LIKE 模式里的 `%` 会让它抛 "URI malformed"
+		// 并导致预渲染失败，因此这里先做 URI 编码（同时保证不同模式 key 不冲突）
+		`index_${encodeURIComponent(path)}`,
 		() => queryCollection('content')
 			.where('stem', 'LIKE', path)
 			.select('categories', 'date', 'description', 'image', 'path', 'readingTime', 'recommend', 'title', 'type', 'updated')

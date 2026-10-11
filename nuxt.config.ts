@@ -125,27 +125,27 @@ export default defineNuxtConfig({
 		build: {
 			markdown: {
 				highlight: {
-						theme: {
-							default: 'catppuccin-latte',
-							dark: 'one-dark-pro',
-						},
-						langs: [
-							'bash',
-							'cpp',
-							'html',
-							'java',
-							'js',
-							'json',
-							'md',
-							'python',
-							'shell',
-							'ts',
-							'vue',
-							'xml',
-							'yaml',
-						],
-						noApiRoute: true,
+					theme: {
+						default: 'catppuccin-latte',
+						dark: 'one-dark-pro',
 					},
+					langs: [
+						'bash',
+						'cpp',
+						'html',
+						'java',
+						'js',
+						'json',
+						'md',
+						'python',
+						'shell',
+						'ts',
+						'vue',
+						'xml',
+						'yaml',
+					],
+					noApiRoute: true,
+				},
 				// @keep-sorted
 				remarkPlugins: {
 					'remark-math': {},

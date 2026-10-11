@@ -131,6 +131,31 @@ GitHub Pages 会自动从 `gh-pages` 分支提供静态服务。
 
 > 也可配置 GitHub App + Webhook，在自有服务器上自动拉取并部署。
 
+### 静态托管需返回真实 404
+
+构建期只产出已知路由，未知路径的行为由静态服务器的回退规则决定。若回退到
+`index.html` / `200.html` 而不返回 404 状态码，搜索引擎会把任意不存在的 URL
+当成正常页面收录（软 404），浪费抓取预算——`/2026/SSE` 这种大小写写错的地址
+也会返回 200。
+
+nginx 需显式返回 404，并指向预渲染出的 `404.html`：
+
+```nginx
+error_page 404 /404.html;
+
+location / {
+	try_files $uri $uri/ =404;
+}
+```
+
+`/_nuxt/` 下的产物文件名带内容哈希，可放心长期缓存（改内容即换名）：
+
+```nginx
+location /_nuxt/ {
+	add_header Cache-Control "public, max-age=31536000, immutable";
+}
+```
+
 ## 📄 许可
 
 博客文章内容采用 [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans) 许可。

@@ -7,12 +7,24 @@ on:
     branches: [main]
 
 concurrency:
-  group: deploy
-  cancel-in-progress: true
+  # 按 ref 分组，让 main 的部署和 PR 的 run 处于不同组：此前两者共用 group: deploy，
+  # 一次 PR 推送就会取消掉正在进行的生产部署，而 PR run 又会跳过部署步骤，
+  # 导致这次部署静默丢失。
+  # cancel-in-progress 只对 PR 开启（同一 PR 的新 run 取代旧 run）；main 的部署不取消，
+  # 连续推送时依次排队执行。
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    # 推送 gh-pages 分支需要写权限。此前依赖仓库默认的 Token 权限，
+    # 一旦默认被收紧为只读，部署会失败
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
 
@@ -25,6 +37,11 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      # 只检查源码。content/** 有单独一套放宽的规则，存量文章不参与，
+      # 因此这一步可以稳定通过；完整检查仍是本地的 pnpm lint
+      - name: Lint source
+        run: pnpm lint:source
 
       - name: Generate static site
         run: pnpm generate

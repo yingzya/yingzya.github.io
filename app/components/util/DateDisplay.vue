@@ -8,7 +8,8 @@ const props = defineProps<{
 }>()
 
 const formattedDate = computed(() => {
-	if (!props.date) return ''
+	if (!props.date)
+		return ''
 	return format(new Date(props.date), props.formatStr || 'yyyy-MM-dd', { locale: zhCN })
 })
 </script>
