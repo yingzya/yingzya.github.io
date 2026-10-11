@@ -27,10 +27,12 @@ export default defineNuxtConfig({
 				// 小米字体 "MiSans"
 				{ rel: 'stylesheet', href: 'https://cdn-font.hyperos.mi.com/font/css?family=MiSans:100,200,300,400,450,500,600,650,700,900:Chinese_Simplify,Latin&display=swap', media: 'print', onload: 'this.media="all"' },
 			],
-			templateParams: {
-				separator: '|',
-			},
-			titleTemplate: `%s %separator ${blogConfig.title}`,
+			// 站点默认标题：兜底页（404.html / 200.html）没有页面级标题时靠它，
+			// 否则这两个文件会完全不带 <title>
+			title: blogConfig.title,
+			// 不用 `%s %separator ...` 这类字符串模板：兜底页走的是不经 templateParams
+			// 的渲染路径，`%separator` 不会被替换，会残留成 " %separator 雨落川"
+			titleTemplate: title => (!title || title === blogConfig.title ? blogConfig.title : `${title} | ${blogConfig.title}`),
 			script: blogConfig.scripts,
 		},
 		rootAttrs: {
