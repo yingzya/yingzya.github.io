@@ -1,5 +1,7 @@
 /** 友链架构图标映射 */
-// @keep-sorted
+// 注意：此处刻意不加 `@keep-sorted`。
+// 该检查用 localeCompare 的默认区域做排序，而中文键在 zh（拼音）与 en（码点）下
+// 顺序不同（如 服/国/虚），同一份代码会在本机通过、只在 CI 上失败，故移除该指令。
 const archIcons = {
 	'服务器': 'ph:hard-drives-fill',
 	'国内 CDN': 'ph:cloud-check-fill',
