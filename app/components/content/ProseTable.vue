@@ -26,6 +26,7 @@ const scroll = ref(true)
 	word-break: break-all;
 
 	table.scroll {
+		contain: layout;
 		display: block;
 		white-space: nowrap;
 		word-break: normal;

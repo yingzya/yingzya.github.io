@@ -1,9 +1,19 @@
+import type { MinimarkTree, TocLink } from '@nuxt/content'
 import type { NitroConfig } from 'nitropack'
 import process from 'node:process'
+import { fileURLToPath } from 'node:url'
 import ci from 'ci-info'
 import blogConfig from './blog.config'
 import packageJson from './package.json'
 import redirectList from './redirects.json'
+import { extractArticleSlots } from './remark-plugins/extract-article-slots'
+
+const katexDist = fileURLToPath(new URL('./node_modules/katex/dist/', import.meta.url))
+
+// HTTP Location 仅接受 ASCII，保留 URL 中已有的转义字符。
+function encodeRedirectTarget(target: string) {
+	return target.replace(/[^\x20-\x7E]/gu, char => encodeURIComponent(char))
+}
 
 // 此处配置无需修改
 export default defineNuxtConfig({
@@ -61,17 +71,24 @@ export default defineNuxtConfig({
 		inlineStyles: false,
 	},
 
+	nitro: {
+		// 公式已预渲染，只发布排版样式和字体。
+		publicAssets: [{ baseURL: '/vendor/katex', dir: katexDist }],
+		ignore: [`${katexDist}contrib/**`, `${katexDist}*.{js,mjs,md}`, `${katexDist}katex.css`],
+	},
+
 	// @keep-sorted
 	routeRules: {
 		...Object.entries(redirectList)
 			.reduce<NitroConfig['routeRules']>((acc, [from, to]) => {
-				acc![from] = { redirect: { to: to as string, statusCode: 308 } }
+				acc![from] = { redirect: { to: encodeRedirectTarget(to), statusCode: 308 } }
 				return acc
 			}, {}),
 		'/api/stats': { prerender: true, headers: { 'Content-Type': 'application/json' } },
 		'/atom.xml': { prerender: true, headers: { 'Content-Type': 'application/xml' } },
-		'/favicon.ico': { redirect: { to: blogConfig.favicon } },
+		'/favicon.ico': { redirect: { to: encodeRedirectTarget(blogConfig.favicon) } },
 		'/llms.txt': { prerender: true, headers: { 'Content-Type': 'text/plain; charset=utf-8' } },
+		'/subscriptions.opml': { prerender: true, headers: { 'Content-Type': 'application/xml' } },
 		'/zhilu.opml': { prerender: true, headers: { 'Content-Type': 'application/xml' } },
 	},
 
@@ -148,8 +165,10 @@ export default defineNuxtConfig({
 					],
 					noApiRoute: true,
 				},
-				// @keep-sorted
 				remarkPlugins: {
+					// 先展开 demo，预览中的组件和公式随正文一起转换。
+					[new URL('./remark-plugins/remark-demo.mjs', import.meta.url).href]: {},
+					[new URL('./remark-plugins/remark-code-component.mjs', import.meta.url).href]: {},
 					'remark-math': {},
 					'remark-reading-time': {},
 				},
@@ -174,6 +193,12 @@ ${packageJson.homepage}
 `)
 		},
 		'content:file:afterParse': (ctx) => {
+			const body = ctx.content.body as (MinimarkTree & { toc?: { links: TocLink[] } }) | undefined
+			if (body?.type === 'minimark') {
+				const slots = extractArticleSlots(body)
+				if (Object.keys(slots).length)
+					ctx.content.meta = { ...ctx.content.meta as object, slots }
+			}
 			const permalink = ctx.content.permalink as string
 			if (permalink) {
 				ctx.content.path = permalink

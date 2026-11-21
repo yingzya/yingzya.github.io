@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type ArticleProps from '~/types/article'
 
-const route = useRoute()
+const path = normalizeContentPath(useRoute().path)
 
 const { data: surrounds } = await useAsyncData(
-	`surround-${route.path}`,
-	() => queryCollectionItemSurroundings('content', route.path, { fields: ['date', 'title', 'type'] })
+	`surround-${path}`,
+	() => queryCollectionItemSurroundings('content', path, { fields: ['date', 'title', 'type'] })
 		.order('date', 'ASC')
 		.where('stem', 'LIKE', `posts/%`),
 )
@@ -25,7 +25,7 @@ const [DefineTemplate, ReuseTemplate] = createReusableTemplate<{
 
 <template>
 <DefineTemplate v-slot="{ post, icon, fallbackIcon, fallbackText, alignEnd }">
-	<ZRawLink :to="post?.path" class="surround-link" :align-end>
+	<ZRawLink :to="post?.path" :data-article-path="post?.path" class="surround-link" :align-end>
 		<Icon :class="{ 'rtl-flip': post }" :name="post ? icon : fallbackIcon" />
 		<div class="surround-text">
 			<strong class="title" :class="getPostTypeClassName(post?.type)">

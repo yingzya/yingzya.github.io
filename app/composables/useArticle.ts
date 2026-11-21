@@ -23,7 +23,10 @@ interface UseCategoryOptions {
 export function useCategory(list: MaybeRefOrGetter<ArticleProps[]>, options?: UseCategoryOptions) {
 	const { bindQuery } = options ?? {}
 	const category = bindQuery
-		? useRouteQuery(bindQuery, undefined, { transform: (value?: string) => value, mode: 'push' })
+		? useHydratedQuery(bindQuery, useRouteQuery(bindQuery, undefined, {
+				transform: (value: unknown) => typeof value === 'string' ? value : undefined,
+				mode: 'push',
+			}))
 		: ref<string | undefined>()
 	const categories = computed(() => [...new Set(toValue(list).map(item => item.categories?.[0]))])
 	const listCategorized = computed(
@@ -39,10 +42,28 @@ export function useCategory(list: MaybeRefOrGetter<ArticleProps[]>, options?: Us
 	}
 }
 
-export function useArticleSort(list: MaybeRefOrGetter<ArticleProps[]>) {
+interface UseArticleSortOptions {
+	bindOrderQuery?: string
+	bindDirectionQuery?: string
+}
+
+export function useArticleSort(list: MaybeRefOrGetter<ArticleProps[]>, options: UseArticleSortOptions = {}) {
 	const appConfig = useAppConfig()
-	const sortOrder = ref<ArticleOrderType>(appConfig.pagination.sortOrder || 'date')
-	const isAscending = ref<boolean>()
+	const initialOrder: ArticleOrderType = appConfig.pagination.sortOrder || 'date'
+	const { bindOrderQuery, bindDirectionQuery } = options
+	function parseOrder(value: unknown): ArticleOrderType {
+		return typeof value === 'string' && Object.hasOwn(appConfig.article.order, value)
+			? value as ArticleOrderType
+			: initialOrder
+	}
+	const sortOrder = bindOrderQuery
+		? useHydratedQuery(bindOrderQuery, useRouteQuery<string, ArticleOrderType>(bindOrderQuery, initialOrder, { transform: parseOrder }))
+		: ref<ArticleOrderType>(initialOrder)
+	const isAscending = bindDirectionQuery
+		? useHydratedQuery(bindDirectionQuery, useRouteQuery<string, boolean>(bindDirectionQuery, 'false', {
+				transform: { get: value => value === 'true', set: String },
+			}))
+		: ref(false)
 	const listSorted = computed(() => alphabetical(
 		toValue(list),
 		item => item[sortOrder.value] || '',

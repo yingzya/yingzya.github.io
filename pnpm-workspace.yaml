@@ -4,10 +4,14 @@ catalogs:
     '@nuxtjs/seo': ^3.2.2
     '@shikijs/colorized-brackets': ^3.13.0
     '@shikijs/transformers': ^3.13.0
+    abcjs: ^6.7.0
+    katex: 0.16.47
+    mermaid: ^11.14.0
     rehype-katex: ^7.0.1
     remark-math: ^6.0.0
     remark-reading-time: ^2.0.2
     shiki: ^3.13.0
+    unist-util-visit: ^5.0.0
   framework:
     '@dxup/nuxt': ^0.0.1
     ci-info: ^4.3.0
@@ -63,6 +67,7 @@ onlyBuiltDependencies:
   - unrs-resolver
 
 overrides:
+  katex: 0.16.47
   sharp: 0.33.4
 
 patchedDependencies:

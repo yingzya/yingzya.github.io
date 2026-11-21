@@ -74,6 +74,11 @@ const blogConfig = {
 		// Twikoo 评论系统
 	],
 
+	stats: {
+		/** 按 SQL LIKE 匹配 content 内不含扩展名的路径。多个范围取并集，留空统计全部。 */
+		includePaths: [] as string[],
+	},
+
 	/** 自己部署的 Twikoo 服务 */
 	twikoo: {
 		envId: 'https://twikoo.yangzy.top/',

@@ -1,20 +1,40 @@
 <script setup lang="ts">
+import type { MinimarkNode } from '@nuxt/content'
+import type ArticleProps from '~/types/article'
+
 const route = useRoute()
+const contentPath = computed(() => normalizeContentPath(route.path))
 
 const layoutStore = useLayoutStore()
 layoutStore.setAside(['toc'])
 
 const { data: post } = await useAsyncData(
-	() => route.path,
-	() => queryCollection('content').path(route.path).first(),
+	contentPath,
+	() => queryCollection('content').path(contentPath.value).first(),
 )
 
 const contentStore = useContentStore()
 const { toc, meta } = storeToRefs(contentStore)
 toc.value = post.value?.body.toc
-meta.value = post.value?.meta
+const articleMeta = computed(() => post.value?.meta as ArticleProps['meta'])
+meta.value = articleMeta.value
 
 const excerpt = computed(() => post.value?.description || '')
+
+function containsMath(node: MinimarkNode): boolean {
+	if (typeof node === 'string')
+		return false
+	const [tag, props, ...children] = node
+	return (tag === 'span' && Array.isArray(props.className) && props.className.includes('katex'))
+		|| children.some(containsMath)
+}
+
+useHead(() => ({
+	link: post.value?.body.value.some(containsMath)
+		|| Object.values(articleMeta.value?.slots ?? {}).some(slot => slot.value.some(containsMath))
+		? [{ rel: 'stylesheet', href: '/vendor/katex/katex.min.css' }]
+		: [],
+}))
 
 if (post.value) {
 	useSeoMeta({
@@ -23,12 +43,6 @@ if (post.value) {
 		ogImage: post.value.image,
 		description: post.value.description,
 	})
-	// KaTeX CSS 仅含数学公式的文章加载，非数学页面不再全局引入
-	if (post.value.rawbody && /\$\$/.test(post.value.rawbody)) {
-		useHead({
-			link: [{ rel: 'stylesheet', href: 'https://lib.baomitu.com/KaTeX/0.16.9/katex.min.css', media: 'print', onload: 'this.media="all"' }],
-		})
-	}
 	layoutStore.setAside(post.value.meta?.aside as WidgetName[])
 }
 else {

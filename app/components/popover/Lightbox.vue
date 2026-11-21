@@ -12,8 +12,18 @@ const emit = defineEmits<{
 const originRect = props.el.getBoundingClientRect()
 const rate = 0.8
 
-const lightbox = ref()
-const lightboxEl = useCurrentElement<HTMLImageElement>(lightbox)
+const popoverStore = usePopoverStore()
+const dialog = useTemplateRef<HTMLDivElement>('dialog')
+const closeButton = useTemplateRef<HTMLButtonElement>('close-button')
+watch(closeButton, button => button?.focus({ preventScroll: true }), { flush: 'post' })
+useEventListener('keydown', (event) => {
+	if (event.key === 'Escape' && props.show && popoverStore.pops.at(-1)?.zIndex === Number(dialog.value?.style.zIndex))
+		emit('close')
+})
+onUnmounted(() => {
+	if (document.activeElement === document.body && props.el.isConnected)
+		props.el.focus({ preventScroll: true })
+})
 
 const { width: winW, height: winH } = useWindowSize()
 
@@ -46,14 +56,15 @@ function restrictScale(width: number, height: number, scale: number) {
 }
 
 function onWheel(e: WheelEvent) {
-	const { left: startX, top: startY, width, height } = lightboxEl.value.getBoundingClientRect()
+	const image = e.currentTarget as HTMLImageElement
+	const { left: startX, top: startY, width, height } = image.getBoundingClientRect()
 	if (restrictScale(width, height, 1 - e.deltaY))
 		return
 	const isTouchpad = Math.abs(e.deltaY) < 8
 	const delta = isTouchpad ? Math.abs(e.deltaY) * 0.05 : 0.5
 	const scale = e.deltaY > 0 ? 1 / (1 + delta) : 1 + delta
 
-	animateBetweenRects(lightboxEl, {
+	animateBetweenRects(image, {
 		left: startX - (e.clientX - startX) * (scale - 1),
 		top: startY - (e.clientY - startY) * (scale - 1),
 		width: width * scale,
@@ -61,12 +72,12 @@ function onWheel(e: WheelEvent) {
 	})
 }
 
-function initPointer() {
+function initPointer(image: HTMLImageElement) {
 	for (const p of Object.values(pointers.value)) {
 		p.startX = p.currentX
 		p.startY = p.currentY
 	}
-	startRect = lightboxEl.value.getBoundingClientRect()
+	startRect = image.getBoundingClientRect()
 	startCenter = getCenter('start')
 	startDistance = getDistance('start')
 }
@@ -89,17 +100,19 @@ function getDistance(mode: 'start' | 'current') {
 	)
 }
 
-useEventListener('pointerdown', (e) => {
+function onPointerDown(e: PointerEvent) {
+	const image = e.currentTarget as HTMLImageElement
+	image.setPointerCapture(e.pointerId)
 	pointers.value[e.pointerId] = {
 		startX: e.clientX,
 		startY: e.clientY,
 		currentX: e.clientX,
 		currentY: e.clientY,
 	}
-	initPointer()
-})
+	initPointer(image)
+}
 
-useEventListener('pointermove', (e) => {
+function onPointerMove(e: PointerEvent) {
 	const p = pointers.value[e.pointerId]
 	if (!p)
 		return
@@ -115,19 +128,19 @@ useEventListener('pointermove', (e) => {
 	const startY = startRect.top + center.value.y - startCenter.y
 	const left = startX - (center.value.x - startX) * (scale - 1)
 	const top = startY - (center.value.y - startY) * (scale - 1)
-	animateBetweenRects(lightboxEl, { left, top, width, height }, { duration: 0 })
-})
+	animateBetweenRects(e.currentTarget as HTMLImageElement, { left, top, width, height }, { duration: 0 })
+}
 
-useEventListener('pointerup', (e) => {
+function onPointerUp(e: PointerEvent) {
 	delete pointers.value[e.pointerId]
 	if (Object.keys(pointers.value).length)
-		initPointer()
-})
+		initPointer(e.currentTarget as HTMLImageElement)
+}
 
 function onEnter(el: Element, done: () => void) {
 	const fixedWidth = window.innerWidth * rate
 	const fixedHeight = window.innerHeight * rate
-	const ratio = props.el.naturalWidth / props.el.naturalHeight
+	const ratio = props.el.naturalHeight ? props.el.naturalWidth / props.el.naturalHeight : originRect.width / (originRect.height || 1) || 1
 	const [width, height] = (fixedWidth / fixedHeight > ratio)
 		? [fixedHeight * ratio, fixedHeight]
 		: [fixedWidth, fixedWidth / ratio]
@@ -140,15 +153,10 @@ function onEnter(el: Element, done: () => void) {
 function onLeave(el: Element, done: () => void) {
 	animateBetweenRects(el, props.el).onfinish = done
 }
-
-useEventListener('keydown', (e) => {
-	if (e.key === 'Escape')
-		emit('close')
-})
 </script>
 
 <template>
-<div class="z-lightbox">
+<div ref="dialog" class="z-lightbox" role="dialog" :aria-label="el.alt || '图片预览'">
 	<Transition>
 		<div
 			v-if="show"
@@ -157,22 +165,32 @@ useEventListener('keydown', (e) => {
 		/>
 	</Transition>
 	<Transition @enter="onEnter" @leave="onLeave">
-		<NuxtImg
+		<img
 			v-if="show"
-			ref="lightbox"
 			class="image"
 			:alt="el.alt"
 			:width="el.width"
 			:height="el.height"
-			:src="el.src"
+			:src="el.currentSrc || el.src"
+			:referrerpolicy="el.referrerPolicy as ReferrerPolicy || undefined"
 			draggable="false"
 			@wheel.prevent="onWheel"
-		/>
+			@pointerdown="onPointerDown"
+			@pointermove="onPointerMove"
+			@pointerup="onPointerUp"
+			@pointercancel="onPointerUp"
+		>
 	</Transition>
 	<Transition>
 		<div v-if="show" class="tooltip">
-			<span v-if="caption" class="caption">{{ caption }}</span>
+			<div v-if="caption || $slots.caption" class="caption">
+				<slot name="caption">
+					{{ caption }}
+				</slot>
+			</div>
 			<button
+				ref="close-button"
+				type="button"
 				class="close"
 				aria-label="关闭灯箱"
 				@click="emit('close')"

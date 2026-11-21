@@ -56,10 +56,10 @@ const { copy, copied } = useCopy(codeblock)
 		<!-- 语言不采用绝对定位，因为和文件名占据互斥空间 -->
 		<span v-if="language" class="language">{{ language }}</span>
 		<div class="operations">
-			<button @click="isWrap = !isWrap">
+			<button type="button" @click="isWrap = !isWrap">
 				{{ isWrap ? '横向滚动' : '自动换行' }}
 			</button>
-			<button @click="copy()">
+			<button type="button" @click="copy()">
 				{{ copied ? '已复制' : '复制' }}
 			</button>
 		</div>
@@ -73,7 +73,9 @@ const { copy, copied } = useCopy(codeblock)
 
 	<button
 		v-if="collapsible"
+		type="button"
 		class="toggle-btn"
+		:aria-expanded="!isCollapsed"
 		:aria-label="isCollapsed ? '展开代码块' : '折叠代码块'"
 		@click="toggleCollapsed()"
 	>
@@ -149,8 +151,8 @@ figcaption {
 		background-color: var(--c-bg-2);
 		transition: opacity 0.2s;
 
-		:hover > &,
-		:focus-within > & {
+		.z-codeblock:hover &,
+		&:focus-within {
 			opacity: 1;
 		}
 
@@ -159,8 +161,33 @@ figcaption {
 			padding: 0.2em 0.4em;
 			transition: opacity 0.2s;
 
-			&:hover {
+			&:hover, &:focus-visible {
 				opacity: 1;
+			}
+		}
+	}
+
+	@media (hover: none) {
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.2em 0.5em;
+
+		> .language {
+			height: auto;
+			transform: none;
+		}
+
+		> .operations {
+			display: flex;
+			position: static;
+			opacity: 1;
+			margin-inline-start: auto;
+			padding: 0;
+
+			> button {
+				opacity: 1;
+				min-height: 2rem;
+				color: var(--c-text-2);
 			}
 		}
 	}

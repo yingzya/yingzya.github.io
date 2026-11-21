@@ -16,11 +16,18 @@ const { word } = storeToRefs(searchStore)
 	<ZhiluHeader class="sidebar-header" to="/" />
 
 	<nav class="sidebar-nav scrollcheck-y">
-		<div class="search-btn sidebar-nav-item gradient-card" @click="layoutStore.toggle('search')">
+		<button
+			type="button"
+			class="search-btn sidebar-nav-item gradient-card"
+			aria-label="搜索"
+			aria-keyshortcuts="Control+K Meta+K"
+			@mousedown.left.prevent
+			@click="searchStore.toggle()"
+		>
 			<Icon name="ph:magnifying-glass-bold" />
 			<span class="nav-text">{{ word || '搜索' }}</span>
 			<Key class="keycut" code="K" cmd prevent @press="searchStore.toggle()" />
-		</div>
+		</button>
 
 		<template v-for="(group, groupIndex) in appConfig.nav" :key="groupIndex">
 			<h3 v-if="group.title">
@@ -145,15 +152,20 @@ const { word } = storeToRefs(searchStore)
 
 .search-btn {
 	opacity: 0.5;
+	width: 100%;
 	margin: 1rem 0;
 	outline: 2px solid var(--c-border);
 	outline-offset: -2px;
+	text-align: start;
 	cursor: text;
 
-	&:hover {
+	&:hover, &:focus-visible {
 		opacity: 1;
-		outline-color: transparent;
 		background-color: transparent;
+	}
+
+	&:hover:not(:focus-visible) {
+		outline-color: transparent;
 	}
 }
 

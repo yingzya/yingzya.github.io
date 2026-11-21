@@ -14,13 +14,16 @@ export default function usePagination<T>(list: MaybeRefOrGetter<T[]>, options?: 
 
 	const totalPages = computed(() => Math.ceil(toValue(list).length / perPage) || initialPage)
 
-	function transformPage(val: string) {
-		const page = Number(val)
-		return page >= 1 && page <= totalPages.value ? page : initialPage
+	function transformPage(val: unknown) {
+		const page = typeof val === 'string' ? Number(val) : Number.NaN
+		return Number.isInteger(page) && page >= 1 && page <= totalPages.value ? page : initialPage
 	}
 
 	const page = bindQuery
-		? useRouteQuery(bindQuery, initialPage.toString(), { transform: transformPage, mode: 'push' })
+		? useHydratedQuery(bindQuery, useRouteQuery(bindQuery, initialPage.toString(), {
+				transform: { get: transformPage, set: String },
+				mode: 'push',
+			}))
 		: ref(initialPage)
 
 	const listPaged = computed(() => {

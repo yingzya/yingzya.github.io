@@ -15,42 +15,38 @@ const { data, status } = useLazyAsyncData(
 	}),
 )
 
-const miniSearch = new MiniSearch({
-	fields: ['title', 'content'],
-	storeFields: ['title', 'titles', 'content', 'level'],
-	searchOptions: {
-		prefix: true,
-		fuzzy: 0.2,
-		combineWith: 'AND',
-		boost: { title: 3, titles: 2 },
-	},
-	processTerm: segmenter
-		? term => Array.from(segmenter.segment(term), segment => segment.segment.toLowerCase())
-		: undefined,
+const miniSearch = computed(() => {
+	const index = new MiniSearch({
+		fields: ['title', 'content'],
+		storeFields: ['title', 'titles', 'content', 'level'],
+		searchOptions: {
+			prefix: true,
+			fuzzy: 0.2,
+			combineWith: 'AND',
+			boost: { title: 3, titles: 2 },
+		},
+		processTerm: segmenter
+			? term => Array.from(segmenter.segment(term), segment => segment.segment.toLowerCase())
+			: undefined,
+	})
+	index.addAll(data.value ?? [])
+	return index
 })
 
 const searchStore = useSearchStore()
+const layoutStore = useLayoutStore()
 const searchInput = ref<HTMLInputElement>()
 
 const { debouncedWord, word } = storeToRefs(searchStore)
-const result = computed(() => {
-	void data.value
-	return miniSearch.search(debouncedWord.value)
-})
+const result = computed(() => miniSearch.value.search(debouncedWord.value))
 
 const isKeyboardMode = ref(false)
 const listResult = useTemplateRef('list-result')
 
 const activeIndex = ref(0)
-const activeItem = computed(() => listResult.value?.children[activeIndex.value] as HTMLElement | undefined)
+const getActiveItem = () => listResult.value?.children[activeIndex.value] as HTMLElement | undefined
 
-watch(() => props.show, focusInput)
-
-watch(status, (newStatus) => {
-	if (newStatus === 'success' && data.value) {
-		miniSearch.addAll(data.value)
-	}
-})
+whenever(() => props.show, () => focusInput(true), { immediate: true })
 
 watch(debouncedWord, () => {
 	activeIndex.value = 0
@@ -59,9 +55,11 @@ watch(debouncedWord, () => {
 useEventListener('mousemove', () => isKeyboardMode.value = false)
 useEventListener('keydown', () => isKeyboardMode.value = true)
 
-async function focusInput() {
+async function focusInput(select = false) {
 	await nextTick()
 	searchInput.value?.focus()
+	if (select)
+		searchInput.value?.select()
 }
 
 function updateActiveIndex(index: number, isKeyboard = false) {
@@ -74,8 +72,8 @@ function updateActiveIndex(index: number, isKeyboard = false) {
 	if (isKeyboard)
 		isKeyboardMode.value = true
 
-	if (activeItem.value && isKeyboardMode.value) {
-		activeItem.value.scrollIntoView({
+	if (isKeyboardMode.value) {
+		getActiveItem()?.scrollIntoView({
 			block: 'nearest',
 		})
 	}
@@ -83,7 +81,7 @@ function updateActiveIndex(index: number, isKeyboard = false) {
 
 function openActiveItem() {
 	// 触发 vue-router 点击事件
-	activeItem.value?.click()
+	getActiveItem()?.click()
 }
 </script>
 
@@ -93,7 +91,7 @@ function openActiveItem() {
 		<div
 			v-if="show"
 			id="z-search-bgmask"
-			@click="searchStore.toggle()"
+			@click="layoutStore.closeAll()"
 		/>
 	</Transition>
 	<Transition name="float-in">
@@ -111,6 +109,7 @@ function openActiveItem() {
 					placeholder="键入开始搜索"
 					@keydown.up.prevent
 					@keydown.down.prevent
+					@keydown.esc.prevent
 				>
 			</form>
 
@@ -129,7 +128,7 @@ function openActiveItem() {
 						:key="item.id"
 						v-bind="item"
 						:class="{ active: activeIndex === itemIndex }"
-						@click="searchStore.toggle()"
+						@click="layoutStore.closeAll()"
 						@mousemove="updateActiveIndex(itemIndex)"
 					/>
 				</ol>
@@ -140,7 +139,7 @@ function openActiveItem() {
 					切换&emsp;
 					<Key code="Enter" icon @press="openActiveItem" />
 					选择&emsp;
-					<Key code="Escape" :icon="false" @press="searchStore.toggle()" />
+					<Key code="Escape" :icon="false" @press="layoutStore.closeAll()" />
 					关闭
 				</div>
 			</TransitionGroup>

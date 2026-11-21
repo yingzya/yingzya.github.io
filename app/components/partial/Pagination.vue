@@ -5,10 +5,19 @@ const props = defineProps<{
 
 const page = defineModel<number>({ required: true })
 const pageArr = computed(() => genPageArr(page.value, props.totalPages))
+const pagination = useTemplateRef<HTMLElement>('pagination')
+const end = useTemplateRef<HTMLElement>('pagination-end')
+const atEnd = useElementVisibility(end)
+useAvoidTarget(pagination)
 </script>
 
 <template>
-<nav class="pagination" :aria-label="`第${page}页，共${totalPages}页`">
+<nav
+	ref="pagination"
+	class="pagination"
+	:class="{ 'sticky': totalPages > 1, 'at-end': atEnd }"
+	:aria-label="`第${page}页，共${totalPages}页`"
+>
 	<ZButton
 		:disabled="page <= 1"
 		class="rtl-flip"
@@ -36,6 +45,7 @@ const pageArr = computed(() => genPageArr(page.value, props.totalPages))
 		@click="page++"
 	/>
 </nav>
+<div ref="pagination-end" aria-hidden="true" />
 </template>
 
 <style lang="scss" scoped>
@@ -45,6 +55,25 @@ const pageArr = computed(() => genPageArr(page.value, props.totalPages))
 	justify-content: space-between;
 	margin: 1rem 0;
 	font-variant-numeric: tabular-nums;
+
+	@media (max-width: $breakpoint-mobile) {
+		&.sticky {
+			position: sticky;
+			bottom: min(2rem, 5vh);
+			z-index: 1;
+
+			&:not(.at-end) {
+				gap: 0.25em;
+				width: fit-content;
+				max-width: 100%;
+				margin-inline: auto;
+				padding: 0.2em;
+				border-radius: 0.5rem;
+				box-shadow: 0 2px 0.5em var(--ld-shadow);
+				background-color: var(--ld-bg-card);
+			}
+		}
+	}
 
 	.pagination-ellipsis {
 		opacity: 0.5;

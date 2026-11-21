@@ -28,6 +28,11 @@ export default defineAppConfig({
 			caret: '_',
 		},
 
+		slide: {
+			/** 在精选文章封面上常驻显示标题。 */
+			showTitle: false,
+		},
+
 		stats: {
 			/** 归档页面每年标题对应的年龄 */
 			birthYear: 2004,

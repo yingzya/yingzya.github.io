@@ -40,6 +40,20 @@ export function getGhUsername(url?: string) {
 export function isExtLink(url?: string) {
 	return url
 		? url.includes(':')
+		|| url.startsWith('//')
 		|| noRouterExtensions.some(ext => url.endsWith(ext))
 		: false
+}
+
+export function safelyDecodeUriComponent(value: string) {
+	try {
+		return decodeURIComponent(value)
+	}
+	catch {
+		return value
+	}
+}
+
+export function normalizeContentPath(path: string) {
+	return path.replace(/\/+$/, '') || '/'
 }

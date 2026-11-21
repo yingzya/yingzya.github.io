@@ -5,6 +5,8 @@ import emblaCarouselVue from 'embla-carousel-vue'
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures'
 
 defineProps<{ list: ArticleProps[] }>()
+const appConfig = useAppConfig()
+const showTitle = computed(() => appConfig.component.slide.showTitle)
 
 const [emblaRef, emblaApi] = emblaCarouselVue({
 	skipSnaps: true,
@@ -41,9 +43,12 @@ useEventListener(emblaRef, 'wheel', (e) => {
 				:title="article.description"
 				:to="article.path"
 			>
-				<NuxtImg class="cover" :src="article.image" :alt="article.title" />
+				<NuxtImg class="cover" :src="article.image" :alt="showTitle ? '' : article.title" />
+				<div v-if="showTitle" class="stable-title text-creative">
+					{{ article.title }}
+				</div>
 				<div class="info">
-					<div class="title text-creative">
+					<div class="title text-creative" :aria-hidden="showTitle || undefined">
 						{{ article.title }}
 					</div>
 					<div class="desc">
@@ -147,6 +152,15 @@ useEventListener(emblaRef, 'wheel', (e) => {
 			object-fit: cover;
 		}
 
+		> .stable-title {
+			position: absolute;
+			inset: auto 0 0;
+			padding: 1.4em 0.75em 0.45em;
+			background-image: linear-gradient(transparent, #000A);
+			text-wrap: balance;
+			color: white;
+		}
+
 		> .info {
 			display: flex;
 			flex-direction: column;
@@ -174,6 +188,11 @@ useEventListener(emblaRef, 'wheel', (e) => {
 		&:hover > .info,
 		&:focus-within > .info {
 			opacity: 1;
+		}
+
+		&:hover > .stable-title,
+		&:focus-within > .stable-title {
+			opacity: 0;
 		}
 	}
 }

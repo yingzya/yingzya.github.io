@@ -18,12 +18,12 @@
 
 ## ✨ 特性
 
-- 📝 **Markdown 写作** — 基于 `@nuxt/content`，支持 MDC 组件、KaTeX 数学公式、代码高亮
+- 📝 **Markdown 写作** — 基于 `@nuxt/content`，支持 MDC、KaTeX 公式、Mermaid 图表与代码高亮
 - 🎨 **亮/暗/自动 主题** — 支持三种色彩模式，自动跟随系统
-- 📊 **文章统计** — 归档页按年份展示字数、篇数统计
+- 📊 **文章归档** — 按年份展示字数和篇数，附分类图标，可切换紧凑排列
 - 📡 **Atom 订阅** — 内置 Atom Feed + OPML，方便 RSS 阅读器订阅
 - 💬 **评论系统** — 集成自部署的 [Twikoo](https://twikoo.js.org/) 评论
-- 🔍 **全文搜索** — 基于 MiniSearch 的客户端搜索
+- 🔍 **全文搜索** — 选中文字后按 Ctrl+K（macOS 为 Cmd+K），可以直接搜索选中的内容
 - 📱 **响应式布局** — 适配桌面、平板、手机三种屏幕
 - 🚀 **SEO 优化** — 自动生成 sitemap、OG 标签、结构化数据
 - 🤖 **自动部署** — GitHub Actions 推送即构建，无需手动操作
@@ -70,6 +70,8 @@ pnpm new
 
 交互式引导，选择分类、填写标签后自动生成 Markdown 文件。
 
+用 ``` `命令`{copy} ``` 给行内命令添加复制按钮，或用 `mermaid` 代码围栏绘制图表。用 `demo` 围栏并排提供 Markdown 的预览与源码两个选项，用 `music-abc` 围栏展示五线谱和播放器。启动后访问 `/previews/markdown-tools` 查看示例。
+
 ### 本地构建
 
 ```bash
@@ -112,11 +114,11 @@ pnpm generate
 博客核心配置位于 `blog.config.ts`，包括：
 
 - **站点信息** — 标题、副标题、作者、域名
-- **文章设置** — 分类（含图标/颜色）、排序方式、URL 规则
+- **文章设置** — 分类（含图标/颜色）、排序方式、URL 规则，可用 `stats.includePaths` 设置侧栏统计范围
 - **评论系统** — Twikoo 服务地址
 - **订阅源** — Atom Feed 配置
 
-运行时可变的配置位于 `app/app.config.ts`，包括导航栏、页脚、分页、组件样式等。
+运行时设置位于 `app/app.config.ts`，包括导航栏、页脚、分页和组件样式。开启 `component.slide.showTitle` 后，精选文章封面会常驻显示标题。
 
 ## 🚢 部署
 

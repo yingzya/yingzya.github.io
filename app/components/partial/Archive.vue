@@ -5,8 +5,12 @@ import { format } from 'date-fns'
 const props = defineProps<{
 	to?: string
 	useUpdated?: boolean
+	hideAuxDate?: boolean
 } & ArticleProps>()
 
+const appConfig = useAppConfig()
+const category = computed(() => props.categories?.[0])
+const categoryColor = computed(() => category.value && appConfig.article.categories[category.value]?.color)
 const mainDate = computed(() => props.useUpdated ? props.updated : props.date)
 const dateLabel = computed(() => mainDate.value
 	? format(new Date(mainDate.value), 'MM-dd')
@@ -19,11 +23,14 @@ const auxDateLabel = computed(() => props.date
 <template>
 <li class="article-item">
 	<time :datetime="getLocaleDatetime(mainDate)" :title="getLocaleDatetime(mainDate)">{{ dateLabel }}</time>
-	<ZRawLink class="article-link gradient-card" :to :title="description">
+	<ZRawLink class="article-link gradient-card" :to :title="description" :style="{ '--c-accent': categoryColor }">
 		<span class="article-title">
+			<span v-if="category" class="article-category" role="img" :aria-label="`分类：${category}`" :title="category">
+				<Icon :name="getCategoryIcon(category)" aria-hidden="true" />
+			</span>
 			{{ title }}
 		</span>
-		<time v-if="useUpdated && isTimeDiffSignificant(date, updated)" class="aux-date" :datetime="getLocaleDatetime(date)" :title="getLocaleDatetime(date)">
+		<time v-if="useUpdated && !hideAuxDate && isTimeDiffSignificant(date, updated)" class="aux-date" :datetime="getLocaleDatetime(date)" :title="getLocaleDatetime(date)">
 			&nbsp;{{ auxDateLabel }}</time>
 		<NuxtImg v-if="image" class="article-cover" :src="image" :alt="title" loading="lazy" />
 	</ZRawLink>
@@ -35,7 +42,7 @@ const auxDateLabel = computed(() => props.date
 	display: flex;
 	align-items: center;
 	gap: 0.5em;
-	margin: 0.2em 0;
+	margin: var(--archive-row-gap, 0.2em) 0;
 	transition: all 0.2s;
 	animation: float-in 0.2s var(--delay) backwards;
 
@@ -64,10 +71,17 @@ const auxDateLabel = computed(() => props.date
 	color: var(--c-text);
 }
 
+.article-category {
+	margin-inline-end: 0.25em;
+	color: color-mix(in srgb, var(--c-accent) 65%, var(--c-text));
+}
+
 .article-link {
 	flex-grow: 1;
 	overflow: hidden;
-	padding: 0.3em 0.6em;
+	overflow-wrap: anywhere;
+	min-width: 0;
+	padding: calc(var(--archive-row-gap, 0.2em) + 0.1em) 0.6em;
 }
 
 .article-cover {

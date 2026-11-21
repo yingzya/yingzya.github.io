@@ -45,6 +45,7 @@
     "embla-carousel-autoplay": "catalog:ui",
     "embla-carousel-vue": "catalog:ui",
     "embla-carousel-wheel-gestures": "catalog:ui",
+    "mermaid": "catalog:content",
     "minisearch": "catalog:util",
     "nuxt": "catalog:framework",
     "parse-domain": "catalog:util",
@@ -61,9 +62,11 @@
     "@iconify-json/catppuccin": "catalog:ui",
     "@iconify-json/ph": "catalog:ui",
     "@zinkawaii/stylelint-config": "catalog:quality",
+    "abcjs": "catalog:content",
     "cspell": "catalog:quality",
     "eslint": "catalog:quality",
     "fast-xml-parser": "catalog:util",
+    "katex": "catalog:content",
     "nanoid": "catalog:util",
     "oxc-minify": "catalog:util",
     "p-limit": "catalog:util",
@@ -76,6 +79,7 @@
     "stylelint": "catalog:quality",
     "tsx": "catalog:framework",
     "typescript": "catalog:framework",
+    "unist-util-visit": "catalog:content",
     "unplugin-yaml": "catalog:framework"
   }
 }

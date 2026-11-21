@@ -44,3 +44,61 @@
 	max-height: 50vh;
 	transition-timing-function: cubic-bezier(0.5, 0, 1, 0.5);
 }
+
+:root[data-article-transition] {
+	scroll-behavior: auto;
+
+	#main-content {
+		view-transition-name: article-body;
+	}
+
+	[data-article-shared] {
+		animation: none;
+		view-transition-name: article-hero;
+	}
+
+	&::view-transition {
+		pointer-events: none;
+	}
+
+	&::view-transition-old(root) {
+		display: none;
+	}
+
+	&::view-transition-new(root) {
+		animation: none;
+	}
+
+	&::view-transition-group(article-hero) {
+		animation-duration: 0.24s;
+		animation-timing-function: ease-out;
+	}
+
+	&::view-transition-group(article-body) {
+		animation: none;
+	}
+
+	&::view-transition-old(article-body), &::view-transition-new(article-body) {
+		animation-duration: 0.18s;
+	}
+
+	// WebKit 独立元素快照在滚动时可能错位，改用整页淡入淡出。
+	@supports (-webkit-nbsp-mode: space) {
+		#main-content, [data-article-shared] {
+			view-transition-name: none;
+		}
+
+		&::view-transition-old(root) {
+			display: block;
+			animation-duration: 0.18s;
+		}
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	:root[data-article-transition]::view-transition-group(*),
+	:root[data-article-transition]::view-transition-old(*),
+	:root[data-article-transition]::view-transition-new(*) {
+		animation-duration: 0s;
+	}
+}

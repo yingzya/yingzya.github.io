@@ -10,6 +10,14 @@
 		margin: 1rem 0;
 	}
 
+	// 单独一行的公式也可能被 Markdown 解析为段落内的行内公式。
+	p:has(> .katex), .katex-display, > .katex {
+		display: block;
+		overflow: auto hidden;
+		padding: 1px 0;
+		scrollbar-width: thin;
+	}
+
 	:target {
 		border-radius: 0.2rem;
 		animation: highlight 3s;

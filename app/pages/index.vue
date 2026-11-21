@@ -8,18 +8,14 @@ useSeoMeta({
 })
 
 const layoutStore = useLayoutStore()
-layoutStore.setAside(['blog-stats', 'blog-tech', 'comm-group'])
+layoutStore.setAside(['blog-stats', 'blog-tech'])
 
 // BUG 若其他页面和 index.vue 共用同一数据源，其 payload 会被置空
 // 此处数据源不采用默认参数，以防归档页面刷新空白
 const { data: listRaw } = await useArticleIndex('posts%')
-const { listSorted, isAscending, sortOrder } = useArticleSort(listRaw)
+const { listSorted, isAscending, sortOrder } = useArticleSort(listRaw, { bindOrderQuery: 'sort', bindDirectionQuery: 'asc' })
 const { category, categories, listCategorized } = useCategory(listSorted, { bindQuery: 'category' })
 const { page, totalPages, listPaged } = usePagination(listCategorized, { bindQuery: 'page' })
-
-watch(category, () => {
-	page.value = 1
-})
 
 useSeoMeta({ title: () => (page.value > 1 ? `第${page.value}页` : '') })
 
@@ -53,19 +49,21 @@ const listRecommended = computed(() => sort(
 			v-model:sort-order="sortOrder"
 			v-model:category="category"
 			:categories
+			@update:category="page = 1"
 		/>
 	</div>
 
-	<TransitionGroup name="float-in">
+	<UtilListTransition v-slot="{ items }" :items="listPaged">
 		<ZArticle
-			v-for="article, index in listPaged"
+			v-for="article, index in items"
 			:key="article.path"
 			v-bind="article"
+			:data-list-key="article.path"
 			:to="article.path"
 			:use-updated="sortOrder === 'updated'"
 			:style="{ '--delay': `${index * 0.05}s` }"
 		/>
-	</TransitionGroup>
+	</UtilListTransition>
 
 	<ZPagination v-model="page" :total-pages />
 </div>

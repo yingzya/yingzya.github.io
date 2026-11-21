@@ -3,8 +3,10 @@ import { LazyPopoverLightbox } from '#components'
 
 const props = withDefaults(defineProps<{
 	src: string
+	alt?: string
 	mirror?: ImgService
 	caption?: string
+	filter?: string
 	width?: string | number
 	height?: string | number
 	zoom?: boolean
@@ -13,15 +15,16 @@ const props = withDefaults(defineProps<{
 	zoom: true,
 })
 
-const pic = ref()
-const picEl = useCurrentElement<HTMLImageElement>(pic)
-
+const slots = useSlots()
+const pic = useTemplateRef('pic')
 const popoverStore = usePopoverStore()
 
-const { open } = popoverStore.use(() => h(LazyPopoverLightbox, {
-	el: picEl.value,
-	caption: props.caption,
-}))
+const { open, close } = popoverStore.use(() => h(LazyPopoverLightbox, {
+	el: unrefElement(pic)!,
+	caption: props.caption || props.alt,
+}, slots.caption ? { caption: slots.caption } : undefined), { unique: true })
+
+onBeforeUnmount(close)
 </script>
 
 <template>
@@ -30,11 +33,21 @@ const { open } = popoverStore.use(() => h(LazyPopoverLightbox, {
 	<ZRawImg
 		ref="pic"
 		class="image"
-		:style="{ cursor: zoom && 'zoom-in' }"
-		:src :alt="caption" :width :height :mirror
+		:style="{ cursor: zoom ? 'zoom-in' : undefined, filter }"
+		:src :alt="alt || caption" :width :height :mirror
+		:role="zoom ? 'button' : undefined"
+		:tabindex="zoom ? 0 : undefined"
+		:aria-label="zoom ? `放大图片 ${alt || caption || ''}`.trim() : undefined"
+		:aria-haspopup="zoom ? 'dialog' : undefined"
 		@click="zoom && open()"
+		@keydown.enter.prevent="zoom && open()"
+		@keydown.space.prevent="zoom && open()"
 	/>
-	<figcaption v-if="caption" aria-hidden v-text="caption" />
+	<figcaption v-if="caption || $slots.caption">
+		<slot name="caption">
+			{{ caption }}
+		</slot>
+	</figcaption>
 </figure>
 </template>
 

@@ -46,18 +46,21 @@ export function escapeHtml(text: string) {
 	return text.replace(/[&<>"']/g, match => map[match] || match)
 }
 
-export function highlightHtml(text: string, word: string, className = 'highlight') {
-	const escapedText = escapeHtml(text)
-	if (!word)
-		return escapedText.replace(/\n+/g, '<br>')
+export function highlightHtml(text: string, words?: string | string[], className = 'highlight') {
+	const terms = (typeof words === 'string' ? [words] : words ?? []).filter(term => term.trim())
+	if (!terms.length)
+		return escapeHtml(text).replace(/\n+/g, '<br>')
 
-	// 分割文本，只在高亮非转义部分
-	const parts = escapedText.split(/(&[a-z]+;)/i)
+	const pattern = terms
+		.sort((a, b) => b.length - a.length)
+		.map(term => term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+		.join('|')
+	const parts = text.split(new RegExp(`(${pattern})`, 'gi'))
+	const escapedClass = escapeHtml(className)
 
-	return parts.map(part =>
-		part.startsWith('&') && part.endsWith(';')
-			? part
-			: part.replace(new RegExp(word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'), matched => `<span class="${className}">${matched}</span>`),
+	return parts.map((part, index) => index % 2 === 1
+		? `<span class="${escapedClass}">${escapeHtml(part)}</span>`
+		: escapeHtml(part),
 	).join('').replace(/\n+/g, '<br>')
 }
 

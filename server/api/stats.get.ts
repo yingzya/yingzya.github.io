@@ -1,3 +1,5 @@
+import blogConfig from '~~/blog.config'
+
 interface StatsEntry {
 	posts: number
 	words: number
@@ -19,7 +21,14 @@ export default defineEventHandler(async (event) => {
 
 	const existedPath = new Map()
 
-	const posts = await queryCollection(event, 'content').all()
+	const query = queryCollection(event, 'content')
+	if (blogConfig.stats.includePaths.length) {
+		query.orWhere(group => blogConfig.stats.includePaths.reduce(
+			(group, pattern) => group.where('stem', 'LIKE', pattern),
+			group,
+		))
+	}
+	const posts = await query.all()
 
 	const findOrCreateCategory = (
 		name: string,

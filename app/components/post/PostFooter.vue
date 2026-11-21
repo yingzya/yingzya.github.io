@@ -2,9 +2,10 @@
 import type ArticleProps from '~/types/article'
 
 defineOptions({ inheritAttrs: false })
-defineProps<ArticleProps>()
+const props = defineProps<ArticleProps>()
 
 const appConfig = useAppConfig()
+const customCopyright = computed(() => props.meta?.slots?.copyright)
 </script>
 
 <template>
@@ -27,11 +28,12 @@ const appConfig = useAppConfig()
 
 	<section class="license">
 		<div class="title text-creative">
-			许可协议
+			{{ customCopyright?.props.title || '许可协议' }}
 		</div>
 
 		<div class="content">
-			<p>
+			<ContentRenderer v-if="customCopyright" :value="customCopyright" />
+			<p v-else>
 				本文采用 <ProseA :href="appConfig.copyright.url">
 					{{ appConfig.copyright.name }}
 				</ProseA>

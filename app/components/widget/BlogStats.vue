@@ -37,7 +37,7 @@ const blogStats = computed(() => [{
 	value: () => h(NuxtTime, { datetime: runtimeConfig.public.buildTime, relative: true }),
 	tip: `构建于${getLocaleDatetime(buildTime)}`,
 }, {
-	label: '总字数',
+	label: appConfig.stats.includePaths.length ? '文章字数' : '总字数',
 	value: totalWords,
 	tip: yearlyTip,
 }])
