@@ -1,0 +1,1 @@
+import{_ as a}from"./G7m2lTIv.js";import{_ as n,e as r,o as _,m as e,r as t}from"#entry";const c={};function m(o,f){const s=a;return _(),r(s,{tabs:["预览","源码"]},{tab1:e(()=>[t(o.$slots,"default")]),tab2:e(()=>[t(o.$slots,"source")]),_:3})}const i=Object.assign(n(c,[["render",m]]),{__name:"Demo"});export{i as default};

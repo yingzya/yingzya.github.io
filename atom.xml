@@ -3,7 +3,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>https://blog.yangzy.top/</id>
   <title>雨落川</title>
-  <updated>2026-10-11T09:14:13.162Z</updated>
+  <updated>2026-11-21T12:24:13.703Z</updated>
   <description>你好，我是轻语，一名热爱技术与探索的博客作者，立志成长为一名全栈工程师。在这里，我记录前端与后端的学习过程、实战项目心得，也分享日常生活中的点滴灵感。🚀 信奉“折腾不止，摸鱼生活”，希望在不断摸索中找到属于自己的技术之路。</description>
   <author>
     <name>轻语</name>
@@ -18,6 +18,21 @@
   <logo>https://assets.yangzy.top/avator.jpg</logo>
   <rights>© 2026 轻语</rights>
   <subtitle>云青青兮欲雨，水澹澹兮生烟</subtitle>
+  <entry>
+    <id>https://blog.yangzy.top/2026/rag</id>
+    <title>企业级 RAG 实现详解</title>
+    <updated>2026-08-03T16:39:06.000Z</updated>
+    <author>
+      <name>轻语</name>
+    </author>
+    <content type="html">
+      <![CDATA[ <p>OcEasy（Onyx/Danswer）RAG 实现详解。</p> <a class="view-full" href="https://blog.yangzy.top/2026/rag" target="_blank">点击查看全文</a>]]>
+    </content>
+    <link href="https://blog.yangzy.top/2026/rag"></link>
+    <summary>OcEasy（Onyx/Danswer）RAG 实现详解。</summary>
+    <category term="实战项目"></category>
+    <published>2026-08-03T16:39:06.000Z</published>
+  </entry>
   <entry>
     <id>https://blog.yangzy.top/2026/sse</id>
     <title>SSE</title>
