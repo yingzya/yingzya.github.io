@@ -1,14 +1,9 @@
 import { differenceInMilliseconds, format, formatDistanceToNow } from 'date-fns'
 import { dateLocale } from '~~/blog.config'
+import { parseArticleDate } from '~~/shared/utils/articleDate'
 
 export function getIsoDatetime(date?: string | Date) {
-	if (!date)
-		return date || undefined
-
-	if (typeof date === 'string')
-		date = new Date(date)
-
-	return date.toISOString()
+	return parseArticleDate(date)?.toISOString()
 }
 
 export function getLocaleDatetime(date?: string | Date) {

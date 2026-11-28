@@ -24,6 +24,9 @@ catalogs:
     mermaid:
       specifier: ^11.14.0
       version: 11.17.2
+    plain-shiki:
+      specifier: ^0.3.2
+      version: 0.3.2
     rehype-katex:
       specifier: ^7.0.1
       version: 7.0.1
@@ -240,6 +243,9 @@ importers:
       parse-domain:
         specifier: catalog:util
         version: 8.2.2
+      plain-shiki:
+        specifier: catalog:content
+        version: 0.3.2(shiki@3.13.0)
       radash:
         specifier: catalog:util
         version: 12.1.1
@@ -5361,6 +5367,11 @@ packages:
 
   pkg-types@2.3.0:
     resolution: {integrity: sha512-SIqCzDRg0s9npO5XQ3tNZioRY1uK06lA41ynBC1YmFTmnY6FjUjVt6s4LoADmwoig1qqD0oK8h1p/8mlMx8Oig==}
+
+  plain-shiki@0.3.2:
+    resolution: {integrity: sha512-DFU1FmqedDChWAIRHiEuepGVqs8mwpsPhCxWNnsJu/rqxwMIR8cUfYJ6LHiONzR6vQZqZpzqGDCbjWjBv8zCbw==}
+    peerDependencies:
+      shiki: '>=1.22.0'
 
   playwright-core@1.55.1:
     resolution: {integrity: sha512-Z6Mh9mkwX+zxSlHqdr5AOcJnfp+xUWLCt9uKV18fhzA8eyxUd8NUWzAjxUh55RZKSYwDGX0cfaySdhZJGMoJ+w==}
@@ -12962,6 +12973,10 @@ snapshots:
       confbox: 0.2.2
       exsolve: 1.0.7
       pathe: 2.0.3
+
+  plain-shiki@0.3.2(shiki@3.13.0):
+    dependencies:
+      shiki: 3.13.0
 
   playwright-core@1.55.1: {}
 

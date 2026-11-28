@@ -1,10 +1,33 @@
 <script setup lang="ts">
 import type { FeedEntry, FeedGroup } from '~/types/feed'
+import { shuffle } from 'radash'
 
-defineProps<{
+const props = defineProps<{
 	label?: string
 	feeds: FeedGroup[]
 }>()
+
+const route = useRoute()
+const config = useAppConfig()
+const shuffled = reactive(new Map<string, FeedEntry[]>())
+
+function shuffleGroup(group: FeedGroup) {
+	shuffled.set(group.name, shuffle(group.entries))
+}
+
+function reorderGroup(group: FeedGroup, event: MouseEvent) {
+	if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey)
+		shuffled.delete(group.name)
+	else
+		shuffleGroup(group)
+}
+
+// 等到水合后再随机排列，首屏始终使用构建时的顺序。
+watch([useMounted(), () => route.query.shuffle, () => config.link.randomInGroup, () => props.feeds], ([mounted, query, defaultRandom]) => {
+	shuffled.clear()
+	if (mounted && (query === 'true' || (query !== 'false' && defaultRandom)))
+		props.feeds.forEach(shuffleGroup)
+}, { immediate: true })
 
 // 友链浮现随机延迟
 function getCardDelay(feed: FeedEntry) {
@@ -23,14 +46,26 @@ function getCardDelay(feed: FeedEntry) {
 
 <section v-for="group in feeds" :key="group.name" class="feed-group">
 	<h3 class="feed-title">
-		{{ group.name }}
+		<button
+			v-if="group.entries.length > 1"
+			type="button"
+			:title="`点击重新排列「${group.name}」，按住修饰键点击可恢复原序`"
+			:aria-label="`重新排列${group.name}友链`"
+			@click="reorderGroup(group, $event)"
+		>
+			{{ group.name }}
+		</button>
+		<span v-else>{{ group.name }}</span>
 	</h3>
 	<p class="feed-desc">
 		{{ group.desc }}
+		<button v-if="shuffled.has(group.name) && group.entries.length > 1" type="button" class="restore-order" @click="shuffled.delete(group.name)">
+			恢复原序
+		</button>
 	</p>
 	<TransitionGroup tag="menu" class="feed-list" appear name="float-in">
 		<li
-			v-for="entry in group.entries"
+			v-for="entry in shuffled.get(group.name) ?? group.entries"
 			:key="entry.link"
 			:style="`--delay: ${getCardDelay(entry)}s;`"
 		>
@@ -61,8 +96,12 @@ function getCardDelay(feed: FeedEntry) {
 	text-align: center;
 	color: transparent;
 	transition: color 0.2s;
-	z-index: -1;
+	pointer-events: none;
 	-webkit-text-stroke: 1px var(--c-text-3);
+
+	button {
+		pointer-events: auto;
+	}
 
 	&::selection, :hover > & {
 		color: var(--c-text-3);
@@ -74,10 +113,16 @@ function getCardDelay(feed: FeedEntry) {
 	color: var(--c-text-2);
 }
 
+.restore-order {
+	margin-inline-start: 0.5em;
+	text-decoration: underline;
+}
+
 .feed-list {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
 	gap: 0.2rem 0.5rem;
+	position: relative;
 	margin: 1rem auto;
 
 	@mixin feed-narrow {

@@ -3,19 +3,14 @@ import type { MinimarkNode } from '@nuxt/content'
 import type ArticleProps from '~/types/article'
 
 const route = useRoute()
-const contentPath = computed(() => normalizeContentPath(route.path))
 
 const layoutStore = useLayoutStore()
 layoutStore.setAside(['toc'])
 
-const { data: post } = await useAsyncData(
-	contentPath,
-	() => queryCollection('content').path(contentPath.value).first(),
-)
+const { data: post } = await useArticleContent()
 
 const contentStore = useContentStore()
-const { toc, meta } = storeToRefs(contentStore)
-toc.value = post.value?.body.toc
+const { meta } = storeToRefs(contentStore)
 const articleMeta = computed(() => post.value?.meta as ArticleProps['meta'])
 meta.value = articleMeta.value
 

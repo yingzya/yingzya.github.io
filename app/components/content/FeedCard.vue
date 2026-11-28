@@ -4,6 +4,7 @@ import type { FeedEntry } from '~/types/feed'
 import { ZRawLink } from '#components'
 
 const props = defineProps<FeedEntry & { inspect?: boolean }>()
+const config = useAppConfig()
 
 const title = computed(() => props.title ?? props.sitenick ?? props.author)
 const domainTip = computed(() => getDomainType(getMainDomain(props.link, true)))
@@ -48,7 +49,7 @@ onMounted(() => {
 			</ClientOnly>
 
 			<NuxtImg v-else :src="avatar" :alt="author" loading="lazy" :title="feed ? undefined : '无订阅源'" />
-			<Icon v-if="!feed" class="no-feed" name="ph:bell-simple-slash-bold" />
+			<Icon v-if="!feed && config.link.remindNoFeed" class="no-feed" name="ph:bell-simple-slash-bold" />
 		</div>
 
 		<span>{{ author }}</span>

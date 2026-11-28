@@ -79,6 +79,10 @@
 	img {
 		max-width: 100%;
 
+		&[width][height] {
+			height: auto;
+		}
+
 		&.icon {
 			height: 1.4em;
 			vertical-align: middle;

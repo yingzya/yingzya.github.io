@@ -1,4 +1,6 @@
+import { formatInTimeZone } from 'date-fns-tz'
 import blogConfig from '~~/blog.config'
+import { parseArticleDate } from '~~/shared/utils/articleDate'
 
 interface StatsEntry {
 	posts: number
@@ -52,17 +54,14 @@ export default defineEventHandler(async (event) => {
 		stats.total.posts++
 		stats.total.words += post.readingTime.words
 
-		if (!post.date)
-			continue
-
 		// 年文章/年字数计数
-		const year = new Date(post.date).getFullYear()
-		if (!stats.annual[year]) {
-			stats.annual[year] = { posts: 0, words: 0 }
+		const date = parseArticleDate(post.date)
+		if (date) {
+			const year = Number(formatInTimeZone(date, blogConfig.timezone, 'yyyy'))
+			const annual = stats.annual[year] ??= { posts: 0, words: 0 }
+			annual.posts++
+			annual.words += post.readingTime.words
 		}
-
-		stats.annual[year].posts++
-		stats.annual[year].words += post.readingTime.words
 
 		// 分类文章计数
 		const categories = post.categories || []

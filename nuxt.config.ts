@@ -7,6 +7,8 @@ import blogConfig from './blog.config'
 import packageJson from './package.json'
 import redirectList from './redirects.json'
 import { extractArticleSlots } from './remark-plugins/extract-article-slots'
+import { codeLanguages } from './shared/codeLanguages'
+import { parseArticleDate } from './shared/utils/articleDate'
 
 const katexDist = fileURLToPath(new URL('./node_modules/katex/dist/', import.meta.url))
 
@@ -148,21 +150,7 @@ export default defineNuxtConfig({
 						default: 'catppuccin-latte',
 						dark: 'one-dark-pro',
 					},
-					langs: [
-						'bash',
-						'cpp',
-						'html',
-						'java',
-						'js',
-						'json',
-						'md',
-						'python',
-						'shell',
-						'ts',
-						'vue',
-						'xml',
-						'yaml',
-					],
+					langs: codeLanguages.flatMap(language => language.names),
 					noApiRoute: true,
 				},
 				remarkPlugins: {
@@ -184,6 +172,13 @@ export default defineNuxtConfig({
 	},
 
 	hooks: {
+		'build:manifest': (manifest) => {
+			// Copy also renders plain friend-link fields. Its optional editor should load only on demand.
+			for (const chunk of Object.values(manifest)) {
+				if (chunk.dynamicImports)
+					chunk.dynamicImports = chunk.dynamicImports.filter(id => !id.endsWith('utils/command-highlight.ts'))
+			}
+		},
 		'ready': () => {
 			console.info(`
 ================================
@@ -193,6 +188,14 @@ ${packageJson.homepage}
 `)
 		},
 		'content:file:afterParse': (ctx) => {
+			// SQLite 会把布尔值存成 0/1，在入库前保留旧文章显式关闭推荐的意图。
+			if (ctx.content.recommend === false)
+				delete ctx.content.recommend
+			const { updated, published, date, sitemap } = ctx.content
+			const lastmod = parseArticleDate(updated) ?? parseArticleDate(published) ?? parseArticleDate(date)
+			if (lastmod && sitemap !== false && sitemap !== null)
+				ctx.content.sitemap = { lastmod, ...sitemap as object }
+
 			const body = ctx.content.body as (MinimarkTree & { toc?: { links: TocLink[] } }) | undefined
 			if (body?.type === 'minimark') {
 				const slots = extractArticleSlots(body)
@@ -214,8 +217,9 @@ ${packageJson.homepage}
 
 	icon: {
 		clientBundle: {
+			includeCustomCollections: true,
 			scan: {
-				globInclude: ['**/*.{vue,jsx,tsx,ts,md,mdc,mdx}'],
+				globInclude: ['app/**/*.{vue,jsx,tsx,ts}', 'content/**/*.{md,mdc,mdx,yml,yaml}', 'blog.config.ts'],
 			},
 		},
 		customCollections: [

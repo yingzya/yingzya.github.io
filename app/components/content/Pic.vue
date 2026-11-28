@@ -9,6 +9,7 @@ const props = withDefaults(defineProps<{
 	filter?: string
 	width?: string | number
 	height?: string | number
+	densities?: string
 	zoom?: boolean
 }>(), {
 	caption: '',
@@ -34,7 +35,7 @@ onBeforeUnmount(close)
 		ref="pic"
 		class="image"
 		:style="{ cursor: zoom ? 'zoom-in' : undefined, filter }"
-		:src :alt="alt || caption" :width :height :mirror
+		:src :alt="alt || caption" :width :height :densities :mirror
 		:role="zoom ? 'button' : undefined"
 		:tabindex="zoom ? 0 : undefined"
 		:aria-label="zoom ? `放大图片 ${alt || caption || ''}`.trim() : undefined"

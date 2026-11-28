@@ -23,7 +23,7 @@ const auxDateLabel = computed(() => props.date
 <template>
 <li class="article-item">
 	<time :datetime="getLocaleDatetime(mainDate)" :title="getLocaleDatetime(mainDate)">{{ dateLabel }}</time>
-	<ZRawLink class="article-link gradient-card" :to :title="description" :style="{ '--c-accent': categoryColor }">
+	<ZRawLink class="article-link gradient-card" :to :data-article-path="to ?? path" :title="description" :style="{ '--c-accent': categoryColor }">
 		<span class="article-title">
 			<span v-if="category" class="article-category" role="img" :aria-label="`分类：${category}`" :title="category">
 				<Icon :name="getCategoryIcon(category)" aria-hidden="true" />
@@ -32,6 +32,9 @@ const auxDateLabel = computed(() => props.date
 		</span>
 		<time v-if="useUpdated && !hideAuxDate && isTimeDiffSignificant(date, updated)" class="aux-date" :datetime="getLocaleDatetime(date)" :title="getLocaleDatetime(date)">
 			&nbsp;{{ auxDateLabel }}</time>
+		<small v-if="tags?.length" class="archive-tags">
+			<span v-for="tag in tags" :key="tag">#{{ tag }}</span>
+		</small>
 		<NuxtImg v-if="image" class="article-cover" :src="image" :alt="title" loading="lazy" />
 	</ZRawLink>
 </li>
@@ -69,6 +72,14 @@ const auxDateLabel = computed(() => props.date
 
 .article-title {
 	color: var(--c-text);
+}
+
+.archive-tags {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: 0 0.5em;
+	margin-inline-start: 0.7em;
+	color: var(--c-text-2);
 }
 
 .article-category {

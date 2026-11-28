@@ -31,7 +31,18 @@ const meta = computed(() => {
 
 const appConfig = useAppConfig()
 
-const rows = computed(() => props.code.split('\n').length - 1)
+const settings = computed(() => appConfig.component.codeblock)
+// MDC adds a terminal newline to the code prop.
+const source = computed(() => props.code.replace(/\r?\n$/, ''))
+const rows = computed(() => source.value ? source.value.split('\n').length : 0)
+const characters = computed(() => [...source.value].length)
+const bytes = computed(() => new TextEncoder().encode(source.value).length)
+const indent = computed(() => {
+	const override = Number(meta.value.indent)
+	if (Number.isInteger(override) && override > 0)
+		return override
+	return ['md', 'mdc', 'markdown', 'json', 'jsonc', 'toml', 'yaml', 'yml'].includes(props.language) ? 2 : settings.value.indent
+})
 const collapsible = computed(() => !meta.value.expand && rows.value > appConfig.component.codeblock.triggerRows)
 const [isCollapsed, toggleCollapsed] = useToggle(collapsible.value)
 
@@ -45,8 +56,8 @@ const { copy, copied } = useCopy(codeblock)
 <template>
 <figure
 	class="z-codeblock"
-	:class="{ collapsed: collapsible && isCollapsed, collapsible }"
-	:style="{ '--collapsed-rows': appConfig.component.codeblock.collapsedRows }"
+	:class="{ 'collapsed': collapsible && isCollapsed, collapsible, 'with-indent-guides': settings.enableIndentGuide && !['text', 'log', 'ansi'].includes(language) }"
+	:style="{ '--collapsed-rows': settings.collapsedRows, '--guide-width': `${indent}ch`, 'tabSize': settings.tabSize }"
 >
 	<figcaption>
 		<span v-if="filename" class="filename">
@@ -84,7 +95,7 @@ const { copy, copied } = useCopy(codeblock)
 			:class="{ 'is-collapsed': isCollapsed }"
 			name="ph:caret-double-up-bold"
 		/>
-		<span class="toggle-tip">{{ rows }} 行</span>
+		<span class="toggle-tip">{{ rows }} 行 · {{ characters }} 字符 · {{ bytes.toLocaleString('zh-CN') }} 字节</span>
 	</button>
 </figure>
 </template>
@@ -241,25 +252,25 @@ pre {
 }
 
 .toggle-icon {
+	margin-inline-end: 0.35em;
 	transition: all 0.2s;
 
 	&.is-collapsed {
 		transform: rotate(180deg);
 	}
-
-	:hover > & {
-		opacity: 0;
-	}
 }
 
-.toggle-tip {
+.with-indent-guides :deep(.indent-guide::before) {
+	content: attr(data-indent);
 	position: absolute;
-	opacity: 0;
-	inset: auto 0;
-	transition: opacity 0.2s;
+	background-image: repeating-linear-gradient(to right, var(--c-border) 0 1px, transparent 1px var(--guide-width));
+	white-space: pre;
+	color: transparent;
+	pointer-events: none;
+	user-select: none;
+}
 
-	:hover > & {
-		opacity: 1;
-	}
+.with-indent-guides :deep(.line > :is(.space, .tab)::before) {
+	content: none;
 }
 </style>

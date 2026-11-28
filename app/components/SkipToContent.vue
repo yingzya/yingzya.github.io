@@ -8,15 +8,16 @@
 <style lang="scss" scoped>
 .skip-link {
 	position: fixed;
+	inset-inline: 0;
 	top: -100%;
 	width: 80%;
-	margin: 1rem;
+	margin-inline: auto;
 	padding: 0.5rem;
 	text-align: center;
 	z-index: 1000;
 }
 
 .skip-link:focus {
-	top: auto;
+	top: 1rem;
 }
 </style>

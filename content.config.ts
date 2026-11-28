@@ -7,12 +7,13 @@ const articleSchema = z.object({
 	description: z.string().optional(),
 	date: z.string().optional(),
 	updated: z.string().optional(),
+	published: z.string().optional(),
 	categories: z.array(z.string()).default([blogConfig.defaultCategory]),
 	tags: z.array(z.string()).default([]),
 	type: z.enum(['tech', 'story']).optional(),
 
 	image: z.string().optional(),
-	recommend: z.number().optional(),
+	recommend: z.number().optional().describe('首页推荐权重，数值越大越靠前，0 也参与推荐'),
 	references: z.array(z.object({
 		title: z.string().optional(),
 		link: z.string().optional(),

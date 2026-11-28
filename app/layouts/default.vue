@@ -1,9 +1,10 @@
 <template>
 <NuxtLoadingIndicator />
+<NuxtRouteAnnouncer />
 <SkipToContent />
 <ZSidebar />
 <div id="content">
-	<main id="main-content">
+	<main id="main-content" tabindex="-1">
 		<slot />
 		<ZFooter />
 	</main>

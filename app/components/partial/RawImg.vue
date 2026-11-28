@@ -6,6 +6,7 @@ const props = withDefaults(defineProps<{
 	src: string
 	width?: string | number
 	height?: string | number
+	densities?: string
 	alt?: string
 	mirror?: ImgService
 }>(), {
@@ -31,6 +32,13 @@ const refinedSrc = computed(() => {
 	:alt="alt"
 	:width="width"
 	:height="height"
+	:densities="densities"
+	:style="{
+		width: height ? 'auto' : undefined,
+		height: height ? 'auto' : undefined,
+		maxWidth: width && height ? `min(100%, ${ensurePx(width)})` : undefined,
+		maxHeight: ensurePx(height),
+	}"
 	:referrerpolicy="mirror ? 'no-referrer' : undefined"
 />
 </template>

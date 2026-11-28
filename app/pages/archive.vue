@@ -191,6 +191,10 @@ const yearlyWordCount = computed(() => {
 	grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--archive-column-width)), 1fr));
 	column-gap: 0.5rem;
 
+	:deep(.archive-tags) {
+		display: none;
+	}
+
 	:deep(.article-item) {
 		display: grid;
 		align-content: start;

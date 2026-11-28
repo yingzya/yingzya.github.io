@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { sort } from 'radash'
-
 const appConfig = useAppConfig()
 useSeoMeta({
 	description: appConfig.description,
@@ -19,11 +17,9 @@ const { page, totalPages, listPaged } = usePagination(listCategorized, { bindQue
 
 useSeoMeta({ title: () => (page.value > 1 ? `第${page.value}页` : '') })
 
-const listRecommended = computed(() => sort(
-	listRaw.value.filter(item => item?.recommend),
-	post => post.recommend || 0,
-	true,
-))
+const listRecommended = computed(() => listRaw.value
+	.filter(post => typeof post.recommend === 'number')
+	.sort((a, b) => b.recommend! - a.recommend! || (b.date ?? '').localeCompare(a.date ?? '')))
 </script>
 
 <template>

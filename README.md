@@ -72,6 +72,8 @@ pnpm new
 
 用 ``` `命令`{copy} ``` 给行内命令添加复制按钮，或用 `mermaid` 代码围栏绘制图表。用 `demo` 围栏并排提供 Markdown 的预览与源码两个选项，用 `music-abc` 围栏展示五线谱和播放器。启动后访问 `/previews/markdown-tools` 查看示例。
 
+可编辑命令框可以用 `:copy{lang="js" code="const count = 1"}` 指定高亮语言，也会根据 `$`、`CMD`、`PS` 等提示符推断语言。未注册的语言显示为纯文本。要增加语言，在 `shared/codeLanguages.ts` 注册 Shiki 语法和别名，Markdown 代码块及命令框会共用这份配置。
+
 ### 本地构建
 
 ```bash
@@ -119,6 +121,8 @@ pnpm generate
 - **订阅源** — Atom Feed 配置
 
 运行时设置位于 `app/app.config.ts`，包括导航栏、页脚、分页和组件样式。开启 `component.slide.showTitle` 后，精选文章封面会常驻显示标题。
+
+友链默认按配置顺序展示。点击分组标题可以打乱该组，点击「恢复原序」即可还原。开启 `link.randomInGroup` 可在进入页面时随机排列，访问 `/link?shuffle=false` 可临时恢复默认顺序。`link.remindNoFeed` 控制无订阅源提示图标。
 
 ## 🚢 部署
 

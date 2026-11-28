@@ -20,6 +20,10 @@ export default defineAppConfig({
 			triggerRows: 32,
 			/** 代码块折叠后的行数 */
 			collapsedRows: 16,
+			/** 缩进辅助线、每级空格数和制表符显示宽度 */
+			enableIndentGuide: true,
+			indent: 4,
+			tabSize: 4,
 		},
 
 		/** 文章开头摘要 */
@@ -73,7 +77,7 @@ export default defineAppConfig({
 			{
 				title: '信息',
 				items: [
-					{ icon: 'simple-icons:nuxtdotjs', text: `主题: Clarity 3.4.0`, url: 'https://github.com/L33Z22L11/blog-v3' },
+					{ icon: 'simple-icons:nuxtdotjs', text: '主题: Clarity', url: 'https://github.com/L33Z22L11/blog-v3' },
 					{ icon: 'ph:swatches-bold', text: '主题和组件文档', url: 'https://blog.zhilu.site/theme' },
 					{ icon: 'ph:certificate-bold', text: '晋ICP备2025064396号-2', url: 'https://beian.miit.gov.cn/' },
 				],
@@ -88,6 +92,14 @@ export default defineAppConfig({
 		showTitle: true,
 		subtitle: blogConfig.subtitle,
 		emojiTail: ['🔥', '💨', '🌟', '⚡', '🚀'],
+	},
+
+	/** 友链页面 */
+	link: {
+		/** 首次打开友链页时按组随机排列。 */
+		randomInGroup: false,
+		/** 为没有订阅源的友链显示提示图标。 */
+		remindNoFeed: true,
 	},
 
 	/** 左侧栏导航 */

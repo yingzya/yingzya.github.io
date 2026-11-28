@@ -13,7 +13,11 @@ function toRect(rect: Element | Rect): Rect {
 	return rect instanceof Element ? rect.getBoundingClientRect() : rect
 }
 
-const ensurePx = (val: number | string) => typeof val === 'number' ? `${val}px` : val
+export function ensurePx(value?: number | string) {
+	if (value == null || String(value).trim() === '')
+		return undefined
+	return Number.isFinite(Number(value)) ? `${Number(value)}px` : value
+}
 
 export function animateBetweenRects(
 	el: MaybeRefOrGetter<Element>,

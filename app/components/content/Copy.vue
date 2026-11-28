@@ -12,6 +12,40 @@ const showPrompt = computed(() => props.prompt !== true)
 
 const showUndo = ref(false)
 const codeInput = useTemplateRef('code-input')
+const visible = useElementVisibility(codeInput, { rootMargin: '120px' })
+const activated = ref(false)
+whenever(visible, () => activated.value = true, { once: true })
+const language = computed(() => props.lang || getPromptLanguage(props.prompt))
+let updateHighlight: (() => void) | undefined
+
+watch([activated, language, codeInput], async ([active, lang, el], _, onCleanup) => {
+	if (!active || !el || ['text', 'plain', 'plaintext'].includes(lang) || !('highlights' in CSS))
+		return
+
+	let stale = false
+	let dispose: (() => void) | undefined
+	onCleanup(() => {
+		stale = true
+		updateHighlight = undefined
+		dispose?.()
+	})
+	try {
+		const { prepareCommandHighlight } = await import('~/utils/command-highlight')
+		const mount = await prepareCommandHighlight(lang)
+		if (!stale && mount) {
+			const editor = mount(el)
+			updateHighlight = editor.update
+			dispose = editor.dispose
+		}
+	}
+	catch {
+		// Network failures or unavailable grammars leave the native text editor usable.
+	}
+})
+watch(() => props.code, () => {
+	showUndo.value = false
+	updateHighlight?.()
+}, { flush: 'post' })
 
 const { copy, copied } = useCopy(codeInput)
 
@@ -20,17 +54,19 @@ function undo() {
 		return
 	codeInput.value.textContent = props.code ?? ''
 	showUndo.value = false
+	updateHighlight?.()
 }
 
 function preventLineBreak(event: InputEvent) {
 	const { data, inputType } = event
-	if (data?.includes('\n') || inputType === 'insertLineBreak') {
+	if (data?.includes('\n') || inputType === 'insertLineBreak' || inputType === 'insertParagraph' || event.dataTransfer?.getData('text/plain').includes('\n')) {
 		event.preventDefault()
 	}
 }
 
 function checkUndoable(event: InputEvent) {
 	showUndo.value = props.code !== (event.target as Element).textContent
+	updateHighlight?.()
 }
 </script>
 
@@ -41,6 +77,8 @@ function checkUndoable(event: InputEvent) {
 	<div
 		ref="code-input"
 		contenteditable="plaintext-only"
+		role="textbox"
+		aria-label="可编辑命令"
 		class="code scrollcheck-x"
 		spellcheck="false"
 		@beforeinput="preventLineBreak"
@@ -48,13 +86,12 @@ function checkUndoable(event: InputEvent) {
 		v-text="code"
 	/>
 
-	<button v-if="showUndo" class="operation" aria-label="恢复原始内容" @click="undo">
-		<Icon name="tabler:arrow-back-up" />
+	<button v-if="showUndo" type="button" class="operation" aria-label="恢复原始内容" @click="undo">
+		<Icon name="ph:arrow-u-up-left-bold" />
 	</button>
 
-	<Icon v-show="false" name="tabler:check" />
-	<button class="operation" aria-label="复制" @click="copy()">
-		<Icon :name="copied ? 'tabler:check' : 'tabler:copy'" />
+	<button type="button" class="operation" aria-label="复制" @click="copy()">
+		<Icon :name="copied ? 'ph:check-bold' : 'ph:copy-bold'" />
 	</button>
 </code>
 </template>
@@ -113,7 +150,7 @@ function checkUndoable(event: InputEvent) {
 	.operation {
 		flex-shrink: 0;
 		height: 2.5em;
-		margin-inline-start: -0.5em;
+		min-width: 2.5em;
 		padding: 0.5em;
 		color: var(--c-text-2);
 		transition: color, 0.2s;

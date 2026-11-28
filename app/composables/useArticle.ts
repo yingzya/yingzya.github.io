@@ -2,6 +2,12 @@ import type ArticleProps from '~/types/article'
 import type { ArticleOrderType } from '~/types/article'
 import { alphabetical } from 'radash'
 
+export function useArticleContent() {
+	const route = useRoute()
+	const path = computed(() => normalizeContentPath(route.path))
+	return useAsyncData(path, () => queryCollection('content').path(path.value).first(), { dedupe: 'defer' })
+}
+
 export function useArticleIndex(path = 'posts/%') {
 	return useAsyncData(
 		// key 会被 Nuxt 写入 `shared_<key>` 缓存，而 Nitro 的缓存驱动会对该 key
@@ -10,7 +16,7 @@ export function useArticleIndex(path = 'posts/%') {
 		`index_${encodeURIComponent(path)}`,
 		() => queryCollection('content')
 			.where('stem', 'LIKE', path)
-			.select('categories', 'date', 'description', 'image', 'path', 'readingTime', 'recommend', 'title', 'type', 'updated')
+			.select('categories', 'date', 'description', 'image', 'path', 'readingTime', 'recommend', 'tags', 'title', 'type', 'updated')
 			.all(),
 		{ default: () => [] }, // 不返回 undefined
 	)

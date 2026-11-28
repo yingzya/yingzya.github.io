@@ -1,53 +1,50 @@
 import type { TocLink } from '@nuxt/content'
 
-interface TocOffset {
-	id: string
-	offsetTop: number
-}
-
 export function useTocAutoHighlight(toc: MaybeRefOrGetter<TocLink[]>) {
 	const activeTocItem = ref<string | null>(null)
+	let headings: { id: string, top: number }[] = []
 
-	const flattenToc = (toc: TocLink[], offsetList: TocOffset[] = []) => {
-		toc.forEach((item) => {
-			const element = document.getElementById(item.id)
-			if (element)
-				offsetList.push({ id: item.id, offsetTop: element.offsetTop })
-			if (item.children)
-				flattenToc(item.children, offsetList)
-		})
-		return offsetList
+	function updateActiveHeading() {
+		const margin = Number.parseFloat(getComputedStyle(document.documentElement).scrollMarginTop) || 64
+		const current = headings.find(heading => heading.top <= window.scrollY + margin + 1)
+		activeTocItem.value = current?.id ?? null
 	}
 
-	const tocOffsets = computedWithControl(
-		() => toValue(toc),
-		// 此处不需担心 reverse 改变原数组
-		() => flattenToc(toValue(toc)).reverse(),
-	)
-
-	const updateActiveToc = () => {
-		const scrollMargin = Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('scroll-margin-top'))
-
-		const scrollPosition = window.scrollY + (scrollMargin || 64)
-
-		// 为兼容性不使用 findLast
-		const currentItem = tocOffsets.value.find(item => item.offsetTop <= scrollPosition)
-
-		activeTocItem.value = currentItem?.id || null
-
-		// 滚动到当前 item
-		const scrollContainer = document.querySelector('#z-aside')
-		const activeElement = document.querySelector(`#z-aside a[href="#${activeTocItem.value}"]`) as HTMLElement | null
-		// scrollIntoView 触发目录滚动时导致文章持续缓慢滚动并打断正常滚动
-		scrollContainer?.scroll({ top: activeElement?.offsetTop || 0 })
+	function measureHeadings() {
+		const offsets: typeof headings = []
+		function collect(items: TocLink[]) {
+			for (const item of items) {
+				const heading = document.getElementById(item.id)
+				if (heading)
+					offsets.push({ id: item.id, top: window.scrollY + heading.getBoundingClientRect().top })
+				if (item.children)
+					collect(item.children)
+			}
+		}
+		collect(toValue(toc))
+		headings = offsets.reverse()
+		updateActiveHeading()
 	}
 
-	useEventListener('scroll', autoThrottleAndDebounce(() => updateActiveToc()), { passive: true })
+	if (import.meta.client) {
+		onMounted(measureHeadings)
+		watch(() => toValue(toc), measureHeadings, { flush: 'post' })
+		useResizeObserver(document.body, measureHeadings)
+		useEventListener(window, 'scroll', autoThrottleAndDebounce(updateActiveHeading), { passive: true })
+		const removeHook = useNuxtApp().hook('page:finish', measureHeadings)
+		onScopeDispose(removeHook)
 
-	const { height: bodyHeight } = useElementSize(document?.body)
-	debouncedWatch(bodyHeight, tocOffsets.trigger)
-
-	return {
-		activeTocItem,
+		watch(activeTocItem, () => {
+			const aside = document.getElementById('z-aside')
+			const active = aside?.querySelector('.article-toc a[aria-current="location"]')
+			if (!aside || !active)
+				return
+			const panel = aside.getBoundingClientRect()
+			const link = active.getBoundingClientRect()
+			if (link.top < panel.top || link.bottom > panel.bottom)
+				aside.scrollTop += link.top - panel.top - aside.clientHeight / 4
+		}, { flush: 'post' })
 	}
+
+	return { activeTocItem }
 }

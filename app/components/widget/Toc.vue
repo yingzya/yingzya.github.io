@@ -3,8 +3,8 @@ import type { TocLink } from '@nuxt/content'
 
 const [DefineTemplate, ReuseTemplate] = createReusableTemplate()
 
-const contentStore = useContentStore()
-const { toc } = storeToRefs(contentStore)
+const { data: post } = await useArticleContent()
+const toc = computed(() => post.value?.body.toc)
 const { activeTocItem } = useTocAutoHighlight(() => toc.value?.links ?? [])
 
 function hasActiveChild(entry: TocLink, activeId: string | null): boolean {
@@ -15,7 +15,7 @@ function hasActiveChild(entry: TocLink, activeId: string | null): boolean {
 </script>
 
 <template>
-<ZWidget>
+<ZWidget class="article-toc">
 	<template #title>
 		<span class="title">文章目录</span>
 		<!-- use <a> for anchor -->
@@ -32,26 +32,24 @@ function hasActiveChild(entry: TocLink, activeId: string | null): boolean {
 	<DefineTemplate v-slot="{ tocItem }">
 		<ol>
 			<li
-				v-for="(entry, index) in tocItem as TocLink[]"
-				:key="index"
+				v-for="entry in tocItem as TocLink[]"
+				:key="entry.id"
 				:class="{
 					'has-active': hasActiveChild(entry, activeTocItem),
 					'active': entry.id === activeTocItem,
 				}"
 			>
 				<!-- 使用 <a> 确保键盘焦点切换 -->
-				<a :href="`#${entry?.id}`" :title="entry.text">{{ entry.text }}</a>
+				<a :href="`#${entry.id}`" :title="entry.text" :aria-current="entry.id === activeTocItem ? 'location' : undefined">{{ entry.text }}</a>
 				<ReuseTemplate v-if="entry.children" :toc-item="entry.children" />
 			</li>
 		</ol>
 	</DefineTemplate>
 
-	<ClientOnly>
-		<ReuseTemplate v-if="toc?.links.length" :toc-item="toc.links" />
-		<p v-else class="no-toc">
-			暂无目录信息
-		</p>
-	</ClientOnly>
+	<ReuseTemplate v-if="toc?.links.length" :toc-item="toc.links" />
+	<p v-else class="no-toc">
+		暂无目录信息
+	</p>
 </ZWidget>
 </template>
 

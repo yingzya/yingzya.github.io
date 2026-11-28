@@ -4,6 +4,8 @@ const colorMode = useColorMode()
 const container = useTemplateRef('container')
 const visible = useElementVisibility(container, { rootMargin: '300px' })
 const ready = ref(false)
+const fitWidth = ref(false)
+const { width: containerWidth } = useElementSize(container)
 whenever(visible, () => ready.value = true, { once: true })
 
 const id = useId()
@@ -29,9 +31,18 @@ const diagram = computedAsync(async () => {
 
 <template>
 <div ref="container" class="mermaid-diagram">
-	<div v-if="diagram?.svg" class="scrollcheck-x diagram-scroll" role="region" aria-label="Mermaid 图表" tabindex="0">
-		<div :style="{ minWidth: diagram.width ? `${diagram.width}px` : undefined }" v-html="diagram.svg" />
-	</div>
+	<template v-if="diagram?.svg">
+		<button
+			v-if="diagram.width && containerWidth && diagram.width > containerWidth"
+			type="button" class="width-toggle" :aria-pressed="fitWidth"
+			@click="fitWidth = !fitWidth"
+		>
+			{{ fitWidth ? '横向滚动' : '适应宽度' }}
+		</button>
+		<div class="scrollcheck-x diagram-scroll" role="region" aria-label="Mermaid 图表" tabindex="0">
+			<div :style="{ minWidth: !fitWidth && diagram.width ? `${diagram.width}px` : undefined }" v-html="diagram.svg" />
+		</div>
+	</template>
 	<template v-else>
 		<details v-if="diagram?.error">
 			<summary>图表渲染失败，查看原因</summary>
@@ -59,6 +70,16 @@ const diagram = computedAsync(async () => {
 
 .diagram-scroll, .diagram-source {
 	overflow-x: auto;
+}
+
+.width-toggle {
+	display: block;
+	margin: 0 0 0.4em auto;
+	padding: 0.25em 0.55em;
+	border-radius: 0.4em;
+	background-color: var(--c-bg-2);
+	font-size: 0.8em;
+	color: var(--c-text-2);
 }
 
 .diagram-source {

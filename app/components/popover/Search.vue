@@ -48,8 +48,14 @@ const getActiveItem = () => listResult.value?.children[activeIndex.value] as HTM
 
 whenever(() => props.show, () => focusInput(true), { immediate: true })
 
-watch(debouncedWord, () => {
-	activeIndex.value = 0
+watch(result, (items, previous) => {
+	const selectedId = previous[activeIndex.value]?.id
+	const retained = items.findIndex(item => item.id === selectedId)
+	activeIndex.value = Math.max(0, retained)
+	if (retained < 0 && listResult.value)
+		listResult.value.scrollTop = 0
+	else if (isKeyboardMode.value)
+		nextTick(() => getActiveItem()?.scrollIntoView({ block: 'nearest' }))
 })
 
 useEventListener('mousemove', () => isKeyboardMode.value = false)

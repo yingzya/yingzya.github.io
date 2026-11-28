@@ -20,6 +20,10 @@ flowchart LR
 
 点击命令旁的复制按钮，或用 Tab 聚焦后按 Enter。比如运行 `pnpm generate`{copy} 生成静态站点。
 
+这行 JavaScript 可以直接编辑。改动数字后，可以复制自己的版本，也可以还原成原来的命令。
+
+:copy{prompt="JS" lang="js" code="const count = 1"}
+
 下面是可以整段复制的 Bash 代码块。窄屏上可以切换自动换行。
 
 ```bash
